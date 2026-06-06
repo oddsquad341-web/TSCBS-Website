@@ -7,538 +7,552 @@
   <meta name="description" content="Premium jewellery, bangles, cosmetics, hair accessories and more. Your one-stop ladies corner for every occasion." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=Outfit:wght@200;300;400;500;600&family=Tenor+Sans&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- TOPBAR -->
-  <div class="topbar">
-    🚚 Free delivery on orders above <span>₹499</span> &nbsp;|&nbsp; 💳 COD Available &nbsp;|&nbsp; 📦 Easy 7-day returns
+<!-- CUSTOM CURSOR -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  ✦ Free Delivery above <span>₹499</span> &nbsp;·&nbsp; COD Available &nbsp;·&nbsp; Bridal Sets Now In Stock &nbsp;·&nbsp; 7-Day Easy Returns ✦
+</div>
+
+<!-- HEADER -->
+<header id="site-header">
+  <a class="logo" href="index.html">TSC<span>BS</span></a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="pages/shop.html">Shop</a>
+    <a href="pages/jewellery.html">Jewellery</a>
+    <a href="pages/bangles.html">Bangles</a>
+    <a href="pages/cosmetics.html">Cosmetics</a>
+    <a href="pages/new-arrivals.html">New Arrivals</a>
+    <a href="pages/sale.html">Sale</a>
+  </nav>
+  <div class="header-actions">
+    <button class="icon-btn search-btn" title="Search">⌕</button>
+    <button class="icon-btn" title="Wishlist" onclick="window.location='pages/wishlist.html'">♡</button>
+    <button class="icon-btn" title="Cart" onclick="window.location='pages/cart.html'" style="position:relative">
+      ⊕ <span class="cart-badge">0</span>
+    </button>
+    <a href="pages/account.html" class="btn-primary">Account</a>
   </div>
+</header>
 
-  <!-- HEADER -->
-  <header>
-    <div class="header-inner">
-      <a class="logo" href="index.html">TSC<span>BS</span></a>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="pages/shop.html">Shop</a>
-        <a href="pages/jewellery.html">Jewellery</a>
-        <a href="pages/bangles.html">Bangles</a>
-        <a href="pages/cosmetics.html">Cosmetics</a>
-        <a href="pages/new-arrivals.html">New Arrivals</a>
-        <a href="pages/sale.html">Sale 🔥</a>
-      </nav>
-      <div class="header-actions">
-        <button class="icon-btn search-btn" title="Search">🔍</button>
-        <button class="icon-btn" title="Wishlist" onclick="window.location='pages/wishlist.html'">♡</button>
-        <button class="icon-btn" title="Cart" onclick="window.location='pages/cart.html'" style="position:relative">
-          🛒 <span class="cart-badge">0</span>
-        </button>
-        <a href="pages/account.html" class="btn-primary">My Account</a>
-      </div>
-    </div>
-  </header>
+<!-- HERO -->
+<section class="hero" style="padding:0; position:relative;">
+  <canvas id="particles-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <span class="hero-badge">✦ New Collection 2025</span>
-        <h1>Where Every Woman<br>Finds Her <em>Shine</em></h1>
-        <p class="hero-desc">
-          Thousands of handpicked jewellery pieces, bangles, cosmetics, hair accessories
-          and everything a woman's heart desires — all in one place.
-        </p>
-        <div class="hero-actions">
-          <a href="pages/shop.html" class="btn-primary">Shop Now</a>
-          <a href="pages/new-arrivals.html" class="btn-ghost">New Arrivals →</a>
-        </div>
-        <div class="hero-stats">
-          <div>
-            <span class="hero-stat-num">5000+</span>
-            <span class="hero-stat-label">Products</span>
-          </div>
-          <div>
-            <span class="hero-stat-num">50K+</span>
-            <span class="hero-stat-label">Happy Customers</span>
-          </div>
-          <div>
-            <span class="hero-stat-num">100%</span>
-            <span class="hero-stat-label">Genuine Quality</span>
-          </div>
-        </div>
+  <!-- Atmospheric orbs -->
+  <div class="hero-bg-orb orb-1"></div>
+  <div class="hero-bg-orb orb-2"></div>
+  <div class="hero-bg-orb orb-3"></div>
+
+  <!-- Decorative grid lines -->
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(201,152,74,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,152,74,0.03) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:1;"></div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+
+      <div class="hero-eyebrow">
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow-text">New Collection — 2025</span>
+        <span class="eyebrow-line" style="background:linear-gradient(90deg,var(--gold),transparent);"></span>
       </div>
-      <div class="hero-visual">
-        <div class="hero-card">
-          <span class="hero-card-icon">💍</span>
-          <div class="hero-card-name">Jewellery</div>
-          <div class="hero-card-count">800+ styles</div>
+
+      <h1>
+        Where Every<br>
+        Woman Finds<br>
+        <span class="line-accent">Her Shine.</span>
+      </h1>
+
+      <p class="hero-desc">
+        Thousands of handpicked jewellery pieces, bangles, cosmetics
+        and everything a woman's heart desires — curated with love.
+      </p>
+
+      <div class="hero-actions">
+        <a href="pages/shop.html" class="btn-primary">Explore Collection</a>
+        <a href="pages/new-arrivals.html" class="btn-ghost">New Arrivals &nbsp;→</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="hero-stat-num" data-count="5000" data-suffix="+">5000+</span>
+          <span class="hero-stat-label">Products</span>
         </div>
-        <div class="hero-card">
-          <span class="hero-card-icon">💄</span>
-          <div class="hero-card-name">Cosmetics</div>
-          <div class="hero-card-count">600+ items</div>
+        <div class="stat-item">
+          <span class="hero-stat-num" data-count="50000" data-suffix="+">50K+</span>
+          <span class="hero-stat-label">Happy Customers</span>
         </div>
-        <div class="hero-card">
-          <span class="hero-card-icon">🪬</span>
-          <div class="hero-card-name">Bangles</div>
-          <div class="hero-card-count">1200+ designs</div>
-        </div>
-        <div class="hero-card">
-          <span class="hero-card-icon">🌸</span>
-          <div class="hero-card-name">Accessories</div>
-          <div class="hero-card-count">500+ pieces</div>
+        <div class="stat-item">
+          <span class="hero-stat-num" data-count="100" data-suffix="%">100%</span>
+          <span class="hero-stat-label">Genuine Quality</span>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- MARQUEE -->
-  <div class="marquee-strip">
-    <div class="marquee-inner">
-      <span>✦ Free Shipping above ₹499</span>
-      <span class="dot">•</span>
-      <span>💳 Cash on Delivery Available</span>
-      <span class="dot">•</span>
-      <span>✦ Bridal Sets Now Available</span>
-      <span class="dot">•</span>
-      <span>🎁 Gift Wrapping on Request</span>
-      <span class="dot">•</span>
-      <span>✦ New Arrivals Every Week</span>
-      <span class="dot">•</span>
-      <span>📦 Easy 7-Day Returns</span>
-      <span class="dot">•</span>
-      <!-- duplicate for seamless loop -->
-      <span>✦ Free Shipping above ₹499</span>
-      <span class="dot">•</span>
-      <span>💳 Cash on Delivery Available</span>
-      <span class="dot">•</span>
-      <span>✦ Bridal Sets Now Available</span>
-      <span class="dot">•</span>
-      <span>🎁 Gift Wrapping on Request</span>
-      <span class="dot">•</span>
-      <span>✦ New Arrivals Every Week</span>
-      <span class="dot">•</span>
-      <span>📦 Easy 7-Day Returns</span>
+    <div class="hero-visual">
+      <a href="pages/jewellery.html" class="hero-card">
+        <span class="hero-card-icon">💍</span>
+        <div class="hero-card-name">Jewellery</div>
+        <div class="hero-card-count">800+ styles</div>
+      </a>
+      <a href="pages/cosmetics.html" class="hero-card">
+        <span class="hero-card-icon">💄</span>
+        <div class="hero-card-name">Cosmetics</div>
+        <div class="hero-card-count">600+ items</div>
+      </a>
+      <a href="pages/bangles.html" class="hero-card">
+        <span class="hero-card-icon">🪬</span>
+        <div class="hero-card-name">Bangles</div>
+        <div class="hero-card-count">1200+ designs</div>
+      </a>
+      <a href="pages/hair.html" class="hero-card">
+        <span class="hero-card-icon">🌸</span>
+        <div class="hero-card-name">Accessories</div>
+        <div class="hero-card-count">500+ pieces</div>
+      </a>
     </div>
   </div>
+</section>
 
-  <!-- TRUST STRIP -->
-  <div class="trust-strip">
-    <div class="trust-grid">
-      <div class="trust-item">
-        <span class="trust-icon">🚚</span>
-        <div>
-          <div class="trust-label">Free Delivery</div>
-          <div class="trust-sub">On orders above ₹499</div>
-        </div>
-      </div>
-      <div class="trust-item">
-        <span class="trust-icon">💳</span>
-        <div>
-          <div class="trust-label">Cash on Delivery</div>
-          <div class="trust-sub">Pay when it arrives</div>
-        </div>
-      </div>
-      <div class="trust-item">
-        <span class="trust-icon">↩️</span>
-        <div>
-          <div class="trust-label">Easy Returns</div>
-          <div class="trust-sub">7-day hassle-free returns</div>
-        </div>
-      </div>
-      <div class="trust-item">
-        <span class="trust-icon">🔒</span>
-        <div>
-          <div class="trust-label">Secure Payments</div>
-          <div class="trust-sub">UPI, Cards, Net Banking</div>
-        </div>
-      </div>
-    </div>
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>✦ Free Shipping above ₹499</span><span class="dot">✦</span>
+    <span>Cash on Delivery Available</span><span class="dot">✦</span>
+    <span>Bridal Sets Now Available</span><span class="dot">✦</span>
+    <span>Gift Wrapping on Request</span><span class="dot">✦</span>
+    <span>New Arrivals Every Week</span><span class="dot">✦</span>
+    <span>Easy 7-Day Returns</span><span class="dot">✦</span>
+    <span>✦ Free Shipping above ₹499</span><span class="dot">✦</span>
+    <span>Cash on Delivery Available</span><span class="dot">✦</span>
+    <span>Bridal Sets Now Available</span><span class="dot">✦</span>
+    <span>Gift Wrapping on Request</span><span class="dot">✦</span>
+    <span>New Arrivals Every Week</span><span class="dot">✦</span>
+    <span>Easy 7-Day Returns</span><span class="dot">✦</span>
   </div>
+</div>
 
-  <!-- CATEGORIES -->
-  <section>
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">Explore</div>
-        <h2 class="section-title">Shop by <em>Category</em></h2>
-        <p class="section-desc">From everyday wear to bridal collections — find exactly what you're looking for.</p>
-      </div>
-      <div class="category-grid">
-        <a href="pages/jewellery.html" class="category-card">
-          <div class="cat-icon">💍</div>
-          <div class="cat-name">Jewellery</div>
-          <div class="cat-count">800+ styles</div>
-        </a>
-        <a href="pages/bangles.html" class="category-card">
-          <div class="cat-icon">🪬</div>
-          <div class="cat-name">Bangles & Choodas</div>
-          <div class="cat-count">1200+ designs</div>
-        </a>
-        <a href="pages/cosmetics.html" class="category-card">
-          <div class="cat-icon">💄</div>
-          <div class="cat-name">Cosmetics</div>
-          <div class="cat-count">600+ items</div>
-        </a>
-        <a href="pages/hair.html" class="category-card">
-          <div class="cat-icon">🎀</div>
-          <div class="cat-name">Hair Accessories</div>
-          <div class="cat-count">400+ pieces</div>
-        </a>
-        <a href="pages/bindis.html" class="category-card">
-          <div class="cat-icon">🔴</div>
-          <div class="cat-name">Bindis & Tikkas</div>
-          <div class="cat-count">300+ styles</div>
-        </a>
-        <a href="pages/dupattas.html" class="category-card">
-          <div class="cat-icon">🧣</div>
-          <div class="cat-name">Dupattas & Sarees</div>
-          <div class="cat-count">250+ pieces</div>
-        </a>
-        <a href="pages/skincare.html" class="category-card">
-          <div class="cat-icon">🌿</div>
-          <div class="cat-name">Skincare</div>
-          <div class="cat-count">180+ products</div>
-        </a>
-        <a href="pages/combos.html" class="category-card">
-          <div class="cat-icon">🎁</div>
-          <div class="cat-name">Combo Sets</div>
-          <div class="cat-count">120+ bundles</div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURED PRODUCTS -->
-  <section style="background: var(--white); padding-top: 4rem; padding-bottom: 4rem;" class="tabs-section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">Handpicked</div>
-        <h2 class="section-title">Our <em>Best Sellers</em></h2>
-        <p class="section-desc">Most-loved products trusted by thousands of customers.</p>
-      </div>
-      <div class="tabs">
-        <button class="tab-btn active" data-tab="all">All</button>
-        <button class="tab-btn" data-tab="jewellery">Jewellery</button>
-        <button class="tab-btn" data-tab="bangles">Bangles</button>
-        <button class="tab-btn" data-tab="cosmetics">Cosmetics</button>
-        <button class="tab-btn" data-tab="accessories">Accessories</button>
-      </div>
-      <div class="tab-panel products-grid" data-panel="all">
-        <!-- Jewellery -->
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <div class="product-img-placeholder">💍</div>
-            <span class="product-badge">Best Seller</span>
-            <button class="product-wishlist" onclick="toggleWishlist(this, 'Kundan Necklace Set')">♡</button>
-            <div class="product-img-overlay">
-              <button class="overlay-btn" title="Quick view">👁</button>
-              <button class="overlay-btn" title="Add to cart" onclick="addToCart('Kundan Necklace Set', 899)">🛒</button>
-            </div>
-          </div>
-          <div class="product-info">
-            <div class="product-cat">Jewellery</div>
-            <div class="product-name">Kundan Necklace Set with Earrings</div>
-            <div class="product-price-row">
-              <div><span class="product-price">₹899</span><span class="product-price-old">₹1499</span></div>
-              <div class="product-rating">⭐ 4.8</div>
-            </div>
-            <button class="add-to-cart-btn" onclick="addToCart('Kundan Necklace Set', 899)">Add to Cart</button>
-          </div>
-        </div>
-        <!-- Bangles -->
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <div class="product-img-placeholder">🪬</div>
-            <span class="product-badge new">New</span>
-            <button class="product-wishlist" onclick="toggleWishlist(this, 'Bridal Chooda Set')">♡</button>
-            <div class="product-img-overlay">
-              <button class="overlay-btn" title="Quick view">👁</button>
-              <button class="overlay-btn" title="Add to cart" onclick="addToCart('Bridal Chooda Set', 1299)">🛒</button>
-            </div>
-          </div>
-          <div class="product-info">
-            <div class="product-cat">Bangles</div>
-            <div class="product-name">Bridal Chooda Set — Red & Gold</div>
-            <div class="product-price-row">
-              <div><span class="product-price">₹1,299</span><span class="product-price-old">₹1,999</span></div>
-              <div class="product-rating">⭐ 4.9</div>
-            </div>
-            <button class="add-to-cart-btn" onclick="addToCart('Bridal Chooda Set', 1299)">Add to Cart</button>
-          </div>
-        </div>
-        <!-- Cosmetics -->
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <div class="product-img-placeholder">💄</div>
-            <span class="product-badge gold">Trending</span>
-            <button class="product-wishlist" onclick="toggleWishlist(this, 'Matte Lipstick Pack')">♡</button>
-            <div class="product-img-overlay">
-              <button class="overlay-btn" title="Quick view">👁</button>
-              <button class="overlay-btn" title="Add to cart" onclick="addToCart('Matte Lipstick Pack', 349)">🛒</button>
-            </div>
-          </div>
-          <div class="product-info">
-            <div class="product-cat">Cosmetics</div>
-            <div class="product-name">Matte Lipstick Pack of 5 Shades</div>
-            <div class="product-price-row">
-              <div><span class="product-price">₹349</span><span class="product-price-old">₹599</span></div>
-              <div class="product-rating">⭐ 4.7</div>
-            </div>
-            <button class="add-to-cart-btn" onclick="addToCart('Matte Lipstick Pack', 349)">Add to Cart</button>
-          </div>
-        </div>
-        <!-- Accessories -->
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <div class="product-img-placeholder">🎀</div>
-            <button class="product-wishlist" onclick="toggleWishlist(this, 'Hair Clip Set')">♡</button>
-            <div class="product-img-overlay">
-              <button class="overlay-btn" title="Quick view">👁</button>
-              <button class="overlay-btn" title="Add to cart" onclick="addToCart('Butterfly Hair Clip Set', 199)">🛒</button>
-            </div>
-          </div>
-          <div class="product-info">
-            <div class="product-cat">Hair Accessories</div>
-            <div class="product-name">Butterfly Hair Clip Set of 12</div>
-            <div class="product-price-row">
-              <div><span class="product-price">₹199</span><span class="product-price-old">₹350</span></div>
-              <div class="product-rating">⭐ 4.6</div>
-            </div>
-            <button class="add-to-cart-btn" onclick="addToCart('Butterfly Hair Clip Set', 199)">Add to Cart</button>
-          </div>
-        </div>
-        <!-- More products -->
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <div class="product-img-placeholder">🔴</div>
-            <span class="product-badge">Best Seller</span>
-            <button class="product-wishlist" onclick="toggleWishlist(this, 'Premium Bindi Box')">♡</button>
-            <div class="product-img-overlay">
-              <button class="overlay-btn">👁</button>
-              <button class="overlay-btn" onclick="addToCart('Premium Bindi Box', 149)">🛒</button>
-            </div>
-          </div>
-          <div class="product-info">
-            <div class="product-cat">Bindis & Tikkas</div>
-            <div class="product-name">Premium Bindi Box — 500 Pieces Assorted</div>
-            <div class="product-price-row">
-              <div><span class="product-price">₹149</span><span class="product-price-old">₹299</span></div>
-              <div class="product-rating">⭐ 4.9</div>
-            </div>
-            <button class="add-to-cart-btn" onclick="addToCart('Premium Bindi Box', 149)">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <div class="product-img-placeholder">🌿</div>
-            <span class="product-badge new">New</span>
-            <button class="product-wishlist" onclick="toggleWishlist(this, 'Rose Face Serum')">♡</button>
-            <div class="product-img-overlay">
-              <button class="overlay-btn">👁</button>
-              <button class="overlay-btn" onclick="addToCart('Rose Face Serum', 449)">🛒</button>
-            </div>
-          </div>
-          <div class="product-info">
-            <div class="product-cat">Skincare</div>
-            <div class="product-name">Rose & Saffron Brightening Face Serum</div>
-            <div class="product-price-row">
-              <div><span class="product-price">₹449</span><span class="product-price-old">₹699</span></div>
-              <div class="product-rating">⭐ 4.8</div>
-            </div>
-            <button class="add-to-cart-btn" onclick="addToCart('Rose Face Serum', 449)">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <div class="product-img-placeholder">🎁</div>
-            <span class="product-badge gold">Combo</span>
-            <button class="product-wishlist" onclick="toggleWishlist(this, 'Bridal Combo')">♡</button>
-            <div class="product-img-overlay">
-              <button class="overlay-btn">👁</button>
-              <button class="overlay-btn" onclick="addToCart('Bridal Combo Set', 1799)">🛒</button>
-            </div>
-          </div>
-          <div class="product-info">
-            <div class="product-cat">Combo Sets</div>
-            <div class="product-name">Bridal Combo — Jewellery + Bangles + Bindi</div>
-            <div class="product-price-row">
-              <div><span class="product-price">₹1,799</span><span class="product-price-old">₹2,999</span></div>
-              <div class="product-rating">⭐ 5.0</div>
-            </div>
-            <button class="add-to-cart-btn" onclick="addToCart('Bridal Combo Set', 1799)">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <div class="product-img-placeholder">💎</div>
-            <button class="product-wishlist" onclick="toggleWishlist(this, 'Oxidised Earrings')">♡</button>
-            <div class="product-img-overlay">
-              <button class="overlay-btn">👁</button>
-              <button class="overlay-btn" onclick="addToCart('Oxidised Jhumka Earrings', 299)">🛒</button>
-            </div>
-          </div>
-          <div class="product-info">
-            <div class="product-cat">Jewellery</div>
-            <div class="product-name">Oxidised Silver Jhumka Earrings</div>
-            <div class="product-price-row">
-              <div><span class="product-price">₹299</span><span class="product-price-old">₹499</span></div>
-              <div class="product-rating">⭐ 4.7</div>
-            </div>
-            <button class="add-to-cart-btn" onclick="addToCart('Oxidised Jhumka Earrings', 299)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-      <div style="text-align:center; margin-top:2.5rem;">
-        <a href="pages/shop.html" class="btn-outline">View All Products →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- OFFER BANNERS -->
-  <section>
-    <div class="container">
-      <div class="offers-grid">
-        <div class="offer-card card-1" data-emoji="💍" onclick="window.location='pages/jewellery.html'">
-          <div class="offer-tag">This Week Only</div>
-          <div class="offer-title">Jewellery<br>Upto 50% Off</div>
-          <a href="pages/jewellery.html" class="btn-primary" style="width:fit-content">Shop Jewellery</a>
-        </div>
-        <div class="offer-card card-2" data-emoji="🪬" onclick="window.location='pages/bangles.html'">
-          <div class="offer-tag">Bridal Season</div>
-          <div class="offer-title">Bridal Bangles<br>Starting ₹299</div>
-          <a href="pages/bangles.html" class="btn-primary" style="width:fit-content">Explore Bangles</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="testimonials-section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag" style="color:var(--gold)">Loved By Customers</div>
-        <h2 class="section-title">What Our <em>Customers</em> Say</h2>
-        <p class="section-desc">Real reviews from real women across India.</p>
-      </div>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-          <div class="testimonial-text">"Ordered the bridal chooda set for my sister's wedding — absolutely stunning quality! Delivered in 2 days."</div>
-          <div class="testimonial-author">
-            <div class="author-avatar">P</div>
-            <div>
-              <div class="author-name">Priya Sharma</div>
-              <div class="author-city">Jaipur, Rajasthan</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-          <div class="testimonial-text">"Best collection of bangles I've ever seen online. Prices are unbeatable and packaging was so beautiful."</div>
-          <div class="testimonial-author">
-            <div class="author-avatar">A</div>
-            <div>
-              <div class="author-name">Ananya Patel</div>
-              <div class="author-city">Ahmedabad, Gujarat</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-          <div class="testimonial-text">"The combo set was perfect for Navratri. Everyone complimented my look! Will definitely order again."</div>
-          <div class="testimonial-author">
-            <div class="author-avatar">S</div>
-            <div>
-              <div class="author-name">Sunita Devi</div>
-              <div class="author-city">Lucknow, UP</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- NEWSLETTER -->
-  <section class="newsletter-section">
-    <div class="container">
-      <div class="newsletter-inner">
-        <div class="section-tag">Stay Updated</div>
-        <h2 class="section-title">Get <em>Exclusive</em> Deals</h2>
-        <p class="section-desc">Subscribe to get first access to new arrivals, festival offers, and member-only discounts.</p>
-        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
-          <input type="email" placeholder="Enter your email address" required />
-          <button type="submit" class="btn-primary">Subscribe</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-grid">
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-grid">
+    <div class="trust-item">
+      <span class="trust-icon">🚚</span>
       <div>
-        <a class="footer-logo" href="index.html">TSC<span>BS</span></a>
-        <p class="footer-desc">Your one-stop destination for everything a woman needs — jewellery, bangles, cosmetics, and so much more. Quality you can trust, prices you'll love.</p>
-        <div class="footer-social">
-          <a href="#" class="social-btn" title="Instagram">📸</a>
-          <a href="#" class="social-btn" title="Facebook">👍</a>
-          <a href="https://wa.me/919999999999" class="social-btn" title="WhatsApp">💬</a>
-          <a href="#" class="social-btn" title="YouTube">▶️</a>
+        <div class="trust-label">Free Delivery</div>
+        <div class="trust-sub">On orders above ₹499</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">💳</span>
+      <div>
+        <div class="trust-label">Cash on Delivery</div>
+        <div class="trust-sub">Pay when it arrives</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">↩</span>
+      <div>
+        <div class="trust-label">Easy Returns</div>
+        <div class="trust-sub">7-day hassle-free returns</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">🔒</span>
+      <div>
+        <div class="trust-label">Secure Payments</div>
+        <div class="trust-sub">UPI, Cards, Net Banking</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section style="background:var(--ink);">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Explore</div>
+      <h2 class="section-title">Shop by <em>Category</em></h2>
+      <p class="section-desc">From everyday essentials to bridal collections — find exactly what you're looking for.</p>
+    </div>
+    <div class="category-grid">
+      <a href="pages/jewellery.html" class="category-card">
+        <div class="cat-icon">💍</div>
+        <div class="cat-name">Jewellery</div>
+        <div class="cat-count">800+ styles</div>
+      </a>
+      <a href="pages/bangles.html" class="category-card">
+        <div class="cat-icon">🪬</div>
+        <div class="cat-name">Bangles &amp; Choodas</div>
+        <div class="cat-count">1200+ designs</div>
+      </a>
+      <a href="pages/cosmetics.html" class="category-card">
+        <div class="cat-icon">💄</div>
+        <div class="cat-name">Cosmetics</div>
+        <div class="cat-count">600+ items</div>
+      </a>
+      <a href="pages/hair.html" class="category-card">
+        <div class="cat-icon">🎀</div>
+        <div class="cat-name">Hair Accessories</div>
+        <div class="cat-count">400+ pieces</div>
+      </a>
+      <a href="pages/bindis.html" class="category-card">
+        <div class="cat-icon">🔴</div>
+        <div class="cat-name">Bindis &amp; Tikkas</div>
+        <div class="cat-count">300+ styles</div>
+      </a>
+      <a href="pages/combos.html" class="category-card">
+        <div class="cat-icon">🎁</div>
+        <div class="cat-name">Combo Sets</div>
+        <div class="cat-count">150+ combos</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<section class="products-bg">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Handpicked</div>
+      <h2 class="section-title">Featured <em>Collection</em></h2>
+      <p class="section-desc">Our most-loved pieces, chosen by thousands of women across India.</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="all">All</button>
+      <button class="tab-btn" data-tab="jewellery">Jewellery</button>
+      <button class="tab-btn" data-tab="bangles">Bangles</button>
+      <button class="tab-btn" data-tab="cosmetics">Cosmetics</button>
+    </div>
+
+    <div class="product-grid">
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <div class="product-img-placeholder">💍</div>
+          <span class="product-badge new">New</span>
+          <button class="product-wishlist" onclick="toggleWishlist(this,'Kundan Necklace Set')">♡</button>
+          <div class="product-img-overlay">
+            <button class="overlay-btn">👁</button>
+            <button class="overlay-btn" onclick="addToCart('Kundan Necklace Set',1299)">⊕</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Jewellery</div>
+          <div class="product-name">Kundan Bridal Necklace Set</div>
+          <div class="product-price-row">
+            <div><span class="product-price">₹1,299</span><span class="product-price-old">₹1,999</span></div>
+            <div class="product-rating">★ 4.9</div>
+          </div>
+          <button class="add-to-cart-btn" onclick="addToCart('Kundan Necklace Set',1299)">Add to Cart</button>
         </div>
       </div>
-      <div class="footer-col">
-        <h4>Shop</h4>
-        <a href="pages/jewellery.html">Jewellery</a>
-        <a href="pages/bangles.html">Bangles & Choodas</a>
-        <a href="pages/cosmetics.html">Cosmetics</a>
-        <a href="pages/hair.html">Hair Accessories</a>
-        <a href="pages/bindis.html">Bindis & Tikkas</a>
-        <a href="pages/combos.html">Combo Sets</a>
-        <a href="pages/sale.html">Sale</a>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <div class="product-img-placeholder">🪬</div>
+          <span class="product-badge sale">Sale</span>
+          <button class="product-wishlist" onclick="toggleWishlist(this,'Bridal Chooda Set')">♡</button>
+          <div class="product-img-overlay">
+            <button class="overlay-btn">👁</button>
+            <button class="overlay-btn" onclick="addToCart('Bridal Chooda Set',849)">⊕</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Bangles</div>
+          <div class="product-name">Bridal Red-White Chooda Set</div>
+          <div class="product-price-row">
+            <div><span class="product-price">₹849</span><span class="product-price-old">₹1,299</span></div>
+            <div class="product-rating">★ 4.8</div>
+          </div>
+          <button class="add-to-cart-btn" onclick="addToCart('Bridal Chooda Set',849)">Add to Cart</button>
+        </div>
       </div>
-      <div class="footer-col">
-        <h4>Help</h4>
-        <a href="pages/shipping.html">Shipping Policy</a>
-        <a href="pages/returns.html">Returns & Exchange</a>
-        <a href="pages/track.html">Track My Order</a>
-        <a href="pages/faq.html">FAQ</a>
-        <a href="pages/contact.html">Contact Us</a>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <div class="product-img-placeholder">💄</div>
+          <button class="product-wishlist" onclick="toggleWishlist(this,'Rose Gold Lipstick')">♡</button>
+          <div class="product-img-overlay">
+            <button class="overlay-btn">👁</button>
+            <button class="overlay-btn" onclick="addToCart('Rose Gold Lipstick',349)">⊕</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Cosmetics</div>
+          <div class="product-name">Rose Gold Matte Lipstick Duo</div>
+          <div class="product-price-row">
+            <div><span class="product-price">₹349</span><span class="product-price-old">₹599</span></div>
+            <div class="product-rating">★ 4.7</div>
+          </div>
+          <button class="add-to-cart-btn" onclick="addToCart('Rose Gold Lipstick',349)">Add to Cart</button>
+        </div>
       </div>
-      <div class="footer-col">
-        <h4>About</h4>
-        <a href="pages/about.html">About TSCBS</a>
-        <a href="pages/privacy.html">Privacy Policy</a>
-        <a href="pages/terms.html">Terms & Conditions</a>
-        <a href="pages/bulk.html">Bulk Orders</a>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <div class="product-img-placeholder">🌸</div>
+          <span class="product-badge new">New</span>
+          <button class="product-wishlist" onclick="toggleWishlist(this,'Floral Hair Set')">♡</button>
+          <div class="product-img-overlay">
+            <button class="overlay-btn">👁</button>
+            <button class="overlay-btn" onclick="addToCart('Floral Hair Set',299)">⊕</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Hair Accessories</div>
+          <div class="product-name">Premium Floral Clip Set — Pack of 6</div>
+          <div class="product-price-row">
+            <div><span class="product-price">₹299</span><span class="product-price-old">₹449</span></div>
+            <div class="product-rating">★ 4.6</div>
+          </div>
+          <button class="add-to-cart-btn" onclick="addToCart('Floral Hair Set',299)">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <div class="product-img-placeholder">🔮</div>
+          <span class="product-badge sale">Sale</span>
+          <button class="product-wishlist" onclick="toggleWishlist(this,'Rose Face Serum')">♡</button>
+          <div class="product-img-overlay">
+            <button class="overlay-btn">👁</button>
+            <button class="overlay-btn" onclick="addToCart('Rose Face Serum',449)">⊕</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Skincare</div>
+          <div class="product-name">24K Rose Glow Face Serum</div>
+          <div class="product-price-row">
+            <div><span class="product-price">₹449</span><span class="product-price-old">₹749</span></div>
+            <div class="product-rating">★ 4.8</div>
+          </div>
+          <button class="add-to-cart-btn" onclick="addToCart('Rose Face Serum',449)">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <div class="product-img-placeholder">🎁</div>
+          <span class="product-badge gold">Combo</span>
+          <button class="product-wishlist" onclick="toggleWishlist(this,'Bridal Combo')">♡</button>
+          <div class="product-img-overlay">
+            <button class="overlay-btn">👁</button>
+            <button class="overlay-btn" onclick="addToCart('Bridal Combo Set',1799)">⊕</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Combo Sets</div>
+          <div class="product-name">Bridal Combo — Jewellery + Bangles + Bindi</div>
+          <div class="product-price-row">
+            <div><span class="product-price">₹1,799</span><span class="product-price-old">₹2,999</span></div>
+            <div class="product-rating">★ 5.0</div>
+          </div>
+          <button class="add-to-cart-btn" onclick="addToCart('Bridal Combo Set',1799)">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <div class="product-img-placeholder">💎</div>
+          <button class="product-wishlist" onclick="toggleWishlist(this,'Oxidised Earrings')">♡</button>
+          <div class="product-img-overlay">
+            <button class="overlay-btn">👁</button>
+            <button class="overlay-btn" onclick="addToCart('Oxidised Jhumka Earrings',299)">⊕</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Jewellery</div>
+          <div class="product-name">Oxidised Silver Jhumka Earrings</div>
+          <div class="product-price-row">
+            <div><span class="product-price">₹299</span><span class="product-price-old">₹499</span></div>
+            <div class="product-rating">★ 4.7</div>
+          </div>
+          <button class="add-to-cart-btn" onclick="addToCart('Oxidised Jhumka Earrings',299)">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <div class="product-img-placeholder">🌺</div>
+          <span class="product-badge new">New</span>
+          <button class="product-wishlist" onclick="toggleWishlist(this,'Meenakari Bangles')">♡</button>
+          <div class="product-img-overlay">
+            <button class="overlay-btn">👁</button>
+            <button class="overlay-btn" onclick="addToCart('Meenakari Bangles Set',699)">⊕</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Bangles</div>
+          <div class="product-name">Meenakari Glass Bangles — Set of 12</div>
+          <div class="product-price-row">
+            <div><span class="product-price">₹699</span><span class="product-price-old">₹999</span></div>
+            <div class="product-rating">★ 4.9</div>
+          </div>
+          <button class="add-to-cart-btn" onclick="addToCart('Meenakari Bangles Set',699)">Add to Cart</button>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:3.5rem;">
+      <a href="pages/shop.html" class="btn-outline">View All Products &nbsp;→</a>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER BANNERS -->
+<section class="offers-section">
+  <div class="container">
+    <div class="offers-grid">
+      <div class="offer-card card-1" data-emoji="💍" onclick="window.location='pages/jewellery.html'">
+        <div class="offer-tag">This Week Only</div>
+        <div class="offer-title">Jewellery<br>Upto 50% Off</div>
+        <a href="pages/jewellery.html" class="btn-primary" style="width:fit-content;margin-top:auto;">Shop Jewellery</a>
+      </div>
+      <div class="offer-card card-2" data-emoji="🪬" onclick="window.location='pages/bangles.html'">
+        <div class="offer-tag">Bridal Season</div>
+        <div class="offer-title">Bridal Bangles<br>Starting ₹299</div>
+        <a href="pages/bangles.html" class="btn-primary" style="width:fit-content;margin-top:auto;">Explore Bangles</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div>© 2025 TSCBS. Made with ♥ for every woman.</div>
-      <div class="payment-icons">
-        <span class="pay-badge">UPI</span>
-        <span class="pay-badge">Visa</span>
-        <span class="pay-badge">MC</span>
-        <span class="pay-badge">RuPay</span>
-        <span class="pay-badge">COD</span>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag" style="color:var(--gold)">Loved By Customers</div>
+      <h2 class="section-title">What Our <em>Customers</em> Say</h2>
+      <p class="section-desc">Real reviews from real women across India.</p>
+    </div>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">"Ordered the bridal chooda set for my sister's wedding — absolutely stunning quality! Delivered in just 2 days."</div>
+        <div class="testimonial-author">
+          <div class="author-avatar">P</div>
+          <div>
+            <div class="author-name">Priya Sharma</div>
+            <div class="author-city">Jaipur, Rajasthan</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">"Best collection of bangles I've ever seen online. Prices are unbeatable and the packaging was so beautiful."</div>
+        <div class="testimonial-author">
+          <div class="author-avatar">A</div>
+          <div>
+            <div class="author-name">Ananya Patel</div>
+            <div class="author-city">Ahmedabad, Gujarat</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">"The combo set was perfect for Navratri. Everyone complimented my look! Will definitely order again and again."</div>
+        <div class="testimonial-author">
+          <div class="author-avatar">S</div>
+          <div>
+            <div class="author-name">Sunita Devi</div>
+            <div class="author-city">Lucknow, UP</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="newsletter-orb"></div>
+  <div class="container">
+    <div class="newsletter-inner">
+      <div class="section-tag">Stay Updated</div>
+      <h2 class="section-title">Get <em>Exclusive</em> Deals</h2>
+      <p class="section-desc">First access to new arrivals, festival offers, and member-only discounts — delivered to your inbox.</p>
+      <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+        <input type="email" placeholder="Enter your email address" required />
+        <button type="submit" class="btn-primary">Subscribe</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a class="footer-logo" href="index.html">TSC<span>BS</span></a>
+      <p class="footer-desc">Your one-stop destination for everything a woman needs — jewellery, bangles, cosmetics, and so much more. Quality you can trust, prices you'll love.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn" title="Instagram">📸</a>
+        <a href="#" class="social-btn" title="Facebook">👍</a>
+        <a href="https://wa.me/919999999999" class="social-btn" title="WhatsApp">💬</a>
+        <a href="#" class="social-btn" title="YouTube">▶</a>
       </div>
     </div>
-  </footer>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="pages/jewellery.html">Jewellery</a>
+      <a href="pages/bangles.html">Bangles &amp; Choodas</a>
+      <a href="pages/cosmetics.html">Cosmetics</a>
+      <a href="pages/hair.html">Hair Accessories</a>
+      <a href="pages/bindis.html">Bindis &amp; Tikkas</a>
+      <a href="pages/combos.html">Combo Sets</a>
+      <a href="pages/sale.html">Sale</a>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <a href="pages/shipping.html">Shipping Policy</a>
+      <a href="pages/returns.html">Returns &amp; Exchange</a>
+      <a href="pages/track.html">Track My Order</a>
+      <a href="pages/faq.html">FAQ</a>
+      <a href="pages/contact.html">Contact Us</a>
+    </div>
+    <div class="footer-col">
+      <h4>About</h4>
+      <a href="pages/about.html">About TSCBS</a>
+      <a href="pages/privacy.html">Privacy Policy</a>
+      <a href="pages/terms.html">Terms &amp; Conditions</a>
+      <a href="pages/bulk.html">Bulk Orders</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2025 TSCBS. Crafted with love for every woman.</div>
+    <div class="payment-icons">
+      <span class="pay-badge">UPI</span>
+      <span class="pay-badge">Visa</span>
+      <span class="pay-badge">MC</span>
+      <span class="pay-badge">RuPay</span>
+      <span class="pay-badge">COD</span>
+    </div>
+  </div>
+</footer>
 
-  <!-- WHATSAPP FLOAT -->
-  <a href="https://wa.me/919999999999?text=Hi!%20I%20want%20to%20know%20more%20about%20your%20products." class="whatsapp-float" target="_blank" title="Chat on WhatsApp">💬</a>
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/919999999999?text=Hi!%20I%20want%20to%20know%20more%20about%20your%20products." class="whatsapp-float" target="_blank" title="Chat on WhatsApp">💬</a>
 
-  <script src="js/main.js"></script>
-  <script>
-    function handleNewsletter(e) {
-      e.preventDefault();
-      const input = e.target.querySelector('input');
-      showToast('🎉 Subscribed! Welcome to the family');
-      input.value = '';
-    }
-  </script>
+<script src="js/main.js"></script>
+<script>
+  function handleNewsletter(e) {
+    e.preventDefault();
+    const input = e.target.querySelector('input');
+    showToast('✦ Subscribed — Welcome to the TSCBS family');
+    input.value = '';
+  }
+</script>
 </body>
 </html>
