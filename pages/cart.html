@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Cart — TSCBS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .cart-layout { display: grid; grid-template-columns: 1fr 360px; gap: 2rem; align-items: start; }
+    .cart-item { display: grid; grid-template-columns: 80px 1fr auto; gap: 1.25rem; align-items: center; padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
+    .cart-item-img { width: 80px; height: 80px; background: var(--rose-light); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 32px; }
+    .cart-item-name { font-size: 14.5px; font-weight: 500; color: var(--deep); margin-bottom: 4px; }
+    .cart-item-meta { font-size: 12.5px; color: var(--muted); }
+    .cart-item-price { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--rose-dark); }
+    .qty-control { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+    .qty-btn { width: 28px; height: 28px; border: 1px solid var(--border); border-radius: 4px; background: white; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .qty-btn:hover { background: var(--rose); color: white; border-color: var(--rose); }
+    .qty-num { font-size: 14px; font-weight: 500; min-width: 20px; text-align: center; }
+    .order-summary { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; position: sticky; top: 90px; }
+    .summary-row { display: flex; justify-content: space-between; font-size: 14px; color: var(--text); margin-bottom: 0.9rem; }
+    .summary-total { font-size: 17px; font-weight: 600; color: var(--deep); border-top: 1px solid var(--border); padding-top: 0.9rem; margin-top: 0.5rem; }
+    .coupon-row { display: flex; gap: 0.5rem; margin: 1rem 0; }
+    .coupon-row input { flex: 1; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 13px; outline: none; }
+    .coupon-row input:focus { border-color: var(--rose); }
+    @media(max-width:900px){ .cart-layout{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <div class="topbar">🚚 Free delivery on orders above <span>₹499</span> &nbsp;|&nbsp; 💳 COD Available</div>
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="../index.html">TSC<span>BS</span></a>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="jewellery.html">Jewellery</a>
+        <a href="bangles.html">Bangles</a>
+        <a href="cosmetics.html">Cosmetics</a>
+        <a href="new-arrivals.html">New Arrivals</a>
+        <a href="sale.html">Sale 🔥</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn search-btn">🔍</button>
+        <button class="icon-btn">♡</button>
+        <button class="icon-btn" style="position:relative">🛒 <span class="cart-badge">0</span></button>
+        <a href="account.html" class="btn-primary">My Account</a>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a><span style="margin:0 6px">›</span> My Cart
+      </div>
+      <h1 class="section-title" style="margin-bottom:2rem">My <em>Cart</em></h1>
+
+      <div class="cart-layout">
+        <div id="cart-items">
+          <div style="text-align:center;padding:4rem 0;color:var(--muted)" id="empty-cart">
+            <div style="font-size:64px;margin-bottom:1rem">🛒</div>
+            <div style="font-family:var(--font-display);font-size:24px;color:var(--deep);margin-bottom:0.5rem">Your cart is empty</div>
+            <p style="margin-bottom:1.5rem">Looks like you haven't added anything yet.</p>
+            <a href="shop.html" class="btn-primary">Start Shopping →</a>
+          </div>
+        </div>
+
+        <div class="order-summary">
+          <h3 style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--deep);margin-bottom:1.5rem">Order Summary</h3>
+          <div class="summary-row"><span>Subtotal</span><span id="subtotal">₹0</span></div>
+          <div class="summary-row"><span>Delivery</span><span style="color:#2b8a3e">FREE</span></div>
+          <div class="summary-row"><span>Discount</span><span style="color:var(--rose)" id="discount">-₹0</span></div>
+          <div class="summary-row summary-total"><span>Total</span><span id="total">₹0</span></div>
+          <div class="coupon-row">
+            <input type="text" placeholder="Coupon code" id="couponInput" />
+            <button class="btn-outline" style="padding:9px 16px;font-size:13px" onclick="applyCoupon()">Apply</button>
+          </div>
+          <button class="btn-primary" style="width:100%;padding:14px;font-size:15px;margin-top:0.5rem" onclick="window.location='checkout.html'">
+            Proceed to Checkout →
+          </button>
+          <div style="text-align:center;margin-top:1rem">
+            <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Secure payment options</div>
+            <div class="payment-icons" style="justify-content:center">
+              <span class="pay-badge" style="background:var(--rose-light);color:var(--rose-dark)">UPI</span>
+              <span class="pay-badge" style="background:var(--rose-light);color:var(--rose-dark)">Cards</span>
+              <span class="pay-badge" style="background:var(--rose-light);color:var(--rose-dark)">COD</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-bottom" style="max-width:1300px;margin:0 auto;">
+      <div>© 2025 TSCBS. Made with ♥ for every woman.</div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/919999999999" class="whatsapp-float" target="_blank">💬</a>
+  <script src="../js/main.js"></script>
+  <script>
+    function renderCart() {
+      const cart = JSON.parse(localStorage.getItem('tscbs_cart') || '[]');
+      const container = document.getElementById('cart-items');
+      const empty = document.getElementById('empty-cart');
+
+      if (cart.length === 0) {
+        empty.style.display = 'block';
+        document.getElementById('subtotal').textContent = '₹0';
+        document.getElementById('total').textContent = '₹0';
+        return;
+      }
+
+      empty.style.display = 'none';
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      document.getElementById('subtotal').textContent = '₹' + total.toLocaleString('en-IN');
+      document.getElementById('total').textContent = '₹' + total.toLocaleString('en-IN');
+
+      const itemsHtml = cart.map((item, i) => `
+        <div class="cart-item">
+          <div class="cart-item-img">💍</div>
+          <div>
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-meta">Standard / One Size</div>
+            <div class="qty-control">
+              <button class="qty-btn">−</button>
+              <span class="qty-num">1</span>
+              <button class="qty-btn">+</button>
+              <button onclick="removeItem(${i})" style="margin-left:1rem;background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px">Remove</button>
+            </div>
+          </div>
+          <div class="cart-item-price">₹${item.price.toLocaleString('en-IN')}</div>
+        </div>
+      `).join('');
+
+      container.innerHTML = itemsHtml + '<div id="empty-cart" style="display:none"></div>';
+    }
+
+    function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem('tscbs_cart') || '[]');
+      cart.splice(index, 1);
+      localStorage.setItem('tscbs_cart', JSON.stringify(cart));
+      renderCart();
+      showToast('Item removed from cart');
+    }
+
+    function applyCoupon() {
+      const code = document.getElementById('couponInput').value.trim().toUpperCase();
+      if (code === 'TSCBS10') {
+        document.getElementById('discount').textContent = '-10%';
+        showToast('🎉 Coupon applied! 10% off');
+      } else {
+        showToast('❌ Invalid coupon code');
+      }
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>

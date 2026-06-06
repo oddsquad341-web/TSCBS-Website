@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — TSCBS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem; align-items: start; }
+    .contact-info-card { background: var(--deep); border-radius: var(--radius); padding: 2.5rem; color: white; }
+    .contact-item { display: flex; gap: 1rem; margin-bottom: 1.75rem; }
+    .contact-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .contact-label { font-size: 11.5px; color: rgba(255,255,255,0.45); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 5px; }
+    .contact-value { font-size: 14.5px; color: white; font-weight: 500; }
+    .contact-form { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label { display: block; font-size: 12.5px; font-weight: 500; color: var(--text); margin-bottom: 6px; letter-spacing: 0.04em; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 11px 14px; border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 14px;
+      color: var(--text); background: var(--ivory); outline: none; transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--rose); background: white; }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    @media(max-width:800px){ .contact-grid{grid-template-columns:1fr} .form-row{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <div class="topbar">🚚 Free delivery on orders above <span>₹499</span> &nbsp;|&nbsp; 💳 COD Available</div>
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="../index.html">TSC<span>BS</span></a>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="jewellery.html">Jewellery</a>
+        <a href="bangles.html">Bangles</a>
+        <a href="cosmetics.html">Cosmetics</a>
+        <a href="new-arrivals.html">New Arrivals</a>
+        <a href="sale.html">Sale 🔥</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn search-btn">🔍</button>
+        <button class="icon-btn">♡</button>
+        <button class="icon-btn" style="position:relative">🛒 <span class="cart-badge">0</span></button>
+        <a href="account.html" class="btn-primary">My Account</a>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a><span style="margin:0 6px">›</span> Contact Us
+      </div>
+      <div class="section-header" style="margin-bottom:3rem">
+        <div class="section-tag">Get in Touch</div>
+        <h1 class="section-title">We'd Love to <em>Hear From You</em></h1>
+        <p class="section-desc">Questions, bulk orders, or just want to say hi — we're always here for you.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info-card">
+          <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:white;margin-bottom:2rem">Reach Us Anytime</h3>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-label">Store Address</div>
+              <div class="contact-value">123, Ladies Corner Market,<br>Main Bazaar, Your City — 110001</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-label">Phone / WhatsApp</div>
+              <div class="contact-value">+91 99999 99999</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value">hello@tscbs.in</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <div class="contact-label">Store Hours</div>
+              <div class="contact-value">Mon–Sat: 10am – 8pm<br>Sunday: 11am – 6pm</div>
+            </div>
+          </div>
+          <a href="https://wa.me/919999999999" target="_blank" class="btn-primary" style="width:100%;text-align:center;margin-top:1rem">
+            💬 Chat on WhatsApp
+          </a>
+        </div>
+        <div class="contact-form">
+          <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--deep);margin-bottom:1.5rem">Send a Message</h3>
+          <form onsubmit="submitContactForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" placeholder="Priya Sharma" required />
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" placeholder="+91 98765 43210" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" placeholder="priya@email.com" required />
+            </div>
+            <div class="form-group">
+              <label>Subject</label>
+              <select>
+                <option>Order Query</option>
+                <option>Return / Exchange</option>
+                <option>Bulk Order Enquiry</option>
+                <option>Product Information</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea placeholder="Tell us how we can help you..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;padding:13px">Send Message →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-bottom" style="max-width:1300px;margin:0 auto;">
+      <div>© 2025 TSCBS. Made with ♥ for every woman.</div>
+      <div class="payment-icons">
+        <span class="pay-badge">UPI</span><span class="pay-badge">Visa</span><span class="pay-badge">COD</span>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/919999999999" class="whatsapp-float" target="_blank">💬</a>
+  <script src="../js/main.js"></script>
+  <script>
+    function submitContactForm(e) {
+      e.preventDefault();
+      showToast('✓ Message sent! We\'ll reply within 24 hours.');
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>

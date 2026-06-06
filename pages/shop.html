@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop All Products — TSCBS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .shop-layout { display: grid; grid-template-columns: 260px 1fr; gap: 2rem; align-items: start; }
+    .filter-sidebar { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; position: sticky; top: 90px; }
+    .filter-group { margin-bottom: 1.75rem; }
+    .filter-group:last-child { margin-bottom: 0; }
+    .filter-title { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep); margin-bottom: 1rem; font-family: var(--font-body); }
+    .filter-option { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 13.5px; color: var(--text); cursor: pointer; }
+    .filter-option input { accent-color: var(--rose); width: 15px; height: 15px; cursor: pointer; }
+    .price-range { width: 100%; accent-color: var(--rose); }
+    .price-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-top: 6px; }
+    .color-swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+    .color-swatch { width: 26px; height: 26px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform 0.2s; }
+    .color-swatch:hover, .color-swatch.active { border-color: var(--rose); transform: scale(1.15); }
+    .shop-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem; }
+    .results-count { font-size: 13.5px; color: var(--muted); }
+    .sort-select { padding: 8px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 13px; color: var(--text); background: white; cursor: pointer; }
+    .breadcrumb { font-size: 12.5px; color: var(--muted); margin-bottom: 1.5rem; }
+    .breadcrumb a { color: var(--rose); text-decoration: none; }
+    .breadcrumb span { margin: 0 6px; }
+    @media(max-width:900px){ .shop-layout { grid-template-columns: 1fr; } .filter-sidebar { position: static; } }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">🚚 Free delivery on orders above <span>₹499</span> &nbsp;|&nbsp; 💳 COD Available</div>
+
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="../index.html">TSC<span>BS</span></a>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="jewellery.html">Jewellery</a>
+        <a href="bangles.html">Bangles</a>
+        <a href="cosmetics.html">Cosmetics</a>
+        <a href="new-arrivals.html">New Arrivals</a>
+        <a href="sale.html">Sale 🔥</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn search-btn">🔍</button>
+        <button class="icon-btn">♡</button>
+        <button class="icon-btn" style="position:relative">🛒 <span class="cart-badge">0</span></button>
+        <a href="account.html" class="btn-primary">My Account</a>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a><span>›</span> Shop All
+      </div>
+      <div class="section-header" style="margin-bottom:2rem">
+        <div class="section-tag">Full Collection</div>
+        <h1 class="section-title">Shop <em>Everything</em></h1>
+      </div>
+
+      <div class="shop-layout">
+        <!-- SIDEBAR -->
+        <aside class="filter-sidebar">
+          <div class="filter-group">
+            <div class="filter-title">Category</div>
+            <label class="filter-option"><input type="checkbox" checked /> All Products</label>
+            <label class="filter-option"><input type="checkbox" /> Jewellery</label>
+            <label class="filter-option"><input type="checkbox" /> Bangles & Choodas</label>
+            <label class="filter-option"><input type="checkbox" /> Cosmetics</label>
+            <label class="filter-option"><input type="checkbox" /> Hair Accessories</label>
+            <label class="filter-option"><input type="checkbox" /> Bindis & Tikkas</label>
+            <label class="filter-option"><input type="checkbox" /> Skincare</label>
+            <label class="filter-option"><input type="checkbox" /> Combo Sets</label>
+          </div>
+          <div class="filter-group">
+            <div class="filter-title">Price Range</div>
+            <input type="range" class="price-range" min="0" max="5000" value="2500" id="priceRange"
+              oninput="document.getElementById('priceVal').textContent='₹'+this.value" />
+            <div class="price-labels"><span>₹0</span><span id="priceVal">₹2500</span></div>
+          </div>
+          <div class="filter-group">
+            <div class="filter-title">Occasion</div>
+            <label class="filter-option"><input type="checkbox" /> Bridal / Wedding</label>
+            <label class="filter-option"><input type="checkbox" /> Festival / Party</label>
+            <label class="filter-option"><input type="checkbox" /> Casual / Daily Wear</label>
+            <label class="filter-option"><input type="checkbox" /> Office Wear</label>
+          </div>
+          <div class="filter-group">
+            <div class="filter-title">Material</div>
+            <label class="filter-option"><input type="checkbox" /> Gold Plated</label>
+            <label class="filter-option"><input type="checkbox" /> Silver / Oxidised</label>
+            <label class="filter-option"><input type="checkbox" /> Kundan</label>
+            <label class="filter-option"><input type="checkbox" /> Meenakari</label>
+            <label class="filter-option"><input type="checkbox" /> Artificial / Fashion</label>
+          </div>
+          <div class="filter-group">
+            <div class="filter-title">Colour</div>
+            <div class="color-swatches">
+              <div class="color-swatch active" style="background:#c8506a" title="Rose"></div>
+              <div class="color-swatch" style="background:#c9984a" title="Gold"></div>
+              <div class="color-swatch" style="background:#e8d5da" title="Pink"></div>
+              <div class="color-swatch" style="background:#2b1a20" title="Dark"></div>
+              <div class="color-swatch" style="background:#3a7d44" title="Green"></div>
+              <div class="color-swatch" style="background:#1a5276" title="Blue"></div>
+              <div class="color-swatch" style="background:#e74c3c" title="Red"></div>
+              <div class="color-swatch" style="background:#f5f5f5;border:1px solid #ccc" title="White"></div>
+            </div>
+          </div>
+          <div class="filter-group">
+            <div class="filter-title">Rating</div>
+            <label class="filter-option"><input type="radio" name="rating" /> ⭐⭐⭐⭐⭐ 5</label>
+            <label class="filter-option"><input type="radio" name="rating" checked /> ⭐⭐⭐⭐ 4+</label>
+            <label class="filter-option"><input type="radio" name="rating" /> ⭐⭐⭐ 3+</label>
+          </div>
+          <button class="btn-primary" style="width:100%">Apply Filters</button>
+          <button class="btn-outline" style="width:100%;margin-top:0.5rem">Clear All</button>
+        </aside>
+
+        <!-- PRODUCTS -->
+        <div>
+          <div class="shop-toolbar">
+            <div class="results-count">Showing <strong>48</strong> of <strong>5000+</strong> products</div>
+            <select class="sort-select">
+              <option>Sort: Popularity</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Newest First</option>
+              <option>Top Rated</option>
+            </select>
+          </div>
+          <div class="products-grid">
+            <div class="product-card">
+              <div class="product-img-wrap">
+                <div class="product-img-placeholder">💍</div>
+                <span class="product-badge">Best Seller</span>
+                <button class="product-wishlist" onclick="toggleWishlist(this,'Kundan Necklace')">♡</button>
+                <div class="product-img-overlay">
+                  <button class="overlay-btn">👁</button>
+                  <button class="overlay-btn" onclick="addToCart('Kundan Necklace Set',899)">🛒</button>
+                </div>
+              </div>
+              <div class="product-info">
+                <div class="product-cat">Jewellery</div>
+                <div class="product-name">Kundan Necklace Set with Earrings</div>
+                <div class="product-price-row">
+                  <div><span class="product-price">₹899</span><span class="product-price-old">₹1499</span></div>
+                  <div class="product-rating">⭐ 4.8</div>
+                </div>
+                <button class="add-to-cart-btn" onclick="addToCart('Kundan Necklace Set',899)">Add to Cart</button>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-img-wrap">
+                <div class="product-img-placeholder">🪬</div>
+                <span class="product-badge new">New</span>
+                <button class="product-wishlist" onclick="toggleWishlist(this,'Bridal Chooda')">♡</button>
+                <div class="product-img-overlay">
+                  <button class="overlay-btn">👁</button>
+                  <button class="overlay-btn" onclick="addToCart('Bridal Chooda Set',1299)">🛒</button>
+                </div>
+              </div>
+              <div class="product-info">
+                <div class="product-cat">Bangles</div>
+                <div class="product-name">Bridal Chooda Set — Red & Gold</div>
+                <div class="product-price-row">
+                  <div><span class="product-price">₹1,299</span><span class="product-price-old">₹1,999</span></div>
+                  <div class="product-rating">⭐ 4.9</div>
+                </div>
+                <button class="add-to-cart-btn" onclick="addToCart('Bridal Chooda Set',1299)">Add to Cart</button>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-img-wrap">
+                <div class="product-img-placeholder">💄</div>
+                <span class="product-badge gold">Trending</span>
+                <button class="product-wishlist" onclick="toggleWishlist(this,'Lipstick Pack')">♡</button>
+                <div class="product-img-overlay">
+                  <button class="overlay-btn">👁</button>
+                  <button class="overlay-btn" onclick="addToCart('Matte Lipstick Pack',349)">🛒</button>
+                </div>
+              </div>
+              <div class="product-info">
+                <div class="product-cat">Cosmetics</div>
+                <div class="product-name">Matte Lipstick Pack of 5 Shades</div>
+                <div class="product-price-row">
+                  <div><span class="product-price">₹349</span><span class="product-price-old">₹599</span></div>
+                  <div class="product-rating">⭐ 4.7</div>
+                </div>
+                <button class="add-to-cart-btn" onclick="addToCart('Matte Lipstick Pack',349)">Add to Cart</button>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-img-wrap">
+                <div class="product-img-placeholder">🎀</div>
+                <button class="product-wishlist" onclick="toggleWishlist(this,'Hair Clips')">♡</button>
+                <div class="product-img-overlay">
+                  <button class="overlay-btn">👁</button>
+                  <button class="overlay-btn" onclick="addToCart('Hair Clip Set',199)">🛒</button>
+                </div>
+              </div>
+              <div class="product-info">
+                <div class="product-cat">Hair Accessories</div>
+                <div class="product-name">Butterfly Hair Clip Set of 12</div>
+                <div class="product-price-row">
+                  <div><span class="product-price">₹199</span><span class="product-price-old">₹350</span></div>
+                  <div class="product-rating">⭐ 4.6</div>
+                </div>
+                <button class="add-to-cart-btn" onclick="addToCart('Hair Clip Set',199)">Add to Cart</button>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-img-wrap">
+                <div class="product-img-placeholder">🔴</div>
+                <span class="product-badge">Best Seller</span>
+                <button class="product-wishlist" onclick="toggleWishlist(this,'Bindi Box')">♡</button>
+                <div class="product-img-overlay"><button class="overlay-btn">👁</button><button class="overlay-btn" onclick="addToCart('Bindi Box',149)">🛒</button></div>
+              </div>
+              <div class="product-info">
+                <div class="product-cat">Bindis & Tikkas</div>
+                <div class="product-name">Premium Bindi Box — 500 Pieces Assorted</div>
+                <div class="product-price-row">
+                  <div><span class="product-price">₹149</span><span class="product-price-old">₹299</span></div>
+                  <div class="product-rating">⭐ 4.9</div>
+                </div>
+                <button class="add-to-cart-btn" onclick="addToCart('Bindi Box',149)">Add to Cart</button>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-img-wrap">
+                <div class="product-img-placeholder">🌿</div>
+                <span class="product-badge new">New</span>
+                <button class="product-wishlist" onclick="toggleWishlist(this,'Rose Serum')">♡</button>
+                <div class="product-img-overlay"><button class="overlay-btn">👁</button><button class="overlay-btn" onclick="addToCart('Rose Serum',449)">🛒</button></div>
+              </div>
+              <div class="product-info">
+                <div class="product-cat">Skincare</div>
+                <div class="product-name">Rose & Saffron Brightening Face Serum</div>
+                <div class="product-price-row">
+                  <div><span class="product-price">₹449</span><span class="product-price-old">₹699</span></div>
+                  <div class="product-rating">⭐ 4.8</div>
+                </div>
+                <button class="add-to-cart-btn" onclick="addToCart('Rose Serum',449)">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:center;margin-top:2.5rem;">
+            <button class="btn-outline">Load More Products</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-bottom" style="max-width:1300px;margin:0 auto;">
+      <div>© 2025 TSCBS. Made with ♥ for every woman.</div>
+      <div class="payment-icons">
+        <span class="pay-badge">UPI</span><span class="pay-badge">Visa</span>
+        <span class="pay-badge">MC</span><span class="pay-badge">COD</span>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/919999999999" class="whatsapp-float" target="_blank">💬</a>
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Arrivals — TSCBS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div class="topbar">✨ New arrivals every week — <span>Subscribe</span> for first access!</div>
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="../index.html">TSC<span>BS</span></a>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="jewellery.html">Jewellery</a>
+        <a href="bangles.html">Bangles</a>
+        <a href="cosmetics.html">Cosmetics</a>
+        <a href="new-arrivals.html">New Arrivals</a>
+        <a href="sale.html">Sale 🔥</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn search-btn">🔍</button>
+        <button class="icon-btn">♡</button>
+        <button class="icon-btn" style="position:relative">🛒 <span class="cart-badge">0</span></button>
+        <a href="account.html" class="btn-primary">My Account</a>
+      </div>
+    </div>
+  </header>
+
+  <section style="background:linear-gradient(135deg,#2b1a20,#4a2535);padding:4rem 2rem;text-align:center">
+    <div class="hero-badge">🌟 Fresh This Week</div>
+    <h1 class="section-title" style="color:white;margin-top:0.75rem">New <em>Arrivals</em></h1>
+    <p style="color:rgba(255,255,255,0.6);max-width:500px;margin:0 auto">
+      Freshly curated pieces added every week. Be the first to own them.
+    </p>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="tabs" style="margin-bottom:2.5rem">
+        <button class="tab-btn active">This Week</button>
+        <button class="tab-btn">This Month</button>
+        <button class="tab-btn">Jewellery</button>
+        <button class="tab-btn">Bangles</button>
+        <button class="tab-btn">Cosmetics</button>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">💍</div>
+            <span class="product-badge new">New</span>
+            <button class="product-wishlist" onclick="toggleWishlist(this,'Pearl Choker')">♡</button>
+            <div class="product-img-overlay"><button class="overlay-btn">👁</button><button class="overlay-btn" onclick="addToCart('Pearl Choker Necklace',699)">🛒</button></div>
+          </div>
+          <div class="product-info">
+            <div class="product-cat">Jewellery</div>
+            <div class="product-name">Pearl Choker Necklace Set</div>
+            <div class="product-price-row">
+              <div><span class="product-price">₹699</span><span class="product-price-old">₹1,099</span></div>
+              <div class="product-rating">⭐ 4.9</div>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Pearl Choker Necklace',699)">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">🪬</div>
+            <span class="product-badge new">New</span>
+            <button class="product-wishlist" onclick="toggleWishlist(this,'Glass Bangles')">♡</button>
+            <div class="product-img-overlay"><button class="overlay-btn">👁</button><button class="overlay-btn" onclick="addToCart('Glass Bangle Set',249)">🛒</button></div>
+          </div>
+          <div class="product-info">
+            <div class="product-cat">Bangles</div>
+            <div class="product-name">Handpainted Glass Bangle Set of 24</div>
+            <div class="product-price-row">
+              <div><span class="product-price">₹249</span><span class="product-price-old">₹449</span></div>
+              <div class="product-rating">⭐ 4.8</div>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Glass Bangle Set',249)">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">💋</div>
+            <span class="product-badge new">New</span>
+            <button class="product-wishlist" onclick="toggleWishlist(this,'Kajal Set')">♡</button>
+            <div class="product-img-overlay"><button class="overlay-btn">👁</button><button class="overlay-btn" onclick="addToCart('Kajal & Kohl Set',199)">🛒</button></div>
+          </div>
+          <div class="product-info">
+            <div class="product-cat">Cosmetics</div>
+            <div class="product-name">Long-Lasting Kajal & Kohl Set</div>
+            <div class="product-price-row">
+              <div><span class="product-price">₹199</span><span class="product-price-old">₹349</span></div>
+              <div class="product-rating">⭐ 4.7</div>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Kajal & Kohl Set',199)">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">🌸</div>
+            <span class="product-badge new">New</span>
+            <button class="product-wishlist" onclick="toggleWishlist(this,'Floral Tikka')">♡</button>
+            <div class="product-img-overlay"><button class="overlay-btn">👁</button><button class="overlay-btn" onclick="addToCart('Floral Maang Tikka',399)">🛒</button></div>
+          </div>
+          <div class="product-info">
+            <div class="product-cat">Jewellery</div>
+            <div class="product-name">Floral Gold-Plated Maang Tikka</div>
+            <div class="product-price-row">
+              <div><span class="product-price">₹399</span><span class="product-price-old">₹649</span></div>
+              <div class="product-rating">⭐ 5.0</div>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Floral Maang Tikka',399)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-bottom" style="max-width:1300px;margin:0 auto;">
+      <div>© 2025 TSCBS. Made with ♥ for every woman.</div>
+      <div class="payment-icons">
+        <span class="pay-badge">UPI</span><span class="pay-badge">Visa</span><span class="pay-badge">COD</span>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/919999999999" class="whatsapp-float" target="_blank">💬</a>
+  <script src="../js/main.js"></script>
+</body>
+</html>
