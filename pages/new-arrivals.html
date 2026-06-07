@@ -1,136 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>New Arrivals — TSCBS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .arrivals-hero {
+      min-height: 60vh;
+      display:flex; align-items:center; justify-content:center;
+      position:relative; overflow:hidden;
+      background: radial-gradient(ellipse at 30% 50%, rgba(201,64,112,0.1) 0%, transparent 50%),
+                  radial-gradient(ellipse at 70% 50%, rgba(201,147,74,0.08) 0%, transparent 50%),
+                  var(--void);
+    }
+    #arrivals-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+    .arrivals-orb-1 { position:absolute; width:500px; height:500px; background:radial-gradient(circle, rgba(201,64,112,0.1) 0%, transparent 70%); filter:blur(80px); top:-100px; left:-100px; animation:orb-float2 18s ease-in-out infinite; pointer-events:none; }
+    .arrivals-orb-2 { position:absolute; width:400px; height:400px; background:radial-gradient(circle, rgba(201,147,74,0.08) 0%, transparent 70%); filter:blur(80px); bottom:-100px; right:-100px; animation:orb-float1 22s ease-in-out infinite; pointer-events:none; }
+    .arrivals-hero-content { position:relative; z-index:2; text-align:center; padding:3rem; }
+    .arrivals-hero-tag { font-family:var(--font-sans); font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; justify-content:center; gap:1rem; margin-bottom:1.5rem; }
+    .arrivals-hero-tag::before, .arrivals-hero-tag::after { content:''; display:block; width:50px; height:1px; background:var(--gold); opacity:0.4; }
+    .arrivals-hero-title { font-family:var(--font-display); font-size:clamp(3.5rem,7vw,6rem); font-weight:400; line-height:1.05; }
+    .arrivals-hero-title em { font-style:italic; background:linear-gradient(135deg,var(--gold) 0%,var(--gold-pale) 40%,var(--rose-bright) 70%,var(--gold-bright) 100%); background-size:300%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:gold-shift 5s ease infinite; }
+    .arrivals-hero-sub { font-family:var(--font-serif); font-size:1.15rem; color:var(--text-muted); margin-top:1rem; font-weight:300; max-width:500px; margin-left:auto; margin-right:auto; }
+    .arrivals-hero-pills { display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap; margin-top:2rem; }
+    .hero-pill { padding:8px 18px; border:1px solid var(--border); border-radius:20px; font-family:var(--font-sans); font-size:10.5px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); transition:border-color 0.3s, color 0.3s, background 0.3s; cursor:none; }
+    .hero-pill:hover, .hero-pill.active { border-color:var(--gold); color:var(--gold); background:var(--gold-glow); }
+
+    .arrivals-section { padding:4rem 0 6rem; }
+    .arrivals-timeline { display:flex; flex-direction:column; gap:5rem; }
+    .arrivals-week { }
+    .week-header { display:flex; align-items:center; gap:2rem; margin-bottom:2.5rem; }
+    .week-label { font-family:var(--font-sans); font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); white-space:nowrap; }
+    .week-date { font-family:var(--font-serif); font-size:0.95rem; color:var(--text-dim); font-style:italic; }
+    .week-line { flex:1; height:1px; background:linear-gradient(90deg,var(--border),transparent); }
+    .arrivals-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
+    .new-badge-pulse { animation: badge-pulse 2s ease-in-out infinite; }
+    @keyframes badge-pulse { 0%,100%{box-shadow:0 0 0 0 rgba(201,147,74,0.4);} 50%{box-shadow:0 0 0 6px rgba(201,147,74,0);} }
+
+    .drop-timer { background:var(--surface); border:1px solid var(--border); border-radius:4px; padding:2.5rem; text-align:center; margin-bottom:4rem; position:relative; overflow:hidden; }
+    .drop-timer::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at center, rgba(201,64,112,0.05) 0%, transparent 70%); }
+    .drop-timer-tag { font-family:var(--font-sans); font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--rose-bright); margin-bottom:0.8rem; }
+    .drop-timer-title { font-family:var(--font-display); font-size:1.8rem; font-weight:400; color:var(--text); margin-bottom:1.5rem; }
+    .timer-blocks { display:flex; align-items:center; justify-content:center; gap:0.5rem; }
+    .timer-block { background:var(--card); border:1px solid var(--border); border-radius:4px; padding:1rem 1.5rem; text-align:center; min-width:80px; }
+    .timer-num { font-family:var(--font-display); font-size:2.5rem; font-weight:400; background:linear-gradient(135deg,var(--gold),var(--gold-pale)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; }
+    .timer-label { font-family:var(--font-sans); font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-dim); margin-top:0.3rem; }
+    .timer-sep { font-family:var(--font-display); font-size:2rem; color:var(--gold); opacity:0.4; }
+  </style>
 </head>
 <body>
-  <div class="topbar">✨ New arrivals every week — <span>Subscribe</span> for first access!</div>
-  <header>
-    <div class="header-inner">
-      <a class="logo" href="../index.html">TSC<span>BS</span></a>
-      <nav>
-        <a href="../index.html">Home</a>
-        <a href="shop.html">Shop</a>
-        <a href="jewellery.html">Jewellery</a>
-        <a href="bangles.html">Bangles</a>
-        <a href="cosmetics.html">Cosmetics</a>
-        <a href="new-arrivals.html">New Arrivals</a>
-        <a href="sale.html">Sale 🔥</a>
-      </nav>
-      <div class="header-actions">
-        <button class="icon-btn search-btn">🔍</button>
-        <button class="icon-btn">♡</button>
-        <button class="icon-btn" style="position:relative">🛒 <span class="cart-badge">0</span></button>
-        <a href="account.html" class="btn-primary">My Account</a>
-      </div>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"><div class="cursor-inner"></div></div>
+<div id="page-loader"><div class="loader-logo">TSC<span>BS</span></div><div class="loader-bar"><div class="loader-fill"></div></div><div class="loader-text">Fresh Arrivals Loading…</div></div>
+
+<div class="topbar"><div class="marquee-top"><span>✨ New arrivals every Friday — be first</span><span class="sep">·</span><span>Free Shipping above ₹499</span><span class="sep">·</span><span>Easy Returns</span><span class="sep">·</span><span>✨ New arrivals every Friday — be first</span><span class="sep">·</span><span>Free Shipping above ₹499</span><span class="sep">·</span><span>Easy Returns</span><span class="sep">·</span></div></div>
+
+<header id="site-header" class="scrolled">
+  <a class="logo" href="../index.html"><span class="logo-tsc">TSC</span><span class="logo-bs">BS</span></a>
+  <nav>
+    <a href="../index.html" class="nav-link"><span>Home</span></a>
+    <a href="shop.html" class="nav-link"><span>Shop</span></a>
+    <a href="jewellery.html" class="nav-link"><span>Jewellery</span></a>
+    <a href="bangles.html" class="nav-link"><span>Bangles</span></a>
+    <a href="cosmetics.html" class="nav-link"><span>Cosmetics</span></a>
+    <a href="new-arrivals.html" class="nav-link" style="color:var(--gold-pale)"><span>New Arrivals</span></a>
+    <a href="sale.html" class="nav-link nav-sale"><span>✦ Sale</span></a>
+  </nav>
+  <div class="header-actions">
+    <button class="icon-btn search-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
+    <button class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+    <button class="icon-btn cart-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg><span class="cart-badge">0</span></button>
+    <a href="account.html" class="btn-header">Account</a>
+  </div>
+</header>
+<div id="search-overlay"><button class="search-close">✕</button><div class="search-inner"><div class="search-label">Search the collection</div><input type="text" id="search-input" placeholder="Bangles, Kundan, Lipstick…" autocomplete="off" /></div></div>
+
+<div class="arrivals-hero">
+  <canvas id="arrivals-canvas"></canvas>
+  <div class="arrivals-orb-1"></div>
+  <div class="arrivals-orb-2"></div>
+  <div class="arrivals-hero-content">
+    <div class="arrivals-hero-tag">Fresh This Week</div>
+    <h1 class="arrivals-hero-title">
+      New <em>Arrivals</em>
+    </h1>
+    <p class="arrivals-hero-sub">Freshly curated pieces added every Friday. Be the first to own them before they sell out.</p>
+    <div class="arrivals-hero-pills">
+      <button class="hero-pill active">All New</button>
+      <button class="hero-pill">Jewellery</button>
+      <button class="hero-pill">Bangles</button>
+      <button class="hero-pill">Cosmetics</button>
+      <button class="hero-pill">Accessories</button>
     </div>
-  </header>
+  </div>
+</div>
 
-  <section style="background:linear-gradient(135deg,#2b1a20,#4a2535);padding:4rem 2rem;text-align:center">
-    <div class="hero-badge">🌟 Fresh This Week</div>
-    <h1 class="section-title" style="color:white;margin-top:0.75rem">New <em>Arrivals</em></h1>
-    <p style="color:rgba(255,255,255,0.6);max-width:500px;margin:0 auto">
-      Freshly curated pieces added every week. Be the first to own them.
-    </p>
-  </section>
+<div class="arrivals-section">
+  <div class="container">
 
-  <section>
-    <div class="container">
-      <div class="tabs" style="margin-bottom:2.5rem">
-        <button class="tab-btn active">This Week</button>
-        <button class="tab-btn">This Month</button>
-        <button class="tab-btn">Jewellery</button>
-        <button class="tab-btn">Bangles</button>
-        <button class="tab-btn">Cosmetics</button>
-      </div>
-      <div class="products-grid">
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <div class="product-img-placeholder">💍</div>
-            <span class="product-badge new">New</span>
-            <button class="product-wishlist" onclick="toggleWishlist(this,'Pearl Choker')">♡</button>
-            <div class="product-img-overlay"><button class="overlay-btn">👁</button><button class="overlay-btn" onclick="addToCart('Pearl Choker Necklace',699)">🛒</button></div>
-          </div>
-          <div class="product-info">
-            <div class="product-cat">Jewellery</div>
-            <div class="product-name">Pearl Choker Necklace Set</div>
-            <div class="product-price-row">
-              <div><span class="product-price">₹699</span><span class="product-price-old">₹1,099</span></div>
-              <div class="product-rating">⭐ 4.9</div>
-            </div>
-            <button class="add-to-cart-btn" onclick="addToCart('Pearl Choker Necklace',699)">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <div class="product-img-placeholder">🪬</div>
-            <span class="product-badge new">New</span>
-            <button class="product-wishlist" onclick="toggleWishlist(this,'Glass Bangles')">♡</button>
-            <div class="product-img-overlay"><button class="overlay-btn">👁</button><button class="overlay-btn" onclick="addToCart('Glass Bangle Set',249)">🛒</button></div>
-          </div>
-          <div class="product-info">
-            <div class="product-cat">Bangles</div>
-            <div class="product-name">Handpainted Glass Bangle Set of 24</div>
-            <div class="product-price-row">
-              <div><span class="product-price">₹249</span><span class="product-price-old">₹449</span></div>
-              <div class="product-rating">⭐ 4.8</div>
-            </div>
-            <button class="add-to-cart-btn" onclick="addToCart('Glass Bangle Set',249)">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <div class="product-img-placeholder">💋</div>
-            <span class="product-badge new">New</span>
-            <button class="product-wishlist" onclick="toggleWishlist(this,'Kajal Set')">♡</button>
-            <div class="product-img-overlay"><button class="overlay-btn">👁</button><button class="overlay-btn" onclick="addToCart('Kajal & Kohl Set',199)">🛒</button></div>
-          </div>
-          <div class="product-info">
-            <div class="product-cat">Cosmetics</div>
-            <div class="product-name">Long-Lasting Kajal & Kohl Set</div>
-            <div class="product-price-row">
-              <div><span class="product-price">₹199</span><span class="product-price-old">₹349</span></div>
-              <div class="product-rating">⭐ 4.7</div>
-            </div>
-            <button class="add-to-cart-btn" onclick="addToCart('Kajal & Kohl Set',199)">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <div class="product-img-placeholder">🌸</div>
-            <span class="product-badge new">New</span>
-            <button class="product-wishlist" onclick="toggleWishlist(this,'Floral Tikka')">♡</button>
-            <div class="product-img-overlay"><button class="overlay-btn">👁</button><button class="overlay-btn" onclick="addToCart('Floral Maang Tikka',399)">🛒</button></div>
-          </div>
-          <div class="product-info">
-            <div class="product-cat">Jewellery</div>
-            <div class="product-name">Floral Gold-Plated Maang Tikka</div>
-            <div class="product-price-row">
-              <div><span class="product-price">₹399</span><span class="product-price-old">₹649</span></div>
-              <div class="product-rating">⭐ 5.0</div>
-            </div>
-            <button class="add-to-cart-btn" onclick="addToCart('Floral Maang Tikka',399)">Add to Cart</button>
-          </div>
+    <!-- Next Drop Timer -->
+    <div class="drop-timer reveal">
+      <div style="position:relative;z-index:2;">
+        <div class="drop-timer-tag">Next Drop In</div>
+        <div class="drop-timer-title">Friday Collection Drops Every Week</div>
+        <div class="timer-blocks">
+          <div class="timer-block"><div class="timer-num" id="t-days">03</div><div class="timer-label">Days</div></div>
+          <div class="timer-sep">:</div>
+          <div class="timer-block"><div class="timer-num" id="t-hrs">14</div><div class="timer-label">Hours</div></div>
+          <div class="timer-sep">:</div>
+          <div class="timer-block"><div class="timer-num" id="t-min">22</div><div class="timer-label">Mins</div></div>
+          <div class="timer-sep">:</div>
+          <div class="timer-block"><div class="timer-num" id="t-sec">45</div><div class="timer-label">Secs</div></div>
         </div>
       </div>
     </div>
-  </section>
 
-  <footer>
-    <div class="footer-bottom" style="max-width:1300px;margin:0 auto;">
-      <div>© 2025 TSCBS. Made with ♥ for every woman.</div>
-      <div class="payment-icons">
-        <span class="pay-badge">UPI</span><span class="pay-badge">Visa</span><span class="pay-badge">COD</span>
+    <div class="arrivals-timeline">
+      <!-- This Week -->
+      <div class="arrivals-week">
+        <div class="week-header">
+          <div class="week-label">✦ This Week</div>
+          <div class="week-date">June 2025</div>
+          <div class="week-line"></div>
+        </div>
+        <div class="arrivals-grid">
+          <div class="product-card reveal">
+            <div class="product-img-wrap">
+              <div class="product-img-placeholder">💍</div>
+              <div class="product-img-shimmer"></div>
+              <span class="product-badge new new-badge-pulse">New</span>
+              <button class="product-wishlist" onclick="toggleWishlist(this,'Pearl Choker Necklace')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+              <div class="product-overlay"><button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="overlay-action" onclick="addToCart('Pearl Choker Necklace',699)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button></div>
+            </div>
+            <div class="product-info">
+              <div class="product-cat">Jewellery</div>
+              <div class="product-name">Pearl Choker Necklace Set</div>
+              <div class="product-bottom"><div class="product-prices"><span class="price-now">₹699</span><span class="price-was">₹1,099</span><span class="price-off">36% off</span></div><div class="product-rating">★ 4.9</div></div>
+              <button class="add-to-cart-btn" onclick="addToCart('Pearl Choker Necklace',699)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card reveal">
+            <div class="product-img-wrap">
+              <div class="product-img-placeholder">🪬</div>
+              <div class="product-img-shimmer"></div>
+              <span class="product-badge new new-badge-pulse">New</span>
+              <button class="product-wishlist" onclick="toggleWishlist(this,'Handpainted Glass Bangles')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+              <div class="product-overlay"><button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="overlay-action" onclick="addToCart('Handpainted Glass Bangles',249)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button></div>
+            </div>
+            <div class="product-info">
+              <div class="product-cat">Bangles</div>
+              <div class="product-name">Handpainted Glass Bangle Set of 24</div>
+              <div class="product-bottom"><div class="product-prices"><span class="price-now">₹249</span><span class="price-was">₹449</span><span class="price-off">45% off</span></div><div class="product-rating">★ 4.8</div></div>
+              <button class="add-to-cart-btn" onclick="addToCart('Handpainted Glass Bangles',249)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card reveal">
+            <div class="product-img-wrap">
+              <div class="product-img-placeholder">💋</div>
+              <div class="product-img-shimmer"></div>
+              <span class="product-badge new new-badge-pulse">New</span>
+              <button class="product-wishlist" onclick="toggleWishlist(this,'Kajal Kohl Set')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+              <div class="product-overlay"><button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="overlay-action" onclick="addToCart('Kajal Kohl Set',199)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button></div>
+            </div>
+            <div class="product-info">
+              <div class="product-cat">Cosmetics</div>
+              <div class="product-name">Long-Lasting Kajal & Kohl Set</div>
+              <div class="product-bottom"><div class="product-prices"><span class="price-now">₹199</span><span class="price-was">₹349</span><span class="price-off">43% off</span></div><div class="product-rating">★ 4.7</div></div>
+              <button class="add-to-cart-btn" onclick="addToCart('Kajal Kohl Set',199)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card reveal">
+            <div class="product-img-wrap">
+              <div class="product-img-placeholder">🌸</div>
+              <div class="product-img-shimmer"></div>
+              <span class="product-badge new new-badge-pulse">New</span>
+              <button class="product-wishlist" onclick="toggleWishlist(this,'Floral Maang Tikka')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+              <div class="product-overlay"><button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="overlay-action" onclick="addToCart('Floral Maang Tikka',399)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button></div>
+            </div>
+            <div class="product-info">
+              <div class="product-cat">Jewellery</div>
+              <div class="product-name">Floral Gold-Plated Maang Tikka</div>
+              <div class="product-bottom"><div class="product-prices"><span class="price-now">₹399</span><span class="price-was">₹649</span><span class="price-off">39% off</span></div><div class="product-rating">★ 5.0</div></div>
+              <button class="add-to-cart-btn" onclick="addToCart('Floral Maang Tikka',399)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Last Week -->
+      <div class="arrivals-week">
+        <div class="week-header">
+          <div class="week-label">Last Week</div>
+          <div class="week-date">May 2025</div>
+          <div class="week-line"></div>
+        </div>
+        <div class="arrivals-grid">
+          <div class="product-card reveal" style="opacity:0.85;">
+            <div class="product-img-wrap"><div class="product-img-placeholder">💎</div><div class="product-img-shimmer"></div><button class="product-wishlist" onclick="toggleWishlist(this,'Kundan Earrings')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><div class="product-overlay"><button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="overlay-action" onclick="addToCart('Kundan Drop Earrings',549)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button></div></div>
+            <div class="product-info"><div class="product-cat">Jewellery</div><div class="product-name">Kundan Drop Earrings — Gold</div><div class="product-bottom"><div class="product-prices"><span class="price-now">₹549</span><span class="price-was">₹899</span><span class="price-off">39% off</span></div><div class="product-rating">★ 4.8</div></div><button class="add-to-cart-btn" onclick="addToCart('Kundan Drop Earrings',549)">Add to Cart</button></div>
+          </div>
+          <div class="product-card reveal">
+            <div class="product-img-wrap"><div class="product-img-placeholder">🌺</div><div class="product-img-shimmer"></div><button class="product-wishlist" onclick="toggleWishlist(this,'Enamel Bangles')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><div class="product-overlay"><button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="overlay-action" onclick="addToCart('Enamel Bangle Set',379)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button></div></div>
+            <div class="product-info"><div class="product-cat">Bangles</div><div class="product-name">Enamel Flower Bangle Set of 8</div><div class="product-bottom"><div class="product-prices"><span class="price-now">₹379</span><span class="price-was">₹599</span><span class="price-off">37% off</span></div><div class="product-rating">★ 4.7</div></div><button class="add-to-cart-btn" onclick="addToCart('Enamel Bangle Set',379)">Add to Cart</button></div>
+          </div>
+          <div class="product-card reveal">
+            <div class="product-img-wrap"><div class="product-img-placeholder">🔮</div><div class="product-img-shimmer"></div><button class="product-wishlist" onclick="toggleWishlist(this,'Vitamin C Serum')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><div class="product-overlay"><button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="overlay-action" onclick="addToCart('Vitamin C Serum',499)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button></div></div>
+            <div class="product-info"><div class="product-cat">Skincare</div><div class="product-name">Vitamin C Brightening Serum 30ml</div><div class="product-bottom"><div class="product-prices"><span class="price-now">₹499</span><span class="price-was">₹799</span><span class="price-off">38% off</span></div><div class="product-rating">★ 4.9</div></div><button class="add-to-cart-btn" onclick="addToCart('Vitamin C Serum',499)">Add to Cart</button></div>
+          </div>
+          <div class="product-card reveal">
+            <div class="product-img-wrap"><div class="product-img-placeholder">🎀</div><div class="product-img-shimmer"></div><button class="product-wishlist" onclick="toggleWishlist(this,'Scrunchie Set')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><div class="product-overlay"><button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="overlay-action" onclick="addToCart('Satin Scrunchie Set',149)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button></div></div>
+            <div class="product-info"><div class="product-cat">Hair Accessories</div><div class="product-name">Satin Scrunchie Set — 6 Colors</div><div class="product-bottom"><div class="product-prices"><span class="price-now">₹149</span><span class="price-was">₹249</span><span class="price-off">40% off</span></div><div class="product-rating">★ 4.6</div></div><button class="add-to-cart-btn" onclick="addToCart('Satin Scrunchie Set',149)">Add to Cart</button></div>
+          </div>
+        </div>
       </div>
     </div>
-  </footer>
+  </div>
+</div>
 
-  <a href="https://wa.me/919999999999" class="whatsapp-float" target="_blank">💬</a>
-  <script src="../js/main.js"></script>
+<footer><div class="footer-bottom" style="max-width:1280px;margin:0 auto;padding:1.8rem 3rem;"><div class="footer-copy">© 2025 TSCBS — Crafted with love for every woman.</div><div class="payment-methods"><span class="pay-badge">UPI</span><span class="pay-badge">Visa</span><span class="pay-badge">MC</span><span class="pay-badge">COD</span></div></div></footer>
+<a href="https://wa.me/919999999999" class="wa-float" target="_blank"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<div id="toast"></div>
+<script src="../js/main.js"></script>
+<script>
+  // Pill filter
+  document.querySelectorAll('.hero-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.hero-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      showToast('✦ Filtering by ' + pill.textContent);
+    });
+  });
+
+  // Countdown to next Friday
+  function nextFriday() {
+    const now = new Date();
+    const day = now.getDay();
+    const daysUntilFri = (5 - day + 7) % 7 || 7;
+    const friday = new Date(now);
+    friday.setDate(now.getDate() + daysUntilFri);
+    friday.setHours(10, 0, 0, 0);
+    return friday;
+  }
+  function updateTimer() {
+    const diff = nextFriday() - new Date();
+    if (diff <= 0) return;
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('t-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('t-hrs').textContent = String(h).padStart(2,'0');
+    document.getElementById('t-min').textContent = String(m).padStart(2,'0');
+    document.getElementById('t-sec').textContent = String(s).padStart(2,'0');
+  }
+  updateTimer();
+  setInterval(updateTimer, 1000);
+
+  // Arrivals hero canvas — same particles as main but rose tinted
+  (function() {
+    const canvas = document.getElementById('arrivals-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H;
+    function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+    resize(); window.addEventListener('resize', resize);
+    const particles = Array.from({length:60}, () => ({
+      x: Math.random()*1000, y: Math.random()*1000, xp:0, yp:0,
+      vx: (Math.random()-.5)*.15, vy: Math.random()*-.25-.05,
+      r: Math.random()*1.8+.3, alpha: Math.random()*.5+.15,
+      color: Math.random()>.4 ? [201,64,112] : [201,147,74],
+      phase: Math.random()*Math.PI*2, speed: Math.random()*.015+.007,
+    }));
+    function draw() {
+      ctx.clearRect(0,0,W,H);
+      particles.forEach(p => {
+        p.phase+=p.speed; p.x+=p.vx; p.y+=p.vy;
+        if(p.y<-10){p.y=H+10;p.x=Math.random()*W;}
+        if(p.x<-10)p.x=W+10; if(p.x>W+10)p.x=-10;
+        p.xp=p.x; p.yp=p.y;
+        const a=p.alpha*(0.6+0.4*Math.sin(p.phase));
+        const [r,g,b]=p.color;
+        ctx.beginPath(); ctx.arc(p.xp,p.yp,p.r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(${r},${g},${b},${a})`; ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+</script>
 </body>
 </html>

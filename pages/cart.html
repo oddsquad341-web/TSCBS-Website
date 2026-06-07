@@ -1,163 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Cart — TSCBS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css" />
   <style>
-    .cart-layout { display: grid; grid-template-columns: 1fr 360px; gap: 2rem; align-items: start; }
-    .cart-item { display: grid; grid-template-columns: 80px 1fr auto; gap: 1.25rem; align-items: center; padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
-    .cart-item-img { width: 80px; height: 80px; background: var(--rose-light); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 32px; }
-    .cart-item-name { font-size: 14.5px; font-weight: 500; color: var(--deep); margin-bottom: 4px; }
-    .cart-item-meta { font-size: 12.5px; color: var(--muted); }
-    .cart-item-price { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--rose-dark); }
-    .qty-control { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
-    .qty-btn { width: 28px; height: 28px; border: 1px solid var(--border); border-radius: 4px; background: white; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-    .qty-btn:hover { background: var(--rose); color: white; border-color: var(--rose); }
-    .qty-num { font-size: 14px; font-weight: 500; min-width: 20px; text-align: center; }
-    .order-summary { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; position: sticky; top: 90px; }
-    .summary-row { display: flex; justify-content: space-between; font-size: 14px; color: var(--text); margin-bottom: 0.9rem; }
-    .summary-total { font-size: 17px; font-weight: 600; color: var(--deep); border-top: 1px solid var(--border); padding-top: 0.9rem; margin-top: 0.5rem; }
-    .coupon-row { display: flex; gap: 0.5rem; margin: 1rem 0; }
-    .coupon-row input { flex: 1; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 13px; outline: none; }
-    .coupon-row input:focus { border-color: var(--rose); }
-    @media(max-width:900px){ .cart-layout{grid-template-columns:1fr} }
+    .page-hero { padding: 6rem 0 3.5rem; text-align:center; background: radial-gradient(ellipse at 50% 100%, rgba(201,147,74,0.07) 0%, transparent 60%), var(--void); border-bottom: 1px solid var(--border); }
+    .page-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem,5vw,4rem); font-weight:400; }
+    .page-hero h1 em { font-style:italic; background: linear-gradient(135deg,var(--gold),var(--gold-pale)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .cart-section { padding: 3.5rem 0 6rem; }
+    .cart-layout { display: grid; grid-template-columns: 1fr 380px; gap: 2.5rem; align-items: start; }
+    .cart-items-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .cart-panel-header { padding: 1.4rem 2rem; border-bottom: 1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+    .cart-panel-title { font-family:var(--font-sans); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); }
+    .cart-count-badge { font-family:var(--font-sans); font-size:10px; background:var(--gold-glow); border:1px solid var(--border); border-radius:20px; padding:3px 10px; color:var(--gold); }
+    .cart-item { display:grid; grid-template-columns:88px 1fr auto; gap:1.5rem; align-items:center; padding:1.6rem 2rem; border-bottom:1px solid var(--border); transition: background 0.3s; }
+    .cart-item:last-child { border-bottom:none; }
+    .cart-item:hover { background: rgba(255,255,255,0.02); }
+    .cart-item-img { width:88px; height:88px; background:var(--card); border:1px solid var(--border); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:2.2rem; flex-shrink:0; }
+    .cart-item-name { font-family:var(--font-serif); font-size:1.05rem; font-weight:400; color:var(--text); line-height:1.3; margin-bottom:0.3rem; }
+    .cart-item-meta { font-family:var(--font-sans); font-size:11px; color:var(--text-dim); letter-spacing:0.08em; }
+    .qty-control { display:flex; align-items:center; gap:0.6rem; margin-top:0.8rem; }
+    .qty-btn { width:28px; height:28px; border:1px solid var(--border); border-radius:2px; background:transparent; color:var(--text-muted); cursor:none; display:flex; align-items:center; justify-content:center; font-size:1rem; transition: border-color 0.3s, color 0.3s, background 0.3s; }
+    .qty-btn:hover { border-color:var(--gold); color:var(--gold); background:var(--gold-glow); }
+    .qty-num { font-family:var(--font-display); font-size:1rem; color:var(--text); min-width:20px; text-align:center; }
+    .cart-remove { font-family:var(--font-sans); font-size:10px; letter-spacing:0.1em; color:var(--text-dim); background:none; border:none; cursor:none; margin-left:0.5rem; transition:color 0.3s; }
+    .cart-remove:hover { color:var(--rose-bright); }
+    .cart-item-price { font-family:var(--font-display); font-size:1.4rem; font-weight:400; background:linear-gradient(135deg,var(--gold),var(--gold-pale)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; white-space:nowrap; }
+    .empty-cart { padding:5rem 2rem; text-align:center; }
+    .empty-icon { font-size:4rem; margin-bottom:1.5rem; opacity:0.3; }
+    .empty-title { font-family:var(--font-display); font-size:1.8rem; color:var(--text-muted); font-weight:400; margin-bottom:0.6rem; }
+    .empty-sub { font-family:var(--font-serif); font-size:1rem; color:var(--text-dim); margin-bottom:2rem; font-style:italic; }
+
+    /* Summary */
+    .order-summary { background:var(--surface); border:1px solid var(--border); border-radius:4px; overflow:hidden; position:sticky; top:90px; }
+    .summary-header { padding:1.4rem 2rem; border-bottom:1px solid var(--border); font-family:var(--font-sans); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); }
+    .summary-body { padding:1.6rem 2rem; }
+    .summary-row { display:flex; align-items:center; justify-content:space-between; padding:0.65rem 0; border-bottom:1px solid rgba(255,255,255,0.04); font-family:var(--font-sans); font-size:13px; color:var(--text-muted); }
+    .summary-row:last-of-type { border-bottom:none; }
+    .summary-row.total { font-size:14px; color:var(--text); font-weight:600; padding-top:1.1rem; border-top:1px solid var(--border); margin-top:0.4rem; }
+    .summary-val-free { color:#4caf50; }
+    .summary-val-disc { color:var(--rose-bright); }
+    .summary-total-val { font-family:var(--font-display); font-size:1.6rem; font-weight:400; background:linear-gradient(135deg,var(--gold),var(--gold-pale)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .coupon-wrap { padding:1.2rem 2rem 0; border-top:1px solid var(--border); }
+    .coupon-row { display:flex; gap:0.6rem; }
+    .coupon-input { flex:1; padding:11px 14px; background:var(--card); border:1px solid var(--border); border-radius:2px; color:var(--text); font-family:var(--font-sans); font-size:12.5px; outline:none; transition:border-color 0.3s; }
+    .coupon-input:focus { border-color:var(--gold); }
+    .coupon-input::placeholder { color:var(--text-dim); }
+    .coupon-apply { padding:11px 18px; background:transparent; border:1px solid var(--border-bright); border-radius:2px; color:var(--gold-pale); font-family:var(--font-sans); font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; cursor:none; transition: background 0.3s, border-color 0.3s; }
+    .coupon-apply:hover { background:var(--gold-glow); border-color:var(--gold); }
+    .checkout-btn { width:100%; margin:1.6rem 0 0; padding:16px; background:linear-gradient(135deg,var(--gold-deep),var(--gold) 50%,var(--gold-bright)); border:none; border-radius:2px; color:var(--void); font-family:var(--font-sans); font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; cursor:none; transition:box-shadow 0.3s, transform 0.2s; box-shadow:0 4px 30px rgba(201,147,74,0.3); }
+    .checkout-btn:hover { box-shadow:0 8px 50px rgba(201,147,74,0.5); transform:translateY(-1px); }
+    .secure-note { display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:1.2rem 2rem; font-family:var(--font-sans); font-size:10.5px; color:var(--text-dim); letter-spacing:0.05em; border-top:1px solid var(--border); }
+    .payment-row { display:flex; gap:0.4rem; justify-content:center; padding:0 2rem 1.4rem; }
   </style>
 </head>
 <body>
-  <div class="topbar">🚚 Free delivery on orders above <span>₹499</span> &nbsp;|&nbsp; 💳 COD Available</div>
-  <header>
-    <div class="header-inner">
-      <a class="logo" href="../index.html">TSC<span>BS</span></a>
-      <nav>
-        <a href="../index.html">Home</a>
-        <a href="shop.html">Shop</a>
-        <a href="jewellery.html">Jewellery</a>
-        <a href="bangles.html">Bangles</a>
-        <a href="cosmetics.html">Cosmetics</a>
-        <a href="new-arrivals.html">New Arrivals</a>
-        <a href="sale.html">Sale 🔥</a>
-      </nav>
-      <div class="header-actions">
-        <button class="icon-btn search-btn">🔍</button>
-        <button class="icon-btn">♡</button>
-        <button class="icon-btn" style="position:relative">🛒 <span class="cart-badge">0</span></button>
-        <a href="account.html" class="btn-primary">My Account</a>
-      </div>
-    </div>
-  </header>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"><div class="cursor-inner"></div></div>
+<div id="page-loader"><div class="loader-logo">TSC<span>BS</span></div><div class="loader-bar"><div class="loader-fill"></div></div><div class="loader-text">Loading Cart…</div></div>
 
-  <section>
-    <div class="container">
-      <div class="breadcrumb">
-        <a href="../index.html">Home</a><span style="margin:0 6px">›</span> My Cart
-      </div>
-      <h1 class="section-title" style="margin-bottom:2rem">My <em>Cart</em></h1>
+<div class="topbar"><div class="marquee-top"><span>✦ Free Shipping above ₹499</span><span class="sep">·</span><span>Cash on Delivery Available</span><span class="sep">·</span><span>7-Day Easy Returns</span><span class="sep">·</span><span>✦ Free Shipping above ₹499</span><span class="sep">·</span><span>Cash on Delivery Available</span><span class="sep">·</span><span>7-Day Easy Returns</span><span class="sep">·</span></div></div>
 
-      <div class="cart-layout">
-        <div id="cart-items">
-          <div style="text-align:center;padding:4rem 0;color:var(--muted)" id="empty-cart">
-            <div style="font-size:64px;margin-bottom:1rem">🛒</div>
-            <div style="font-family:var(--font-display);font-size:24px;color:var(--deep);margin-bottom:0.5rem">Your cart is empty</div>
-            <p style="margin-bottom:1.5rem">Looks like you haven't added anything yet.</p>
-            <a href="shop.html" class="btn-primary">Start Shopping →</a>
+<header id="site-header" class="scrolled">
+  <a class="logo" href="../index.html"><span class="logo-tsc">TSC</span><span class="logo-bs">BS</span></a>
+  <nav>
+    <a href="../index.html" class="nav-link"><span>Home</span></a>
+    <a href="shop.html" class="nav-link"><span>Shop</span></a>
+    <a href="jewellery.html" class="nav-link"><span>Jewellery</span></a>
+    <a href="bangles.html" class="nav-link"><span>Bangles</span></a>
+    <a href="cosmetics.html" class="nav-link"><span>Cosmetics</span></a>
+    <a href="new-arrivals.html" class="nav-link"><span>New Arrivals</span></a>
+    <a href="sale.html" class="nav-link nav-sale"><span>✦ Sale</span></a>
+  </nav>
+  <div class="header-actions">
+    <button class="icon-btn search-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
+    <button class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+    <button class="icon-btn cart-btn" style="border-color:var(--border-bright);color:var(--gold)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg><span class="cart-badge">0</span></button>
+    <a href="account.html" class="btn-header">Account</a>
+  </div>
+</header>
+
+<div id="search-overlay"><button class="search-close">✕</button><div class="search-inner"><div class="search-label">Search the collection</div><input type="text" id="search-input" placeholder="Bangles, Kundan, Lipstick…" autocomplete="off" /><div class="search-suggestions"><span onclick="window.location='shop.html?q=Bridal'">Bridal Set</span><span onclick="window.location='shop.html?q=Kundan'">Kundan</span><span onclick="window.location='shop.html?q=Bangles'">Bangles</span></div></div></div>
+
+<div class="page-hero">
+  <div class="page-hero-tag">Your Selection</div>
+  <h1>My <em>Cart</em></h1>
+</div>
+
+<div class="cart-section">
+  <div class="container">
+    <div class="cart-layout">
+      <div>
+        <div class="cart-items-panel">
+          <div class="cart-panel-header">
+            <div class="cart-panel-title">Cart Items</div>
+            <div class="cart-count-badge" id="cart-count-badge">0 items</div>
+          </div>
+          <div id="cart-items">
+            <div class="empty-cart" id="empty-cart">
+              <div class="empty-icon">🛍</div>
+              <div class="empty-title">Your cart is empty</div>
+              <div class="empty-sub">Looks like you haven't found your shine yet.</div>
+              <a href="shop.html" class="btn-gold" style="display:inline-flex;">Start Shopping →</a>
+            </div>
           </div>
         </div>
 
-        <div class="order-summary">
-          <h3 style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--deep);margin-bottom:1.5rem">Order Summary</h3>
+        <div style="margin-top:1.5rem;padding:1.4rem 2rem;background:var(--surface);border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;gap:1.2rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <span style="font-family:var(--font-sans);font-size:12px;color:var(--text-muted);">Free delivery on orders above <strong style="color:var(--gold)">₹499</strong>. Cash on Delivery available.</span>
+        </div>
+      </div>
+
+      <div class="order-summary">
+        <div class="summary-header">Order Summary</div>
+        <div class="summary-body">
           <div class="summary-row"><span>Subtotal</span><span id="subtotal">₹0</span></div>
-          <div class="summary-row"><span>Delivery</span><span style="color:#2b8a3e">FREE</span></div>
-          <div class="summary-row"><span>Discount</span><span style="color:var(--rose)" id="discount">-₹0</span></div>
-          <div class="summary-row summary-total"><span>Total</span><span id="total">₹0</span></div>
+          <div class="summary-row"><span>Delivery</span><span class="summary-val-free" id="delivery-val">FREE</span></div>
+          <div class="summary-row"><span>Coupon Discount</span><span class="summary-val-disc" id="discount">-₹0</span></div>
+          <div class="summary-row total"><span>Total</span><span class="summary-total-val" id="total">₹0</span></div>
+        </div>
+        <div class="coupon-wrap">
           <div class="coupon-row">
-            <input type="text" placeholder="Coupon code" id="couponInput" />
-            <button class="btn-outline" style="padding:9px 16px;font-size:13px" onclick="applyCoupon()">Apply</button>
+            <input type="text" class="coupon-input" placeholder="Enter coupon code" id="couponInput" />
+            <button class="coupon-apply" onclick="applyCoupon()">Apply</button>
           </div>
-          <button class="btn-primary" style="width:100%;padding:14px;font-size:15px;margin-top:0.5rem" onclick="window.location='checkout.html'">
+          <p style="font-family:var(--font-sans);font-size:10px;color:var(--text-dim);margin-top:0.6rem;letter-spacing:0.05em;">Try: TSCBS10 for 10% off</p>
+        </div>
+        <div style="padding:1.2rem 2rem 0;">
+          <button class="checkout-btn" onclick="window.location='checkout.html'">
             Proceed to Checkout →
           </button>
-          <div style="text-align:center;margin-top:1rem">
-            <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Secure payment options</div>
-            <div class="payment-icons" style="justify-content:center">
-              <span class="pay-badge" style="background:var(--rose-light);color:var(--rose-dark)">UPI</span>
-              <span class="pay-badge" style="background:var(--rose-light);color:var(--rose-dark)">Cards</span>
-              <span class="pay-badge" style="background:var(--rose-light);color:var(--rose-dark)">COD</span>
-            </div>
-          </div>
+        </div>
+        <div class="secure-note">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Secure 256-bit encrypted checkout
+        </div>
+        <div class="payment-row">
+          <span class="pay-badge">UPI</span><span class="pay-badge">Visa</span><span class="pay-badge">MC</span><span class="pay-badge">RuPay</span><span class="pay-badge">COD</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <footer>
-    <div class="footer-bottom" style="max-width:1300px;margin:0 auto;">
-      <div>© 2025 TSCBS. Made with ♥ for every woman.</div>
-    </div>
-  </footer>
+<footer><div class="footer-bottom" style="max-width:1280px;margin:0 auto;padding:1.8rem 3rem;"><div class="footer-copy">© 2025 TSCBS — Crafted with love for every woman.</div><div class="payment-methods"><span class="pay-badge">UPI</span><span class="pay-badge">Visa</span><span class="pay-badge">COD</span></div></div></footer>
+<a href="https://wa.me/919999999999" class="wa-float" target="_blank"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<div id="toast"></div>
+<script src="../js/main.js"></script>
+<script>
+  const ICONS = ['💍','🪬','💄','🌸','🔮','🎁','💎','🌺','🎀','🔴'];
+  let discountPct = 0;
 
-  <a href="https://wa.me/919999999999" class="whatsapp-float" target="_blank">💬</a>
-  <script src="../js/main.js"></script>
-  <script>
-    function renderCart() {
-      const cart = JSON.parse(localStorage.getItem('tscbs_cart') || '[]');
-      const container = document.getElementById('cart-items');
-      const empty = document.getElementById('empty-cart');
+  function renderCart() {
+    const cart = JSON.parse(localStorage.getItem('tscbs_cart') || '[]');
+    const badge = document.getElementById('cart-count-badge');
+    const empty = document.getElementById('empty-cart');
+    const container = document.getElementById('cart-items');
+    if (badge) badge.textContent = cart.length + ' item' + (cart.length !== 1 ? 's' : '');
 
-      if (cart.length === 0) {
-        empty.style.display = 'block';
-        document.getElementById('subtotal').textContent = '₹0';
-        document.getElementById('total').textContent = '₹0';
-        return;
-      }
+    if (cart.length === 0) {
+      empty.style.display = 'block';
+      updateTotals(0);
+      return;
+    }
+    empty.style.display = 'none';
+    const subtotal = cart.reduce((s, i) => s + i.price, 0);
+    updateTotals(subtotal);
 
-      empty.style.display = 'none';
-      const total = cart.reduce((sum, item) => sum + item.price, 0);
-      document.getElementById('subtotal').textContent = '₹' + total.toLocaleString('en-IN');
-      document.getElementById('total').textContent = '₹' + total.toLocaleString('en-IN');
-
-      const itemsHtml = cart.map((item, i) => `
-        <div class="cart-item">
-          <div class="cart-item-img">💍</div>
-          <div>
-            <div class="cart-item-name">${item.name}</div>
-            <div class="cart-item-meta">Standard / One Size</div>
-            <div class="qty-control">
-              <button class="qty-btn">−</button>
-              <span class="qty-num">1</span>
-              <button class="qty-btn">+</button>
-              <button onclick="removeItem(${i})" style="margin-left:1rem;background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px">Remove</button>
-            </div>
+    const html = cart.map((item, i) => `
+      <div class="cart-item reveal" style="opacity:1;transform:none;">
+        <div class="cart-item-img">${ICONS[i % ICONS.length]}</div>
+        <div>
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-meta">Standard · One Size</div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
+            <span class="qty-num">1</span>
+            <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
+            <button class="cart-remove" onclick="removeItem(${i})">Remove</button>
           </div>
-          <div class="cart-item-price">₹${item.price.toLocaleString('en-IN')}</div>
         </div>
-      `).join('');
+        <div class="cart-item-price">₹${item.price.toLocaleString('en-IN')}</div>
+      </div>
+    `).join('');
+    container.innerHTML = html + '<div id="empty-cart" style="display:none"></div>';
+  }
 
-      container.innerHTML = itemsHtml + '<div id="empty-cart" style="display:none"></div>';
-    }
+  function updateTotals(subtotal) {
+    const disc = Math.round(subtotal * discountPct / 100);
+    const total = subtotal - disc;
+    document.getElementById('subtotal').textContent = '₹' + subtotal.toLocaleString('en-IN');
+    document.getElementById('discount').textContent = disc > 0 ? '-₹' + disc.toLocaleString('en-IN') : '-₹0';
+    document.getElementById('total').textContent = '₹' + total.toLocaleString('en-IN');
+    document.getElementById('delivery-val').textContent = subtotal >= 499 ? 'FREE' : '₹49';
+  }
 
-    function removeItem(index) {
-      let cart = JSON.parse(localStorage.getItem('tscbs_cart') || '[]');
-      cart.splice(index, 1);
-      localStorage.setItem('tscbs_cart', JSON.stringify(cart));
-      renderCart();
-      showToast('Item removed from cart');
-    }
-
-    function applyCoupon() {
-      const code = document.getElementById('couponInput').value.trim().toUpperCase();
-      if (code === 'TSCBS10') {
-        document.getElementById('discount').textContent = '-10%';
-        showToast('🎉 Coupon applied! 10% off');
-      } else {
-        showToast('❌ Invalid coupon code');
-      }
-    }
-
+  function removeItem(i) {
+    let cart = JSON.parse(localStorage.getItem('tscbs_cart') || '[]');
+    cart.splice(i, 1);
+    localStorage.setItem('tscbs_cart', JSON.stringify(cart));
     renderCart();
-  </script>
+    showToast('✦ Item removed');
+  }
+
+  function changeQty(i, dir) { showToast('Quantity updated'); }
+
+  function applyCoupon() {
+    const code = document.getElementById('couponInput').value.trim().toUpperCase();
+    if (code === 'TSCBS10') {
+      discountPct = 10;
+      const cart = JSON.parse(localStorage.getItem('tscbs_cart') || '[]');
+      const sub = cart.reduce((s, i) => s + i.price, 0);
+      updateTotals(sub);
+      showToast('🎉 TSCBS10 applied — 10% off!');
+    } else if (code === 'FIRST20') {
+      discountPct = 20;
+      const cart = JSON.parse(localStorage.getItem('tscbs_cart') || '[]');
+      const sub = cart.reduce((s, i) => s + i.price, 0);
+      updateTotals(sub);
+      showToast('🎉 FIRST20 applied — 20% off!');
+    } else {
+      showToast('✕ Invalid coupon code');
+    }
+  }
+
+  renderCart();
+</script>
 </body>
 </html>

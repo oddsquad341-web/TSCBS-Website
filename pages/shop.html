@@ -3,271 +3,436 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shop All Products — TSCBS</title>
+  <title>Shop All — TSCBS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css" />
   <style>
-    .shop-layout { display: grid; grid-template-columns: 260px 1fr; gap: 2rem; align-items: start; }
-    .filter-sidebar { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; position: sticky; top: 90px; }
-    .filter-group { margin-bottom: 1.75rem; }
-    .filter-group:last-child { margin-bottom: 0; }
-    .filter-title { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep); margin-bottom: 1rem; font-family: var(--font-body); }
-    .filter-option { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 13.5px; color: var(--text); cursor: pointer; }
-    .filter-option input { accent-color: var(--rose); width: 15px; height: 15px; cursor: pointer; }
-    .price-range { width: 100%; accent-color: var(--rose); }
-    .price-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-top: 6px; }
+    .page-hero {
+      padding: 7rem 0 4rem;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 100%, rgba(201,147,74,0.08) 0%, transparent 60%), var(--void);
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(201,147,74,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(201,147,74,0.02) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+    .page-hero-tag { font-family: var(--font-sans); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 1rem; }
+    .page-hero-tag::before, .page-hero-tag::after { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); opacity: 0.4; }
+    .page-hero h1 { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5rem); font-weight: 400; color: var(--text); line-height: 1.05; }
+    .page-hero h1 em { font-style: italic; background: linear-gradient(135deg, var(--gold), var(--gold-pale)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .page-hero p { font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-muted); margin-top: 1rem; font-weight: 300; }
+    .breadcrumb { font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 2rem; display: flex; align-items: center; gap: 0.6rem; }
+    .breadcrumb a { color: var(--text-dim); text-decoration: none; transition: color 0.3s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb span { opacity: 0.3; }
+
+    .shop-layout { display: grid; grid-template-columns: 280px 1fr; gap: 2.5rem; align-items: start; padding: 3.5rem 0 6rem; }
+
+    /* SIDEBAR */
+    .filter-sidebar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      position: sticky; top: 90px;
+    }
+    .filter-header {
+      padding: 1.4rem 1.6rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .filter-header-title { font-family: var(--font-sans); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .filter-clear { font-family: var(--font-sans); font-size: 10px; letter-spacing: 0.1em; color: var(--text-dim); background: none; border: none; cursor: none; transition: color 0.3s; }
+    .filter-clear:hover { color: var(--rose-bright); }
+    .filter-group { padding: 1.4rem 1.6rem; border-bottom: 1px solid var(--border); }
+    .filter-group:last-child { border-bottom: none; }
+    .filter-title { font-family: var(--font-sans); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1rem; }
+    .filter-option { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-family: var(--font-sans); font-size: 12.5px; color: var(--text-muted); cursor: none; transition: color 0.3s; }
+    .filter-option:hover { color: var(--gold-pale); }
+    .filter-option input[type="checkbox"] { width: 14px; height: 14px; accent-color: var(--gold); cursor: none; }
+    .filter-option input[type="radio"] { width: 14px; height: 14px; accent-color: var(--gold); cursor: none; }
+    .price-range {
+      width: 100%; height: 2px;
+      accent-color: var(--gold);
+      background: var(--border); cursor: none;
+      -webkit-appearance: none; outline: none;
+    }
+    .price-range::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; background: var(--gold); border-radius: 50%; cursor: none; }
+    .price-labels { display: flex; justify-content: space-between; font-family: var(--font-sans); font-size: 11px; color: var(--text-dim); margin-top: 8px; }
     .color-swatches { display: flex; flex-wrap: wrap; gap: 8px; }
-    .color-swatch { width: 26px; height: 26px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform 0.2s; }
-    .color-swatch:hover, .color-swatch.active { border-color: var(--rose); transform: scale(1.15); }
-    .shop-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem; }
-    .results-count { font-size: 13.5px; color: var(--muted); }
-    .sort-select { padding: 8px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 13px; color: var(--text); background: white; cursor: pointer; }
-    .breadcrumb { font-size: 12.5px; color: var(--muted); margin-bottom: 1.5rem; }
-    .breadcrumb a { color: var(--rose); text-decoration: none; }
-    .breadcrumb span { margin: 0 6px; }
-    @media(max-width:900px){ .shop-layout { grid-template-columns: 1fr; } .filter-sidebar { position: static; } }
+    .color-swatch { width: 24px; height: 24px; border-radius: 50%; border: 2px solid transparent; cursor: none; transition: transform 0.2s, border-color 0.2s; }
+    .color-swatch:hover, .color-swatch.active { transform: scale(1.2); border-color: var(--gold); }
+    .sidebar-apply-btn {
+      width: calc(100% - 3.2rem);
+      margin: 1.6rem 1.6rem;
+      padding: 12px;
+      background: linear-gradient(135deg, var(--gold-deep), var(--gold));
+      border: none; border-radius: 2px;
+      font-family: var(--font-sans); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--void); cursor: none;
+      transition: box-shadow 0.3s;
+    }
+    .sidebar-apply-btn:hover { box-shadow: 0 4px 30px rgba(201,147,74,0.4); }
+
+    /* TOOLBAR */
+    .shop-toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .results-count { font-family: var(--font-serif); font-size: 1rem; color: var(--text-muted); font-style: italic; }
+    .results-count strong { font-style: normal; color: var(--gold); }
+    .sort-wrap { display: flex; align-items: center; gap: 0.8rem; }
+    .sort-label { font-family: var(--font-sans); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); }
+    .sort-select {
+      padding: 9px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--text-muted);
+      font-family: var(--font-sans); font-size: 12px;
+      outline: none; cursor: none;
+      transition: border-color 0.3s;
+    }
+    .sort-select:focus { border-color: var(--gold); }
+
+    /* PRODUCTS */
+    .shop-product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .load-more-wrap { text-align: center; margin-top: 3rem; }
   </style>
 </head>
 <body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"><div class="cursor-inner"></div></div>
+<div id="page-loader">
+  <div class="loader-logo">TSC<span>BS</span></div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+  <div class="loader-text">Loading Collection…</div>
+</div>
 
-  <div class="topbar">🚚 Free delivery on orders above <span>₹499</span> &nbsp;|&nbsp; 💳 COD Available</div>
+<div class="topbar">
+  <div class="marquee-top">
+    <span>✦ Free Shipping above ₹499</span><span class="sep">·</span>
+    <span>Cash on Delivery Available</span><span class="sep">·</span>
+    <span>7-Day Easy Returns</span><span class="sep">·</span>
+    <span>New Arrivals Every Week</span><span class="sep">·</span>
+    <span>✦ Free Shipping above ₹499</span><span class="sep">·</span>
+    <span>Cash on Delivery Available</span><span class="sep">·</span>
+    <span>7-Day Easy Returns</span><span class="sep">·</span>
+    <span>New Arrivals Every Week</span><span class="sep">·</span>
+  </div>
+</div>
 
-  <header>
-    <div class="header-inner">
-      <a class="logo" href="../index.html">TSC<span>BS</span></a>
-      <nav>
-        <a href="../index.html">Home</a>
-        <a href="shop.html">Shop</a>
-        <a href="jewellery.html">Jewellery</a>
-        <a href="bangles.html">Bangles</a>
-        <a href="cosmetics.html">Cosmetics</a>
-        <a href="new-arrivals.html">New Arrivals</a>
-        <a href="sale.html">Sale 🔥</a>
-      </nav>
-      <div class="header-actions">
-        <button class="icon-btn search-btn">🔍</button>
-        <button class="icon-btn">♡</button>
-        <button class="icon-btn" style="position:relative">🛒 <span class="cart-badge">0</span></button>
-        <a href="account.html" class="btn-primary">My Account</a>
-      </div>
+<header id="site-header" class="scrolled">
+  <a class="logo" href="../index.html"><span class="logo-tsc">TSC</span><span class="logo-bs">BS</span></a>
+  <nav>
+    <a href="../index.html" class="nav-link"><span>Home</span></a>
+    <a href="shop.html" class="nav-link" style="color:var(--gold-pale)"><span>Shop</span></a>
+    <a href="jewellery.html" class="nav-link"><span>Jewellery</span></a>
+    <a href="bangles.html" class="nav-link"><span>Bangles</span></a>
+    <a href="cosmetics.html" class="nav-link"><span>Cosmetics</span></a>
+    <a href="new-arrivals.html" class="nav-link"><span>New Arrivals</span></a>
+    <a href="sale.html" class="nav-link nav-sale"><span>✦ Sale</span></a>
+  </nav>
+  <div class="header-actions">
+    <button class="icon-btn search-btn" title="Search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <button class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+    <button class="icon-btn cart-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg><span class="cart-badge">0</span></button>
+    <a href="account.html" class="btn-header">Account</a>
+  </div>
+</header>
+
+<div id="search-overlay">
+  <button class="search-close">✕</button>
+  <div class="search-inner">
+    <div class="search-label">Search the collection</div>
+    <input type="text" id="search-input" placeholder="Bangles, Kundan, Lipstick…" autocomplete="off" />
+    <div class="search-suggestions">
+      <span onclick="window.location='shop.html?q=Bridal'">Bridal Set</span>
+      <span onclick="window.location='shop.html?q=Kundan'">Kundan</span>
+      <span onclick="window.location='shop.html?q=Bangles'">Glass Bangles</span>
+      <span onclick="window.location='shop.html?q=Lipstick'">Lipstick</span>
     </div>
-  </header>
+  </div>
+</div>
 
-  <section>
-    <div class="container">
-      <div class="breadcrumb">
-        <a href="../index.html">Home</a><span>›</span> Shop All
+<div class="page-hero">
+  <div style="position:relative;z-index:2;">
+    <div class="page-hero-tag">Full Collection</div>
+    <h1>Shop <em>Everything</em></h1>
+    <p>5000+ products across jewellery, bangles, cosmetics and more.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="shop-layout">
+    <aside class="filter-sidebar">
+      <div class="filter-header">
+        <div class="filter-header-title">Filters</div>
+        <button class="filter-clear">Clear All</button>
       </div>
-      <div class="section-header" style="margin-bottom:2rem">
-        <div class="section-tag">Full Collection</div>
-        <h1 class="section-title">Shop <em>Everything</em></h1>
+      <div class="filter-group">
+        <div class="filter-title">Category</div>
+        <label class="filter-option"><input type="checkbox" checked /> All Products</label>
+        <label class="filter-option"><input type="checkbox" /> Jewellery</label>
+        <label class="filter-option"><input type="checkbox" /> Bangles & Choodas</label>
+        <label class="filter-option"><input type="checkbox" /> Cosmetics</label>
+        <label class="filter-option"><input type="checkbox" /> Hair Accessories</label>
+        <label class="filter-option"><input type="checkbox" /> Bindis & Tikkas</label>
+        <label class="filter-option"><input type="checkbox" /> Skincare</label>
+        <label class="filter-option"><input type="checkbox" /> Combo Sets</label>
+      </div>
+      <div class="filter-group">
+        <div class="filter-title">Price Range</div>
+        <input type="range" class="price-range" min="0" max="5000" value="2500" oninput="document.getElementById('pv').textContent='₹'+this.value" />
+        <div class="price-labels"><span>₹0</span><span id="pv">₹2500</span></div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-title">Occasion</div>
+        <label class="filter-option"><input type="checkbox" /> Bridal / Wedding</label>
+        <label class="filter-option"><input type="checkbox" /> Festival / Party</label>
+        <label class="filter-option"><input type="checkbox" /> Casual / Daily</label>
+        <label class="filter-option"><input type="checkbox" /> Office Wear</label>
+      </div>
+      <div class="filter-group">
+        <div class="filter-title">Material</div>
+        <label class="filter-option"><input type="checkbox" /> Gold Plated</label>
+        <label class="filter-option"><input type="checkbox" /> Silver / Oxidised</label>
+        <label class="filter-option"><input type="checkbox" /> Kundan</label>
+        <label class="filter-option"><input type="checkbox" /> Meenakari</label>
+        <label class="filter-option"><input type="checkbox" /> Fashion / Artificial</label>
+      </div>
+      <div class="filter-group">
+        <div class="filter-title">Colour</div>
+        <div class="color-swatches">
+          <div class="color-swatch active" style="background:#c8506a" title="Rose"></div>
+          <div class="color-swatch" style="background:#c9984a" title="Gold"></div>
+          <div class="color-swatch" style="background:#f0c0d0" title="Pink"></div>
+          <div class="color-swatch" style="background:#3a7d44" title="Green"></div>
+          <div class="color-swatch" style="background:#1a5276" title="Blue"></div>
+          <div class="color-swatch" style="background:#e74c3c" title="Red"></div>
+          <div class="color-swatch" style="background:#1a1a2e" title="Dark"></div>
+          <div class="color-swatch" style="background:#f5f5f5;border:1px solid rgba(255,255,255,0.2)" title="White"></div>
+        </div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-title">Rating</div>
+        <label class="filter-option"><input type="radio" name="rating" /> ★★★★★ 5 only</label>
+        <label class="filter-option"><input type="radio" name="rating" checked /> ★★★★ 4+ stars</label>
+        <label class="filter-option"><input type="radio" name="rating" /> ★★★ 3+ stars</label>
+      </div>
+      <button class="sidebar-apply-btn">Apply Filters</button>
+    </aside>
+
+    <div>
+      <div class="breadcrumb"><a href="../index.html">Home</a><span>›</span><span style="color:var(--text-muted)">Shop All</span></div>
+      <div class="shop-toolbar">
+        <div class="results-count">Showing <strong>48</strong> of <strong>5,000+</strong> products</div>
+        <div class="sort-wrap">
+          <span class="sort-label">Sort</span>
+          <select class="sort-select">
+            <option>Popularity</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Newest First</option>
+            <option>Top Rated</option>
+          </select>
+        </div>
       </div>
 
-      <div class="shop-layout">
-        <!-- SIDEBAR -->
-        <aside class="filter-sidebar">
-          <div class="filter-group">
-            <div class="filter-title">Category</div>
-            <label class="filter-option"><input type="checkbox" checked /> All Products</label>
-            <label class="filter-option"><input type="checkbox" /> Jewellery</label>
-            <label class="filter-option"><input type="checkbox" /> Bangles & Choodas</label>
-            <label class="filter-option"><input type="checkbox" /> Cosmetics</label>
-            <label class="filter-option"><input type="checkbox" /> Hair Accessories</label>
-            <label class="filter-option"><input type="checkbox" /> Bindis & Tikkas</label>
-            <label class="filter-option"><input type="checkbox" /> Skincare</label>
-            <label class="filter-option"><input type="checkbox" /> Combo Sets</label>
-          </div>
-          <div class="filter-group">
-            <div class="filter-title">Price Range</div>
-            <input type="range" class="price-range" min="0" max="5000" value="2500" id="priceRange"
-              oninput="document.getElementById('priceVal').textContent='₹'+this.value" />
-            <div class="price-labels"><span>₹0</span><span id="priceVal">₹2500</span></div>
-          </div>
-          <div class="filter-group">
-            <div class="filter-title">Occasion</div>
-            <label class="filter-option"><input type="checkbox" /> Bridal / Wedding</label>
-            <label class="filter-option"><input type="checkbox" /> Festival / Party</label>
-            <label class="filter-option"><input type="checkbox" /> Casual / Daily Wear</label>
-            <label class="filter-option"><input type="checkbox" /> Office Wear</label>
-          </div>
-          <div class="filter-group">
-            <div class="filter-title">Material</div>
-            <label class="filter-option"><input type="checkbox" /> Gold Plated</label>
-            <label class="filter-option"><input type="checkbox" /> Silver / Oxidised</label>
-            <label class="filter-option"><input type="checkbox" /> Kundan</label>
-            <label class="filter-option"><input type="checkbox" /> Meenakari</label>
-            <label class="filter-option"><input type="checkbox" /> Artificial / Fashion</label>
-          </div>
-          <div class="filter-group">
-            <div class="filter-title">Colour</div>
-            <div class="color-swatches">
-              <div class="color-swatch active" style="background:#c8506a" title="Rose"></div>
-              <div class="color-swatch" style="background:#c9984a" title="Gold"></div>
-              <div class="color-swatch" style="background:#e8d5da" title="Pink"></div>
-              <div class="color-swatch" style="background:#2b1a20" title="Dark"></div>
-              <div class="color-swatch" style="background:#3a7d44" title="Green"></div>
-              <div class="color-swatch" style="background:#1a5276" title="Blue"></div>
-              <div class="color-swatch" style="background:#e74c3c" title="Red"></div>
-              <div class="color-swatch" style="background:#f5f5f5;border:1px solid #ccc" title="White"></div>
+      <div class="shop-product-grid">
+        <!-- 9 product cards -->
+        <div class="product-card reveal" data-cat="jewellery">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">💍</div>
+            <div class="product-img-shimmer"></div>
+            <span class="product-badge combo">Best Seller</span>
+            <button class="product-wishlist" onclick="toggleWishlist(this,'Kundan Necklace Set')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <div class="product-overlay">
+              <button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="overlay-action" onclick="addToCart('Kundan Necklace Set',899)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button>
             </div>
           </div>
-          <div class="filter-group">
-            <div class="filter-title">Rating</div>
-            <label class="filter-option"><input type="radio" name="rating" /> ⭐⭐⭐⭐⭐ 5</label>
-            <label class="filter-option"><input type="radio" name="rating" checked /> ⭐⭐⭐⭐ 4+</label>
-            <label class="filter-option"><input type="radio" name="rating" /> ⭐⭐⭐ 3+</label>
+          <div class="product-info">
+            <div class="product-cat">Jewellery</div>
+            <div class="product-name">Kundan Necklace Set with Earrings</div>
+            <div class="product-bottom"><div class="product-prices"><span class="price-now">₹899</span><span class="price-was">₹1,499</span><span class="price-off">40% off</span></div><div class="product-rating">★ 4.8</div></div>
+            <button class="add-to-cart-btn" onclick="addToCart('Kundan Necklace Set',899)">Add to Cart</button>
           </div>
-          <button class="btn-primary" style="width:100%">Apply Filters</button>
-          <button class="btn-outline" style="width:100%;margin-top:0.5rem">Clear All</button>
-        </aside>
-
-        <!-- PRODUCTS -->
-        <div>
-          <div class="shop-toolbar">
-            <div class="results-count">Showing <strong>48</strong> of <strong>5000+</strong> products</div>
-            <select class="sort-select">
-              <option>Sort: Popularity</option>
-              <option>Price: Low to High</option>
-              <option>Price: High to Low</option>
-              <option>Newest First</option>
-              <option>Top Rated</option>
-            </select>
-          </div>
-          <div class="products-grid">
-            <div class="product-card">
-              <div class="product-img-wrap">
-                <div class="product-img-placeholder">💍</div>
-                <span class="product-badge">Best Seller</span>
-                <button class="product-wishlist" onclick="toggleWishlist(this,'Kundan Necklace')">♡</button>
-                <div class="product-img-overlay">
-                  <button class="overlay-btn">👁</button>
-                  <button class="overlay-btn" onclick="addToCart('Kundan Necklace Set',899)">🛒</button>
-                </div>
-              </div>
-              <div class="product-info">
-                <div class="product-cat">Jewellery</div>
-                <div class="product-name">Kundan Necklace Set with Earrings</div>
-                <div class="product-price-row">
-                  <div><span class="product-price">₹899</span><span class="product-price-old">₹1499</span></div>
-                  <div class="product-rating">⭐ 4.8</div>
-                </div>
-                <button class="add-to-cart-btn" onclick="addToCart('Kundan Necklace Set',899)">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <div class="product-img-wrap">
-                <div class="product-img-placeholder">🪬</div>
-                <span class="product-badge new">New</span>
-                <button class="product-wishlist" onclick="toggleWishlist(this,'Bridal Chooda')">♡</button>
-                <div class="product-img-overlay">
-                  <button class="overlay-btn">👁</button>
-                  <button class="overlay-btn" onclick="addToCart('Bridal Chooda Set',1299)">🛒</button>
-                </div>
-              </div>
-              <div class="product-info">
-                <div class="product-cat">Bangles</div>
-                <div class="product-name">Bridal Chooda Set — Red & Gold</div>
-                <div class="product-price-row">
-                  <div><span class="product-price">₹1,299</span><span class="product-price-old">₹1,999</span></div>
-                  <div class="product-rating">⭐ 4.9</div>
-                </div>
-                <button class="add-to-cart-btn" onclick="addToCart('Bridal Chooda Set',1299)">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <div class="product-img-wrap">
-                <div class="product-img-placeholder">💄</div>
-                <span class="product-badge gold">Trending</span>
-                <button class="product-wishlist" onclick="toggleWishlist(this,'Lipstick Pack')">♡</button>
-                <div class="product-img-overlay">
-                  <button class="overlay-btn">👁</button>
-                  <button class="overlay-btn" onclick="addToCart('Matte Lipstick Pack',349)">🛒</button>
-                </div>
-              </div>
-              <div class="product-info">
-                <div class="product-cat">Cosmetics</div>
-                <div class="product-name">Matte Lipstick Pack of 5 Shades</div>
-                <div class="product-price-row">
-                  <div><span class="product-price">₹349</span><span class="product-price-old">₹599</span></div>
-                  <div class="product-rating">⭐ 4.7</div>
-                </div>
-                <button class="add-to-cart-btn" onclick="addToCart('Matte Lipstick Pack',349)">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <div class="product-img-wrap">
-                <div class="product-img-placeholder">🎀</div>
-                <button class="product-wishlist" onclick="toggleWishlist(this,'Hair Clips')">♡</button>
-                <div class="product-img-overlay">
-                  <button class="overlay-btn">👁</button>
-                  <button class="overlay-btn" onclick="addToCart('Hair Clip Set',199)">🛒</button>
-                </div>
-              </div>
-              <div class="product-info">
-                <div class="product-cat">Hair Accessories</div>
-                <div class="product-name">Butterfly Hair Clip Set of 12</div>
-                <div class="product-price-row">
-                  <div><span class="product-price">₹199</span><span class="product-price-old">₹350</span></div>
-                  <div class="product-rating">⭐ 4.6</div>
-                </div>
-                <button class="add-to-cart-btn" onclick="addToCart('Hair Clip Set',199)">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <div class="product-img-wrap">
-                <div class="product-img-placeholder">🔴</div>
-                <span class="product-badge">Best Seller</span>
-                <button class="product-wishlist" onclick="toggleWishlist(this,'Bindi Box')">♡</button>
-                <div class="product-img-overlay"><button class="overlay-btn">👁</button><button class="overlay-btn" onclick="addToCart('Bindi Box',149)">🛒</button></div>
-              </div>
-              <div class="product-info">
-                <div class="product-cat">Bindis & Tikkas</div>
-                <div class="product-name">Premium Bindi Box — 500 Pieces Assorted</div>
-                <div class="product-price-row">
-                  <div><span class="product-price">₹149</span><span class="product-price-old">₹299</span></div>
-                  <div class="product-rating">⭐ 4.9</div>
-                </div>
-                <button class="add-to-cart-btn" onclick="addToCart('Bindi Box',149)">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <div class="product-img-wrap">
-                <div class="product-img-placeholder">🌿</div>
-                <span class="product-badge new">New</span>
-                <button class="product-wishlist" onclick="toggleWishlist(this,'Rose Serum')">♡</button>
-                <div class="product-img-overlay"><button class="overlay-btn">👁</button><button class="overlay-btn" onclick="addToCart('Rose Serum',449)">🛒</button></div>
-              </div>
-              <div class="product-info">
-                <div class="product-cat">Skincare</div>
-                <div class="product-name">Rose & Saffron Brightening Face Serum</div>
-                <div class="product-price-row">
-                  <div><span class="product-price">₹449</span><span class="product-price-old">₹699</span></div>
-                  <div class="product-rating">⭐ 4.8</div>
-                </div>
-                <button class="add-to-cart-btn" onclick="addToCart('Rose Serum',449)">Add to Cart</button>
-              </div>
+        </div>
+        <div class="product-card reveal" data-cat="bangles">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">🪬</div>
+            <div class="product-img-shimmer"></div>
+            <span class="product-badge new">New</span>
+            <button class="product-wishlist" onclick="toggleWishlist(this,'Bridal Chooda')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <div class="product-overlay">
+              <button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="overlay-action" onclick="addToCart('Bridal Chooda Set',1299)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button>
             </div>
           </div>
-          <div style="text-align:center;margin-top:2.5rem;">
-            <button class="btn-outline">Load More Products</button>
+          <div class="product-info">
+            <div class="product-cat">Bangles</div>
+            <div class="product-name">Bridal Chooda Set — Red & Gold</div>
+            <div class="product-bottom"><div class="product-prices"><span class="price-now">₹1,299</span><span class="price-was">₹1,999</span><span class="price-off">35% off</span></div><div class="product-rating">★ 4.9</div></div>
+            <button class="add-to-cart-btn" onclick="addToCart('Bridal Chooda Set',1299)">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="cosmetics">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">💄</div>
+            <div class="product-img-shimmer"></div>
+            <span class="product-badge sale">Trending</span>
+            <button class="product-wishlist" onclick="toggleWishlist(this,'Lipstick Pack')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <div class="product-overlay">
+              <button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="overlay-action" onclick="addToCart('Matte Lipstick Pack',349)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-cat">Cosmetics</div>
+            <div class="product-name">Matte Lipstick Pack — 5 Shades</div>
+            <div class="product-bottom"><div class="product-prices"><span class="price-now">₹349</span><span class="price-was">₹599</span><span class="price-off">42% off</span></div><div class="product-rating">★ 4.7</div></div>
+            <button class="add-to-cart-btn" onclick="addToCart('Matte Lipstick Pack',349)">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card reveal">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">🎀</div>
+            <div class="product-img-shimmer"></div>
+            <button class="product-wishlist" onclick="toggleWishlist(this,'Butterfly Hair Clips')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <div class="product-overlay">
+              <button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="overlay-action" onclick="addToCart('Butterfly Hair Clips',199)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-cat">Hair Accessories</div>
+            <div class="product-name">Butterfly Hair Clip Set of 12</div>
+            <div class="product-bottom"><div class="product-prices"><span class="price-now">₹199</span><span class="price-was">₹350</span><span class="price-off">43% off</span></div><div class="product-rating">★ 4.6</div></div>
+            <button class="add-to-cart-btn" onclick="addToCart('Butterfly Hair Clips',199)">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card reveal">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">🔴</div>
+            <div class="product-img-shimmer"></div>
+            <span class="product-badge combo">Best Seller</span>
+            <button class="product-wishlist" onclick="toggleWishlist(this,'Bindi Box')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <div class="product-overlay">
+              <button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="overlay-action" onclick="addToCart('Bindi Box 500pc',149)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-cat">Bindis & Tikkas</div>
+            <div class="product-name">Premium Bindi Box — 500 Pieces Assorted</div>
+            <div class="product-bottom"><div class="product-prices"><span class="price-now">₹149</span><span class="price-was">₹299</span><span class="price-off">50% off</span></div><div class="product-rating">★ 4.9</div></div>
+            <button class="add-to-cart-btn" onclick="addToCart('Bindi Box 500pc',149)">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="cosmetics">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">🌿</div>
+            <div class="product-img-shimmer"></div>
+            <span class="product-badge new">New</span>
+            <button class="product-wishlist" onclick="toggleWishlist(this,'Rose Saffron Serum')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <div class="product-overlay">
+              <button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="overlay-action" onclick="addToCart('Rose Saffron Serum',449)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-cat">Skincare</div>
+            <div class="product-name">Rose & Saffron Brightening Face Serum</div>
+            <div class="product-bottom"><div class="product-prices"><span class="price-now">₹449</span><span class="price-was">₹699</span><span class="price-off">36% off</span></div><div class="product-rating">★ 4.8</div></div>
+            <button class="add-to-cart-btn" onclick="addToCart('Rose Saffron Serum',449)">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="jewellery">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">💎</div>
+            <div class="product-img-shimmer"></div>
+            <button class="product-wishlist" onclick="toggleWishlist(this,'Silver Jhumka')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <div class="product-overlay">
+              <button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="overlay-action" onclick="addToCart('Oxidised Silver Jhumka',299)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-cat">Jewellery</div>
+            <div class="product-name">Oxidised Silver Jhumka Earrings</div>
+            <div class="product-bottom"><div class="product-prices"><span class="price-now">₹299</span><span class="price-was">₹499</span><span class="price-off">40% off</span></div><div class="product-rating">★ 4.7</div></div>
+            <button class="add-to-cart-btn" onclick="addToCart('Oxidised Silver Jhumka',299)">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bangles">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">🌺</div>
+            <div class="product-img-shimmer"></div>
+            <span class="product-badge new">New</span>
+            <button class="product-wishlist" onclick="toggleWishlist(this,'Meenakari Bangles')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <div class="product-overlay">
+              <button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="overlay-action" onclick="addToCart('Meenakari Bangles Set',699)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-cat">Bangles</div>
+            <div class="product-name">Meenakari Glass Bangles — Set of 12</div>
+            <div class="product-bottom"><div class="product-prices"><span class="price-now">₹699</span><span class="price-was">₹999</span><span class="price-off">30% off</span></div><div class="product-rating">★ 4.9</div></div>
+            <button class="add-to-cart-btn" onclick="addToCart('Meenakari Bangles Set',699)">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card reveal">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">🎁</div>
+            <div class="product-img-shimmer"></div>
+            <span class="product-badge combo">Combo</span>
+            <button class="product-wishlist" onclick="toggleWishlist(this,'Bridal Combo')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <div class="product-overlay">
+              <button class="overlay-action"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="overlay-action" onclick="addToCart('Bridal Combo Set',1799)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-cat">Combo Sets</div>
+            <div class="product-name">Bridal Combo — Jewellery + Bangles + Bindi</div>
+            <div class="product-bottom"><div class="product-prices"><span class="price-now">₹1,799</span><span class="price-was">₹2,999</span><span class="price-off">40% off</span></div><div class="product-rating">★ 5.0</div></div>
+            <button class="add-to-cart-btn" onclick="addToCart('Bridal Combo Set',1799)">Add to Cart</button>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <footer>
-    <div class="footer-bottom" style="max-width:1300px;margin:0 auto;">
-      <div>© 2025 TSCBS. Made with ♥ for every woman.</div>
-      <div class="payment-icons">
-        <span class="pay-badge">UPI</span><span class="pay-badge">Visa</span>
-        <span class="pay-badge">MC</span><span class="pay-badge">COD</span>
+      <div class="load-more-wrap">
+        <button class="btn-outline" onclick="showToast('✦ Loading more treasures…')">Load More Products →</button>
       </div>
     </div>
-  </footer>
+  </div>
+</div>
 
-  <a href="https://wa.me/919999999999" class="whatsapp-float" target="_blank">💬</a>
-  <script src="../js/main.js"></script>
+<footer>
+  <div class="footer-bottom" style="max-width:1280px;margin:0 auto;padding:1.8rem 3rem;">
+    <div class="footer-copy">© 2025 TSCBS — Crafted with love for every woman.</div>
+    <div class="payment-methods">
+      <span class="pay-badge">UPI</span><span class="pay-badge">Visa</span><span class="pay-badge">MC</span><span class="pay-badge">RuPay</span><span class="pay-badge">COD</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919999999999" class="wa-float" target="_blank">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<div id="toast"></div>
+<script src="../js/main.js"></script>
 </body>
 </html>
