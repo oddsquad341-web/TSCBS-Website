@@ -324,19 +324,155 @@ footer{background:#1C0F20;border-top:1px solid rgba(244,114,182,.1);padding:4rem
 
 /* RESPONSIVE */
 @media(max-width:1060px){.prod-grid{grid-template-columns:repeat(3,1fr)}}
+
+/* ════════════════════════════════
+   MOBILE-FIRST FIXES
+════════════════════════════════ */
+
+/* HAMBURGER MENU */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem;border:none;background:none;z-index:600}
+.hamburger span{display:block;width:22px;height:2px;background:var(--rose);border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* MOBILE NAV DRAWER */
+.mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(255,249,245,.98);backdrop-filter:blur(20px);z-index:550;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:2rem}
+.mobile-nav.open{display:flex}
+.mobile-nav a{font-size:1.3rem;font-weight:700;color:var(--text);padding:.9rem 2rem;width:100%;text-align:center;border-radius:12px;transition:all .2s;font-family:var(--serif);font-style:italic}
+.mobile-nav a:hover,.mobile-nav a:active{background:var(--pink-soft);color:var(--rose)}
+.mobile-nav .sale-link{color:var(--rose)}
+.mobile-nav-close{position:absolute;top:1.25rem;right:1.25rem;background:var(--pink-soft);border:none;width:40px;height:40px;border-radius:50%;font-size:1.2rem;cursor:pointer;color:var(--rose);display:flex;align-items:center;justify-content:center}
+
 @media(max-width:860px){
-  .hero-inner{grid-template-columns:1fr}.hero-right{display:none}
-  .trust-grid{grid-template-columns:repeat(2,1fr)}.cat-grid{grid-template-columns:repeat(3,1fr)}
-  .prod-grid{grid-template-columns:repeat(2,1fr)}.testi-grid{grid-template-columns:repeat(2,1fr)}
-  .offers-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}
-  .main-nav{display:none}.site-header{padding:0 1.5rem}
-  section{padding:3.5rem 1.5rem}.trust-strip{padding:1.4rem 1.5rem}footer{padding:3rem 1.5rem 1.75rem}
+  .hamburger{display:flex}
+  .main-nav{display:none!important}
+  .site-header{padding:0 1rem;height:60px}
+  .header-logo{font-size:1.35rem}
+  .h-cta{display:none}
+  .header-actions{gap:.4rem}
+  .h-btn{padding:.38rem .52rem;font-size:.9rem}
+
+  /* HERO */
+  .hero{min-height:auto;padding:2rem 0 3rem}
+  .hero-inner{grid-template-columns:1fr!important;gap:1.5rem;padding:0 1.25rem!important}
+  .hero-right{display:none!important}
+  .hero-h1{font-size:clamp(1.8rem,7vw,2.8rem)!important}
+  .hero-desc{font-size:.88rem!important;max-width:100%!important}
+  .urgency-hook{font-size:.72rem;flex-wrap:wrap}
+  .urgency-text{font-size:.7rem}
+  .hero-btns{gap:.65rem}
+  .btn-main,.btn-sec{padding:.75rem 1.4rem!important;font-size:.78rem!important}
+  .hero-stats{grid-template-columns:repeat(2,1fr)!important;margin-top:1.25rem}
+  .hstat{padding:.75rem .5rem}
+  .hstat-num{font-size:1.3rem}
+  .live-proof{flex-wrap:wrap;gap:.5rem}
+
+  /* TOPBAR */
+  .topbar{padding:7px 0}
+  .topbar-inner span{font-size:10px;letter-spacing:.08em}
+
+  /* MARQUEE */
+  .marquee-bar{padding:.6rem 0}
+  .mq-inner span{font-size:.62rem;padding:0 1.2rem}
+
+  /* TRUST */
+  .trust-strip{padding:1rem 1.25rem}
+  .trust-grid{grid-template-columns:repeat(2,1fr)!important;gap:.5rem}
+  .trust-item{padding:.65rem .75rem;gap:.6rem}
+  .ti-icon{width:36px;height:36px;font-size:1rem}
+  .ti-title{font-size:.72rem}
+  .ti-sub{font-size:.62rem}
+
+  /* SECTIONS */
+  section{padding:2.5rem 1.25rem!important}
+  .sec-h2{font-size:1.6rem!important}
+  .sec-p{font-size:.82rem!important}
+  .sec-tag{font-size:.6rem}
+
+  /* CATEGORIES */
+  .cat-grid{grid-template-columns:repeat(2,1fr)!important;gap:.75rem!important}
+  .cat-card{padding:1.5rem .75rem 1.1rem}
+  .cc-icon{font-size:2rem}
+  .cc-name{font-size:.66rem}
+  .cc-count{font-size:.6rem}
+
+  /* PRODUCTS */
+  .prod-grid{grid-template-columns:repeat(2,1fr)!important;gap:.75rem!important}
+  .prod-img{font-size:2.8rem!important}
+  .prod-info{padding:.85rem .85rem .95rem}
+  .prod-name{font-size:.78rem}
+  .prod-price{font-size:1rem}
+  .prod-old{font-size:.66rem}
+  .prod-atc{font-size:.66rem;padding:.55rem}
+  .prod-rating{font-size:.62rem}
+  .prod-social{font-size:.58rem}
+  .prod-save{font-size:.55rem}
+
+  /* FLASH BAR */
+  .flash-bar{flex-direction:column!important;align-items:flex-start!important;padding:.9rem 1.1rem;gap:.75rem;border-radius:10px}
+  .flash-title{font-size:.84rem}
+  .flash-sub{font-size:.65rem}
+  .tb{min-width:38px;padding:.3rem .45rem}
+  .tb-num{font-size:1rem}
+  .tb-lbl{font-size:.45rem}
+
+  /* OFFERS */
+  .offers-grid{grid-template-columns:1fr!important;gap:.85rem}
+  .offer-main{padding:2rem;min-height:220px}
+  .offer-main .otitle{font-size:1.7rem}
+  .offer-sm{padding:1.4rem}
+  .offer-sm-wrap{gap:.85rem}
+
+  /* TESTIMONIALS */
+  .testi-grid{grid-template-columns:1fr!important;gap:.85rem}
+  .testi-quote{font-size:.88rem}
+
+  /* NEWSLETTER */
+  .nl-section{padding:3rem 1.25rem}
+  .nl-h2{font-size:1.5rem}
+  .nl-p{font-size:.8rem}
+  .nl-form{flex-direction:column;border-radius:14px;padding:.5rem}
+  .nl-input{padding:.65rem 1rem;font-size:.82rem}
+  .nl-btn{border-radius:10px;padding:.65rem 1rem;font-size:.72rem}
+
+  /* FOOTER */
+  footer{padding:2.5rem 1.25rem 1.75rem}
+  .footer-grid{grid-template-columns:1fr!important;gap:1.75rem}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:.65rem;font-size:.62rem}
+  .pay-row{gap:.3rem}
+  .pay-chip{font-size:.52rem;padding:2px 6px}
+
+  /* PAGE HERO */
+  .page-hero{padding:3rem 1.25rem 2rem}
+  .page-h1{font-size:1.6rem!important}
+  .page-desc{font-size:.82rem}
+  .breadcrumb{font-size:.6rem}
+
+  /* WA BTN */
+  .wa-btn{bottom:1.25rem;right:1.25rem;width:48px;height:48px;font-size:1.25rem}
 }
-@media(max-width:580px){
-  .cat-grid{grid-template-columns:repeat(2,1fr)}.testi-grid{grid-template-columns:1fr}
-  .trust-grid{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr}
-  .flash-bar{flex-direction:column;align-items:flex-start}
+
+@media(max-width:400px){
+  .cat-grid{grid-template-columns:repeat(2,1fr)!important}
+  .prod-grid{grid-template-columns:repeat(2,1fr)!important}
+  .hero-h1{font-size:1.65rem!important}
+  .hero-stats{grid-template-columns:repeat(2,1fr)!important}
+  .hstat-num{font-size:1.15rem}
 }
+
+/* Hamburger — index specific */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem;border:none;background:none;z-index:600}
+.hamburger span{display:block;width:22px;height:2px;background:var(--rose);border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(255,249,245,.98);backdrop-filter:blur(20px);z-index:550;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:2rem}
+.mobile-nav.open{display:flex}
+.mobile-nav a{font-size:1.3rem;font-weight:700;color:var(--text);padding:.9rem 2rem;width:100%;text-align:center;border-radius:12px;transition:all .2s;font-family:var(--serif);font-style:italic}
+.mobile-nav a:hover,.mobile-nav a:active{background:var(--pink-soft);color:var(--rose)}
+.mobile-nav .sale-link{color:var(--rose)}
+.mobile-nav-close{position:absolute;top:1.25rem;right:1.25rem;background:var(--pink-soft);border:none;width:40px;height:40px;border-radius:50%;font-size:1.2rem;cursor:pointer;color:var(--rose);display:flex;align-items:center;justify-content:center}
 </style>
 </head>
 <body>
@@ -369,6 +505,7 @@ footer{background:#1C0F20;border-top:1px solid rgba(244,114,182,.1);padding:4rem
     <li><a href="pages/new-arrivals.html">New Arrivals</a></li>
     <li><a href="pages/sale.html" class="sale-link">Sale 🔥</a></li>
   </ul>
+  <button class="hamburger" onclick="openMobileNav()" aria-label="Menu"><span></span><span></span><span></span></button>
   <div class="header-actions">
     <button class="h-btn" onclick="doSearch()">🔍</button>
     <button class="h-btn" onclick="location.href='pages/wishlist.html'">♡</button>
@@ -593,7 +730,7 @@ footer{background:#1C0F20;border-top:1px solid rgba(244,114,182,.1);padding:4rem
       <p class="f-desc">Your one-stop destination for everything a woman needs — jewellery, bangles, cosmetics, and so much more. Quality you can trust, prices you'll love.</p>
       <div class="f-socials">
         <a href="#" class="f-soc">📸</a><a href="#" class="f-soc">👍</a>
-        <a href="https://wa.me/919999999999" class="f-soc">💬</a><a href="#" class="f-soc">▶️</a>
+        <a href="https://wa.me/919910513800" class="f-soc">💬</a><a href="#" class="f-soc">▶️</a>
       </div>
     </div>
     <div class="footer-col">
@@ -624,7 +761,7 @@ footer{background:#1C0F20;border-top:1px solid rgba(244,114,182,.1);padding:4rem
   </div>
 </footer>
 
-<a href="https://wa.me/919999999999?text=Hi!%20I%20want%20to%20know%20more." class="wa-btn" target="_blank">💬</a>
+<a href="https://wa.me/919910513800?text=Hi!%20I%20want%20to%20know%20more." class="wa-btn" target="_blank">💬</a>
 <div id="toast"></div>
 
 <script>

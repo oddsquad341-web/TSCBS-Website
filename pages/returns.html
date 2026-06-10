@@ -7,11 +7,30 @@
 <style>.policy-section{max-width:800px;margin:0 auto;padding:3rem 3rem 5rem}.policy-card{background:var(--white);border:1.5px solid var(--border);border-radius:16px;padding:2rem;margin-bottom:1.5rem;transition:all .3s}.policy-card:hover{border-color:var(--border-strong);box-shadow:var(--shadow-soft)}.pc-header{display:flex;align-items:center;gap:.85rem;margin-bottom:1rem}.pc-icon{font-size:1.6rem}.pc-title{font-size:.96rem;font-weight:700;color:var(--text);font-family:var(--serif);font-style:italic}.policy-card p,.policy-card li{font-size:.85rem;color:var(--text-muted);line-height:1.85}.policy-card ul{padding-left:1.25rem;margin-top:.5rem}.policy-card li{margin-bottom:.35rem}.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}.step{background:var(--pink-soft);border-radius:12px;padding:1.25rem;text-align:center}.step-num{font-family:var(--serif);font-size:1.8rem;font-weight:700;color:var(--rose);display:block;margin-bottom:.4rem}.step-text{font-size:.76rem;color:var(--text-muted)}</style>
 </head>
 <body>
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobile-nav">
+  <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+  <a href="../index.html" onclick="closeMobileNav()">🏠 Home</a>
+  <a href="shop.html" onclick="closeMobileNav()">🛍️ Shop</a>
+  <a href="jewellery.html" onclick="closeMobileNav()">💍 Jewellery</a>
+  <a href="bangles.html" onclick="closeMobileNav()">🪬 Bangles</a>
+  <a href="cosmetics.html" onclick="closeMobileNav()">💄 Cosmetics</a>
+  <a href="hair.html" onclick="closeMobileNav()">🎀 Hair</a>
+  <a href="new-arrivals.html" onclick="closeMobileNav()">🆕 New Arrivals</a>
+  <a href="sale.html" class="sale-link" onclick="closeMobileNav()">🔥 Sale</a>
+  <a href="cart.html" onclick="closeMobileNav()">🛒 Cart</a>
+  <a href="contact.html" onclick="closeMobileNav()">💬 Contact</a>
+</div>
+<script>
+function openMobileNav(){document.getElementById('mobile-nav').classList.add('open');document.body.style.overflow='hidden';document.querySelector('.hamburger').classList.add('open')}
+function closeMobileNav(){document.getElementById('mobile-nav').classList.remove('open');document.body.style.overflow='';document.querySelector('.hamburger').classList.remove('open')}
+</script>
 <div class="topbar"><div class="topbar-inner"><span>✨ Free Delivery on ₹499+</span><span class="sep">·</span><span>💳 Cash on Delivery</span><span class="sep">·</span><span>💍 Bridal 2025 Live</span><span class="sep">·</span><span>📦 7-Day Returns</span><span class="sep">·</span><span>🔥 Sale Up to 60% Off</span><span class="sep">·</span><span>✨ Free Delivery on ₹499+</span><span class="sep">·</span><span>💳 Cash on Delivery</span><span class="sep">·</span><span>💍 Bridal 2025 Live</span><span class="sep">·</span><span>📦 7-Day Returns</span><span class="sep">·</span><span>🔥 Sale Up to 60% Off</span><span class="sep">·</span></div></div>
 <header class="site-header" id="site-header">
   <a href="../index.html" class="header-logo">TSC<span>BS</span></a>
   <ul class="main-nav"><li><a href="../index.html" class=" active">Home</a></li><li><a href="shop.html" class=" ">Shop</a></li><li><a href="jewellery.html" class=" ">Jewellery</a></li><li><a href="bangles.html" class=" ">Bangles</a></li><li><a href="cosmetics.html" class=" ">Cosmetics</a></li><li><a href="new-arrivals.html" class=" ">New Arrivals</a></li><li><a href="sale.html" class="sale-link ">Sale 🔥</a></li></ul>
-  <div class="header-actions">
+  <button class="hamburger" onclick="openMobileNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="header-actions">
     <button class="h-btn" onclick="doSearch()">🔍</button>
     <button class="h-btn" onclick="location.href='wishlist.html'">♡</button>
     <button class="h-btn" onclick="location.href='cart.html'" style="position:relative">🛍️<span class="h-cart-count" id="cart-count">0</span></button>
@@ -37,17 +56,17 @@
   <div class="policy-card rv"><div class="pc-header"><span class="pc-icon">✔️</span><div class="pc-title">Eligible for Return</div></div><ul><li>Item received in wrong size/colour</li><li>Damaged or defective product</li><li>Item not as described</li><li>Wrong item delivered</li></ul></div>
   <div class="policy-card rv"><div class="pc-header"><span class="pc-icon">❌</span><div class="pc-title">Not Eligible</div></div><ul><li>Items used, washed or altered</li><li>Items without original packaging after 7 days</li><li>Customised or personalised products</li></ul></div>
   <div class="policy-card rv"><div class="pc-header"><span class="pc-icon">💳</span><div class="pc-title">Refund Timeline</div></div><p>Refunds are processed within <strong>3–5 business days</strong> after we receive the returned item. UPI/Bank transfers happen fastest. COD refunds are via bank transfer.</p></div>
-  <div style="text-align:center;margin-top:2rem" class="rv"><a href="https://wa.me/919999999999?text=Hi!%20I%20want%20to%20return%20my%20order." class="btn-main" style="display:inline-flex">Start a Return on WhatsApp 💬</a></div>
+  <div style="text-align:center;margin-top:2rem" class="rv"><a href="https://wa.me/919910513800?text=Hi!%20I%20want%20to%20return%20my%20order." class="btn-main" style="display:inline-flex">Start a Return on WhatsApp 💬</a></div>
 </div>
 <footer><div class="footer-grid">
 <div><a href="../index.html" class="f-logo">TSC<span>BS</span></a>
 <p class="f-desc">Your one-stop destination for everything a woman needs. Quality you can trust, prices you'll love.</p>
-<div class="f-socials"><a href="#" class="f-soc">📸</a><a href="#" class="f-soc">👍</a><a href="https://wa.me/919999999999" class="f-soc">💬</a><a href="#" class="f-soc">▶️</a></div></div>
+<div class="f-socials"><a href="#" class="f-soc">📸</a><a href="#" class="f-soc">👍</a><a href="https://wa.me/919910513800" class="f-soc">💬</a><a href="#" class="f-soc">▶️</a></div></div>
 <div class="footer-col"><h5>Shop</h5><a href="shop.html">All Products</a><a href="jewellery.html">Jewellery</a><a href="bangles.html">Bangles</a><a href="cosmetics.html">Cosmetics</a><a href="hair.html">Hair</a><a href="combos.html">Combos</a><a href="sale.html">Sale 🔥</a></div>
 <div class="footer-col"><h5>Help</h5><a href="shipping.html">Shipping</a><a href="returns.html">Returns</a><a href="track.html">Track Order</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a></div>
 <div class="footer-col"><h5>About</h5><a href="about.html">About Us</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="bulk.html">Bulk Orders</a></div>
 </div><div class="footer-bottom"><span>© 2025 TSCBS — Crafted with 💕 for every woman.</span>
 <div class="pay-row"><span class="pay-chip">UPI</span><span class="pay-chip">Visa</span><span class="pay-chip">Mastercard</span><span class="pay-chip">RuPay</span><span class="pay-chip">COD</span></div></div></footer>
-<a href="https://wa.me/919999999999" class="wa-btn" target="_blank">💬</a>
+<a href="https://wa.me/919910513800" class="wa-btn" target="_blank">💬</a>
 <div id="toast"></div><script src="_common.js"></script>
 </body></html>
