@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>My Account — TSCBS ✨</title>
+<link rel="stylesheet" href="_shared.css"/>
+<style>
+.account-section{max-width:900px;margin:0 auto;padding:3rem 3rem 5rem}
+.account-grid{display:grid;grid-template-columns:240px 1fr;gap:2rem;align-items:start}
+.account-sidebar{background:var(--white);border:1.5px solid var(--border);border-radius:18px;padding:1.5rem;position:sticky;top:90px}
+.acct-profile{text-align:center;padding-bottom:1.25rem;border-bottom:1px solid var(--border);margin-bottom:1.25rem}
+.acct-avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--pink));display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto .75rem;border:3px solid var(--pink-light)}
+.acct-name{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.2rem}
+.acct-email{font-size:.72rem;color:var(--text-muted)}
+.acct-nav a{display:flex;align-items:center;gap:.65rem;padding:.7rem .9rem;border-radius:10px;font-size:.78rem;font-weight:600;color:var(--text-muted);transition:all .2s;margin-bottom:.2rem}
+.acct-nav a:hover,.acct-nav a.active{background:var(--pink-soft);color:var(--rose)}
+.acct-panel{background:var(--white);border:1.5px solid var(--border);border-radius:18px;padding:2rem}
+.acct-panel h3{font-family:var(--serif);font-size:1.3rem;font-style:italic;color:var(--text);margin-bottom:1.5rem;font-weight:600}
+.order-row{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border:1.5px solid var(--border);border-radius:12px;margin-bottom:.75rem;transition:all .2s;flex-wrap:wrap;gap:.75rem}
+.order-row:hover{border-color:var(--border-strong);background:var(--pink-soft)}
+.or-id{font-size:.78rem;font-weight:700;color:var(--text)}
+.or-items{font-size:.72rem;color:var(--text-muted)}
+.or-amt{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--rose)}
+.or-status{font-size:.65rem;font-weight:700;padding:3px 10px;border-radius:20px}
+.st-delivered{background:linear-gradient(135deg,#D1FAE5,#A7F3D0);color:#065F46}
+.st-shipped{background:linear-gradient(135deg,#DBEAFE,#BFDBFE);color:#1E40AF}
+.st-processing{background:var(--gold-light);color:var(--gold)}
+@media(max-width:720px){.account-grid{grid-template-columns:1fr}.account-sidebar{position:static}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><span>✨ Free Delivery on ₹499+</span><span class="sep">·</span><span>💳 Cash on Delivery</span><span class="sep">·</span><span>💍 Bridal 2025 Live</span><span class="sep">·</span><span>📦 7-Day Returns</span><span class="sep">·</span><span>🔥 Sale Up to 60% Off</span><span class="sep">·</span><span>✨ Free Delivery on ₹499+</span><span class="sep">·</span><span>💳 Cash on Delivery</span><span class="sep">·</span><span>💍 Bridal 2025 Live</span><span class="sep">·</span><span>📦 7-Day Returns</span><span class="sep">·</span><span>🔥 Sale Up to 60% Off</span><span class="sep">·</span></div></div>
+<header class="site-header" id="site-header">
+  <a href="../index.html" class="header-logo">TSC<span>BS</span></a>
+  <ul class="main-nav"><li><a href="../index.html" class=" active">Home</a></li><li><a href="shop.html" class=" ">Shop</a></li><li><a href="jewellery.html" class=" ">Jewellery</a></li><li><a href="bangles.html" class=" ">Bangles</a></li><li><a href="cosmetics.html" class=" ">Cosmetics</a></li><li><a href="new-arrivals.html" class=" ">New Arrivals</a></li><li><a href="sale.html" class="sale-link ">Sale 🔥</a></li></ul>
+  <div class="header-actions">
+    <button class="h-btn" onclick="doSearch()">🔍</button>
+    <button class="h-btn" onclick="location.href='wishlist.html'">♡</button>
+    <button class="h-btn" onclick="location.href='cart.html'" style="position:relative">🛍️<span class="h-cart-count" id="cart-count">0</span></button>
+    <a href="account.html" class="h-cta">My Account</a>
+  </div>
+</header>
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="../index.html">Home</a><span>›</span><a href="account.html">Account</a></div>
+    <div class="page-tag">👤 Account</div>
+    <h1 class="page-h1">My <em>Account</em></h1>
+    <p class="page-desc">Manage your orders, wishlist and profile.</p>
+  </div>
+</div><div class="account-section">
+<div class="account-grid rv">
+  <div class="account-sidebar">
+    <div class="acct-profile">
+      <div class="acct-avatar">👤</div>
+      <div class="acct-name">Welcome Back!</div>
+      <div class="acct-email">customer@email.com</div>
+    </div>
+    <div class="acct-nav">
+      <a href="#" class="active">📦 My Orders</a>
+      <a href="wishlist.html">♡ Wishlist</a>
+      <a href="track.html">🚚 Track Order</a>
+      <a href="contact.html">💬 Help & Support</a>
+      <a href="#" onclick="showToast('Logged out successfully')">🚪 Log Out</a>
+    </div>
+  </div>
+  <div class="acct-panel">
+    <h3>My Orders ✨</h3>
+    <div class="order-row"><div><div class="or-id">TSCBS-20250610-1234</div><div class="or-items">Kundan Necklace Set, Bridal Chooda (2 items)</div></div><div><div class="or-amt">₹2,198</div><span class="or-status st-shipped">Shipped 🚚</span></div></div>
+    <div class="order-row"><div><div class="or-id">TSCBS-20250601-0987</div><div class="or-items">Matte Lipstick Pack, Bindi Box (2 items)</div></div><div><div class="or-amt">₹498</div><span class="or-status st-delivered">Delivered ✅</span></div></div>
+    <div class="order-row"><div><div class="or-id">TSCBS-20250520-0756</div><div class="or-items">Bridal Combo Set (1 item)</div></div><div><div class="or-amt">₹1,799</div><span class="or-status st-delivered">Delivered ✅</span></div></div>
+    <div class="order-row"><div><div class="or-id">TSCBS-20250610-1301</div><div class="or-items">Rose Serum, Butterfly Clips (2 items)</div></div><div><div class="or-amt">₹648</div><span class="or-status st-processing">Processing ⏳</span></div></div>
+    <div style="text-align:center;margin-top:1.5rem"><a href="shop.html" class="btn-ghost" style="display:inline-block;font-size:.8rem">Shop More Products ✨</a></div>
+  </div>
+</div></div>
+<footer><div class="footer-grid">
+<div><a href="../index.html" class="f-logo">TSC<span>BS</span></a>
+<p class="f-desc">Your one-stop destination for everything a woman needs. Quality you can trust, prices you'll love.</p>
+<div class="f-socials"><a href="#" class="f-soc">📸</a><a href="#" class="f-soc">👍</a><a href="https://wa.me/919999999999" class="f-soc">💬</a><a href="#" class="f-soc">▶️</a></div></div>
+<div class="footer-col"><h5>Shop</h5><a href="shop.html">All Products</a><a href="jewellery.html">Jewellery</a><a href="bangles.html">Bangles</a><a href="cosmetics.html">Cosmetics</a><a href="hair.html">Hair</a><a href="combos.html">Combos</a><a href="sale.html">Sale 🔥</a></div>
+<div class="footer-col"><h5>Help</h5><a href="shipping.html">Shipping</a><a href="returns.html">Returns</a><a href="track.html">Track Order</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a></div>
+<div class="footer-col"><h5>About</h5><a href="about.html">About Us</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="bulk.html">Bulk Orders</a></div>
+</div><div class="footer-bottom"><span>© 2025 TSCBS — Crafted with 💕 for every woman.</span>
+<div class="pay-row"><span class="pay-chip">UPI</span><span class="pay-chip">Visa</span><span class="pay-chip">Mastercard</span><span class="pay-chip">RuPay</span><span class="pay-chip">COD</span></div></div></footer>
+<a href="https://wa.me/919999999999" class="wa-btn" target="_blank">💬</a>
+<div id="toast"></div><script src="_common.js"></script>
+</body></html>

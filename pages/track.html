@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Track My Order — TSCBS ✨</title>
+<link rel="stylesheet" href="_shared.css"/>
+<style>
+.track-section{max-width:700px;margin:0 auto;padding:3rem 3rem 5rem}
+.track-form{background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:2.5rem;margin-bottom:2rem}
+.track-form h3{font-family:var(--serif);font-size:1.5rem;font-style:italic;color:var(--text);margin-bottom:1.75rem;text-align:center}
+.tf-group{margin-bottom:1.25rem}
+.tf-group label{display:block;font-size:.72rem;font-weight:700;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.45rem}
+.tf-group input{width:100%;border:1.5px solid var(--border);border-radius:12px;padding:.78rem 1rem;font-family:var(--sans);font-size:.88rem;color:var(--text);outline:none;transition:border-color .2s;background:var(--cream)}
+.tf-group input:focus{border-color:var(--rose);background:var(--white)}
+.track-result{background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:2.5rem;display:none}
+.tr-status{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.tr-emoji{font-size:2.5rem}
+.tr-label{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--rose);margin-bottom:.25rem}
+.tr-value{font-size:1rem;font-weight:700;color:var(--text)}
+.track-steps{display:flex;flex-direction:column;gap:0}
+.ts-item{display:flex;gap:1.1rem;align-items:flex-start;padding:.85rem 0;position:relative}
+.ts-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;margin-top:3px;border:2.5px solid var(--border)}
+.ts-dot.done{background:var(--rose);border-color:var(--rose)}
+.ts-dot.active{background:var(--pink);border-color:var(--rose);box-shadow:0 0 0 4px rgba(225,29,122,.15)}
+.ts-line{position:absolute;left:6px;top:14px;width:2px;height:100%;background:var(--border)}
+.ts-item:last-child .ts-line{display:none}
+.ts-title{font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:.18rem}
+.ts-time{font-size:.7rem;color:var(--text-muted)}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><span>✨ Free Delivery on ₹499+</span><span class="sep">·</span><span>💳 Cash on Delivery</span><span class="sep">·</span><span>💍 Bridal 2025 Live</span><span class="sep">·</span><span>📦 7-Day Returns</span><span class="sep">·</span><span>🔥 Sale Up to 60% Off</span><span class="sep">·</span><span>✨ Free Delivery on ₹499+</span><span class="sep">·</span><span>💳 Cash on Delivery</span><span class="sep">·</span><span>💍 Bridal 2025 Live</span><span class="sep">·</span><span>📦 7-Day Returns</span><span class="sep">·</span><span>🔥 Sale Up to 60% Off</span><span class="sep">·</span></div></div>
+<header class="site-header" id="site-header">
+  <a href="../index.html" class="header-logo">TSC<span>BS</span></a>
+  <ul class="main-nav"><li><a href="../index.html" class=" active">Home</a></li><li><a href="shop.html" class=" ">Shop</a></li><li><a href="jewellery.html" class=" ">Jewellery</a></li><li><a href="bangles.html" class=" ">Bangles</a></li><li><a href="cosmetics.html" class=" ">Cosmetics</a></li><li><a href="new-arrivals.html" class=" ">New Arrivals</a></li><li><a href="sale.html" class="sale-link ">Sale 🔥</a></li></ul>
+  <div class="header-actions">
+    <button class="h-btn" onclick="doSearch()">🔍</button>
+    <button class="h-btn" onclick="location.href='wishlist.html'">♡</button>
+    <button class="h-btn" onclick="location.href='cart.html'" style="position:relative">🛍️<span class="h-cart-count" id="cart-count">0</span></button>
+    <a href="account.html" class="h-cta">My Account</a>
+  </div>
+</header>
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="../index.html">Home</a><span>›</span><a href="track.html">Track Order</a></div>
+    <div class="page-tag">📦 Track</div>
+    <h1 class="page-h1">Track My <em>Order</em></h1>
+    <p class="page-desc">Enter your order ID to get real-time tracking updates.</p>
+  </div>
+</div><div class="track-section">
+  <div class="track-form rv">
+    <h3>Track Your Order ✨</h3>
+    <div class="tf-group"><label>Order ID</label><input type="text" id="order-id" placeholder="e.g. TSCBS-20250610-1234"/></div>
+    <div class="tf-group"><label>Mobile Number</label><input type="tel" id="order-phone" placeholder="+91 98765 43210"/></div>
+    <button class="btn-main" style="width:100%;justify-content:center" onclick="trackOrder()">Track Order 📦</button>
+  </div>
+  <div class="track-result rv" id="track-result">
+    <div class="tr-status"><span class="tr-emoji">🚚</span><div><div class="tr-label">Status</div><div class="tr-value">Out for Delivery</div></div></div>
+    <div class="track-steps">
+      <div class="ts-item"><div class="ts-dot done"></div><div class="ts-line"></div><div><div class="ts-title">Order Placed ✅</div><div class="ts-time">Today, 10:30 AM</div></div></div>
+      <div class="ts-item"><div class="ts-dot done"></div><div class="ts-line"></div><div><div class="ts-title">Order Confirmed ✅</div><div class="ts-time">Today, 11:00 AM</div></div></div>
+      <div class="ts-item"><div class="ts-dot done"></div><div class="ts-line"></div><div><div class="ts-title">Packed & Dispatched ✅</div><div class="ts-time">Today, 2:15 PM</div></div></div>
+      <div class="ts-item"><div class="ts-dot active"></div><div class="ts-line"></div><div><div class="ts-title">Out for Delivery 🚚</div><div class="ts-time">Expected by 7:00 PM today</div></div></div>
+      <div class="ts-item"><div class="ts-dot"></div><div><div class="ts-title" style="color:var(--text-light)">Delivered</div><div class="ts-time">Pending</div></div></div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2rem" class="rv"><p style="font-size:.82rem;color:var(--text-muted);margin-bottom:1rem">Need help with your order?</p><a href="https://wa.me/919999999999" class="btn-main" style="display:inline-flex">WhatsApp Us 💬</a></div>
+</div>
+<script>function trackOrder(){const id=document.getElementById('order-id').value.trim();if(!id){showToast('Please enter your Order ID');return;}document.getElementById('track-result').style.display='block';document.getElementById('track-result').scrollIntoView({behavior:'smooth'});showToast('📦 Order found! Showing tracking...');}</script>
+<footer><div class="footer-grid">
+<div><a href="../index.html" class="f-logo">TSC<span>BS</span></a>
+<p class="f-desc">Your one-stop destination for everything a woman needs. Quality you can trust, prices you'll love.</p>
+<div class="f-socials"><a href="#" class="f-soc">📸</a><a href="#" class="f-soc">👍</a><a href="https://wa.me/919999999999" class="f-soc">💬</a><a href="#" class="f-soc">▶️</a></div></div>
+<div class="footer-col"><h5>Shop</h5><a href="shop.html">All Products</a><a href="jewellery.html">Jewellery</a><a href="bangles.html">Bangles</a><a href="cosmetics.html">Cosmetics</a><a href="hair.html">Hair</a><a href="combos.html">Combos</a><a href="sale.html">Sale 🔥</a></div>
+<div class="footer-col"><h5>Help</h5><a href="shipping.html">Shipping</a><a href="returns.html">Returns</a><a href="track.html">Track Order</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a></div>
+<div class="footer-col"><h5>About</h5><a href="about.html">About Us</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="bulk.html">Bulk Orders</a></div>
+</div><div class="footer-bottom"><span>© 2025 TSCBS — Crafted with 💕 for every woman.</span>
+<div class="pay-row"><span class="pay-chip">UPI</span><span class="pay-chip">Visa</span><span class="pay-chip">Mastercard</span><span class="pay-chip">RuPay</span><span class="pay-chip">COD</span></div></div></footer>
+<a href="https://wa.me/919999999999" class="wa-btn" target="_blank">💬</a>
+<div id="toast"></div><script src="_common.js"></script>
+</body></html>

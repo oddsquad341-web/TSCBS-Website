@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jewellery — TSCBS ✨</title>
+<link rel="stylesheet" href="_shared.css"/>
+<style>.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;max-width:1200px;margin:0 auto}section{padding:3rem 3rem 5rem}@media(max-width:900px){.prod-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:500px){.prod-grid{grid-template-columns:repeat(2,1fr)}}</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><span>✨ Free Delivery on ₹499+</span><span class="sep">·</span><span>💳 Cash on Delivery</span><span class="sep">·</span><span>💍 Bridal 2025 Live</span><span class="sep">·</span><span>📦 7-Day Returns</span><span class="sep">·</span><span>🔥 Sale Up to 60% Off</span><span class="sep">·</span><span>✨ Free Delivery on ₹499+</span><span class="sep">·</span><span>💳 Cash on Delivery</span><span class="sep">·</span><span>💍 Bridal 2025 Live</span><span class="sep">·</span><span>📦 7-Day Returns</span><span class="sep">·</span><span>🔥 Sale Up to 60% Off</span><span class="sep">·</span></div></div>
+<header class="site-header" id="site-header">
+  <a href="../index.html" class="header-logo">TSC<span>BS</span></a>
+  <ul class="main-nav"><li><a href="../index.html" class=" ">Home</a></li><li><a href="shop.html" class=" ">Shop</a></li><li><a href="jewellery.html" class=" active">Jewellery</a></li><li><a href="bangles.html" class=" ">Bangles</a></li><li><a href="cosmetics.html" class=" ">Cosmetics</a></li><li><a href="new-arrivals.html" class=" ">New Arrivals</a></li><li><a href="sale.html" class="sale-link ">Sale 🔥</a></li></ul>
+  <div class="header-actions">
+    <button class="h-btn" onclick="doSearch()">🔍</button>
+    <button class="h-btn" onclick="location.href='wishlist.html'">♡</button>
+    <button class="h-btn" onclick="location.href='cart.html'" style="position:relative">🛍️<span class="h-cart-count" id="cart-count">0</span></button>
+    <a href="account.html" class="h-cta">My Account</a>
+  </div>
+</header>
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="../index.html">Home</a><span>›</span><a href="jewellery.html">Jewellery</a></div>
+    <div class="page-tag">💍 Jewellery</div>
+    <h1 class="page-h1">Our <em>Jewellery</em> Collection</h1>
+    <p class="page-desc">800+ handpicked necklaces, earrings, bangles & more — for every occasion.</p>
+  </div>
+</div><div class="marquee-bar"><div class="mq-inner"><span>✨ Free Shipping ₹499+</span><span class="md">✦</span><span>Cash on Delivery</span><span class="md">✦</span><span>💍 Bridal Collection Live</span><span class="md">✦</span><span>New Arrivals Weekly</span><span class="md">✦</span><span>7-Day Returns</span><span class="md">✦</span><span>✨ Free Shipping ₹499+</span><span class="md">✦</span><span>Cash on Delivery</span><span class="md">✦</span><span>💍 Bridal Collection Live</span><span class="md">✦</span><span>New Arrivals Weekly</span><span class="md">✦</span><span>7-Day Returns</span><span class="md">✦</span></div></div><section><div style="text-align:center;margin-bottom:2.5rem" class="rv"><div class="sec-tag">💍 800+ Styles</div><h2 class="sec-h2">Jewellery for <em>Every Occasion</em></h2><p class="sec-p">From bridal sets to everyday wear — find your perfect piece.</p></div><div class="prod-grid"><div class="prod-card rv">
+  <div class="prod-img">💍<span class="prod-badge pb-best">Best Seller</span>
+    <button class="prod-wish" onclick="toggleWish(this,'Kundan Necklace Set')">♡</button>
+    <div class="stock-bar"><span>Only 4 left</span><div class="sb-fill"><div class="sb-used" style="width:82%"></div></div></div>
+    <div class="prod-overlay"><button class="ov-btn">👁</button><button class="ov-btn add-ov" onclick="addToCart('Kundan Necklace Set',899)">🛒</button></div>
+  </div>
+  <div class="prod-info">
+    <div class="prod-cat">Necklaces</div>
+    <div class="prod-name">Kundan Necklace Set with Earrings</div>
+    <div class="prod-pr-row"><div><span class="prod-price">₹899</span><span class="prod-old">₹1,499</span></div><span class="prod-save">Save 40%</span></div>
+    <div class="prod-rating">⭐⭐⭐⭐⭐ <span>(286)</span></div>
+    <div class="prod-social">🔥 <strong>23 people</strong> bought today</div>
+    <button class="prod-atc" onclick="addToCart('Kundan Necklace Set',899)">Add to Cart 🛒</button>
+  </div>
+</div><div class="prod-card rv">
+  <div class="prod-img">💎<span class="prod-badge pb-new">New</span>
+    <button class="prod-wish" onclick="toggleWish(this,'Gold Jhumkas')">♡</button>
+    <div class="stock-bar"><span>Only 6 left</span><div class="sb-fill"><div class="sb-used" style="width:68%"></div></div></div>
+    <div class="prod-overlay"><button class="ov-btn">👁</button><button class="ov-btn add-ov" onclick="addToCart('Gold Jhumkas',549)">🛒</button></div>
+  </div>
+  <div class="prod-info">
+    <div class="prod-cat">Earrings</div>
+    <div class="prod-name">Gold Plated Jhumka Earrings</div>
+    <div class="prod-pr-row"><div><span class="prod-price">₹549</span><span class="prod-old">₹899</span></div><span class="prod-save">Save 39%</span></div>
+    <div class="prod-rating">⭐⭐⭐⭐⭐ <span>(194)</span></div>
+    <div class="prod-social">🔥 <strong>17 people</strong> bought today</div>
+    <button class="prod-atc" onclick="addToCart('Gold Jhumkas',549)">Add to Cart 🛒</button>
+  </div>
+</div><div class="prod-card rv">
+  <div class="prod-img">✨<span class="prod-badge pb-hot">Trending</span>
+    <button class="prod-wish" onclick="toggleWish(this,'Pearl Maang Tikka')">♡</button>
+    <div class="stock-bar"><span>Only 3 left</span><div class="sb-fill"><div class="sb-used" style="width:88%"></div></div></div>
+    <div class="prod-overlay"><button class="ov-btn">👁</button><button class="ov-btn add-ov" onclick="addToCart('Pearl Maang Tikka',399)">🛒</button></div>
+  </div>
+  <div class="prod-info">
+    <div class="prod-cat">Maang Tikka</div>
+    <div class="prod-name">Pearl & Gold Maang Tikka</div>
+    <div class="prod-pr-row"><div><span class="prod-price">₹399</span><span class="prod-old">₹699</span></div><span class="prod-save">Save 43%</span></div>
+    <div class="prod-rating">⭐⭐⭐⭐⭐ <span>(312)</span></div>
+    <div class="prod-social">🔥 <strong>38 people</strong> bought today</div>
+    <button class="prod-atc" onclick="addToCart('Pearl Maang Tikka',399)">Add to Cart 🛒</button>
+  </div>
+</div><div class="prod-card rv">
+  <div class="prod-img">👑<span class="prod-badge pb-sale">Sale</span>
+    <button class="prod-wish" onclick="toggleWish(this,'Antique Necklace Set')">♡</button>
+    <div class="stock-bar"><span>7 left</span><div class="sb-fill"><div class="sb-used" style="width:62%"></div></div></div>
+    <div class="prod-overlay"><button class="ov-btn">👁</button><button class="ov-btn add-ov" onclick="addToCart('Antique Necklace Set',1199)">🛒</button></div>
+  </div>
+  <div class="prod-info">
+    <div class="prod-cat">Necklaces</div>
+    <div class="prod-name">Antique Polki Necklace Set</div>
+    <div class="prod-pr-row"><div><span class="prod-price">₹1,199</span><span class="prod-old">₹1,999</span></div><span class="prod-save">Save 40%</span></div>
+    <div class="prod-rating">⭐⭐⭐⭐⭐ <span>(167)</span></div>
+    <div class="prod-social">🔥 <strong>12 people</strong> bought today</div>
+    <button class="prod-atc" onclick="addToCart('Antique Necklace Set',1199)">Add to Cart 🛒</button>
+  </div>
+</div><div class="prod-card rv">
+  <div class="prod-img">💍
+    <button class="prod-wish" onclick="toggleWish(this,'Meenakari Earrings')">♡</button>
+    <div class="stock-bar"><span>12 left</span><div class="sb-fill"><div class="sb-used" style="width:45%"></div></div></div>
+    <div class="prod-overlay"><button class="ov-btn">👁</button><button class="ov-btn add-ov" onclick="addToCart('Meenakari Earrings',299)">🛒</button></div>
+  </div>
+  <div class="prod-info">
+    <div class="prod-cat">Earrings</div>
+    <div class="prod-name">Meenakari Drop Earrings</div>
+    <div class="prod-pr-row"><div><span class="prod-price">₹299</span><span class="prod-old">₹499</span></div><span class="prod-save">Save 40%</span></div>
+    <div class="prod-rating">⭐⭐⭐⭐⭐ <span>(231)</span></div>
+    <div class="prod-social">🔥 <strong>19 people</strong> bought today</div>
+    <button class="prod-atc" onclick="addToCart('Meenakari Earrings',299)">Add to Cart 🛒</button>
+  </div>
+</div><div class="prod-card rv">
+  <div class="prod-img">💎<span class="prod-badge pb-best">Best Seller</span>
+    <button class="prod-wish" onclick="toggleWish(this,'Oxidised Jhumka')">♡</button>
+    <div class="stock-bar"><span>Selling fast</span><div class="sb-fill"><div class="sb-used" style="width:48%"></div></div></div>
+    <div class="prod-overlay"><button class="ov-btn">👁</button><button class="ov-btn add-ov" onclick="addToCart('Oxidised Jhumka',299)">🛒</button></div>
+  </div>
+  <div class="prod-info">
+    <div class="prod-cat">Earrings</div>
+    <div class="prod-name">Oxidised Silver Jhumka</div>
+    <div class="prod-pr-row"><div><span class="prod-price">₹299</span><span class="prod-old">₹499</span></div><span class="prod-save">Save 40%</span></div>
+    <div class="prod-rating">⭐⭐⭐⭐⭐ <span>(203)</span></div>
+    <div class="prod-social">🔥 <strong>31 people</strong> bought today</div>
+    <button class="prod-atc" onclick="addToCart('Oxidised Jhumka',299)">Add to Cart 🛒</button>
+  </div>
+</div><div class="prod-card rv">
+  <div class="prod-img">✨<span class="prod-badge pb-new">New</span>
+    <button class="prod-wish" onclick="toggleWish(this,'Layered Necklace')">♡</button>
+    <div class="stock-bar"><span>8 left</span><div class="sb-fill"><div class="sb-used" style="width:60%"></div></div></div>
+    <div class="prod-overlay"><button class="ov-btn">👁</button><button class="ov-btn add-ov" onclick="addToCart('Layered Necklace',649)">🛒</button></div>
+  </div>
+  <div class="prod-info">
+    <div class="prod-cat">Necklaces</div>
+    <div class="prod-name">Gold Layered Pendant Necklace</div>
+    <div class="prod-pr-row"><div><span class="prod-price">₹649</span><span class="prod-old">₹999</span></div><span class="prod-save">Save 35%</span></div>
+    <div class="prod-rating">⭐⭐⭐⭐⭐ <span>(88)</span></div>
+    <div class="prod-social">🔥 <strong>9 people</strong> bought today</div>
+    <button class="prod-atc" onclick="addToCart('Layered Necklace',649)">Add to Cart 🛒</button>
+  </div>
+</div><div class="prod-card rv">
+  <div class="prod-img">👑
+    <button class="prod-wish" onclick="toggleWish(this,'Bangles Combo')">♡</button>
+    <div class="stock-bar"><span>5 left</span><div class="sb-fill"><div class="sb-used" style="width:78%"></div></div></div>
+    <div class="prod-overlay"><button class="ov-btn">👁</button><button class="ov-btn add-ov" onclick="addToCart('Bangles Combo',799)">🛒</button></div>
+  </div>
+  <div class="prod-info">
+    <div class="prod-cat">Bangles</div>
+    <div class="prod-name">Kundan Gold Bangle Set of 6</div>
+    <div class="prod-pr-row"><div><span class="prod-price">₹799</span><span class="prod-old">₹1,299</span></div><span class="prod-save">Save 38%</span></div>
+    <div class="prod-rating">⭐⭐⭐⭐⭐ <span>(145)</span></div>
+    <div class="prod-social">🔥 <strong>21 people</strong> bought today</div>
+    <button class="prod-atc" onclick="addToCart('Bangles Combo',799)">Add to Cart 🛒</button>
+  </div>
+</div></div><div style="text-align:center;margin-top:2.5rem" class="rv"><a href="shop.html" class="btn-main">View All Jewellery ✨</a></div></section>
+<footer><div class="footer-grid">
+<div><a href="../index.html" class="f-logo">TSC<span>BS</span></a>
+<p class="f-desc">Your one-stop destination for everything a woman needs. Quality you can trust, prices you'll love.</p>
+<div class="f-socials"><a href="#" class="f-soc">📸</a><a href="#" class="f-soc">👍</a><a href="https://wa.me/919999999999" class="f-soc">💬</a><a href="#" class="f-soc">▶️</a></div></div>
+<div class="footer-col"><h5>Shop</h5><a href="shop.html">All Products</a><a href="jewellery.html">Jewellery</a><a href="bangles.html">Bangles</a><a href="cosmetics.html">Cosmetics</a><a href="hair.html">Hair</a><a href="combos.html">Combos</a><a href="sale.html">Sale 🔥</a></div>
+<div class="footer-col"><h5>Help</h5><a href="shipping.html">Shipping</a><a href="returns.html">Returns</a><a href="track.html">Track Order</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a></div>
+<div class="footer-col"><h5>About</h5><a href="about.html">About Us</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="bulk.html">Bulk Orders</a></div>
+</div><div class="footer-bottom"><span>© 2025 TSCBS — Crafted with 💕 for every woman.</span>
+<div class="pay-row"><span class="pay-chip">UPI</span><span class="pay-chip">Visa</span><span class="pay-chip">Mastercard</span><span class="pay-chip">RuPay</span><span class="pay-chip">COD</span></div></div></footer>
+<a href="https://wa.me/919999999999" class="wa-btn" target="_blank">💬</a>
+<div id="toast"></div><script src="_common.js"></script>
+</body></html>

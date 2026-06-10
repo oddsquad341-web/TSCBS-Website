@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FAQ — TSCBS ✨</title>
+<link rel="stylesheet" href="_shared.css"/>
+<style>
+.faq-section{max-width:800px;margin:0 auto;padding:3rem 3rem 5rem}
+.faq-item{background:var(--white);border:1.5px solid var(--border);border-radius:14px;margin-bottom:.85rem;overflow:hidden;transition:all .3s}
+.faq-item:hover{border-color:var(--border-strong)}
+.faq-item.open{border-color:var(--rose);box-shadow:var(--shadow-pink)}
+.faq-q{padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:.88rem;font-weight:700;color:var(--text);gap:1rem;user-select:none}
+.faq-icon{color:var(--rose);font-size:1.2rem;flex-shrink:0;transition:transform .3s;font-weight:400}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.faq-item.open .faq-a{max-height:300px;padding:0 1.5rem 1.25rem}
+.faq-a p{font-size:.84rem;color:var(--text-muted);line-height:1.8;font-weight:400}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><span>✨ Free Delivery on ₹499+</span><span class="sep">·</span><span>💳 Cash on Delivery</span><span class="sep">·</span><span>💍 Bridal 2025 Live</span><span class="sep">·</span><span>📦 7-Day Returns</span><span class="sep">·</span><span>🔥 Sale Up to 60% Off</span><span class="sep">·</span><span>✨ Free Delivery on ₹499+</span><span class="sep">·</span><span>💳 Cash on Delivery</span><span class="sep">·</span><span>💍 Bridal 2025 Live</span><span class="sep">·</span><span>📦 7-Day Returns</span><span class="sep">·</span><span>🔥 Sale Up to 60% Off</span><span class="sep">·</span></div></div>
+<header class="site-header" id="site-header">
+  <a href="../index.html" class="header-logo">TSC<span>BS</span></a>
+  <ul class="main-nav"><li><a href="../index.html" class=" active">Home</a></li><li><a href="shop.html" class=" ">Shop</a></li><li><a href="jewellery.html" class=" ">Jewellery</a></li><li><a href="bangles.html" class=" ">Bangles</a></li><li><a href="cosmetics.html" class=" ">Cosmetics</a></li><li><a href="new-arrivals.html" class=" ">New Arrivals</a></li><li><a href="sale.html" class="sale-link ">Sale 🔥</a></li></ul>
+  <div class="header-actions">
+    <button class="h-btn" onclick="doSearch()">🔍</button>
+    <button class="h-btn" onclick="location.href='wishlist.html'">♡</button>
+    <button class="h-btn" onclick="location.href='cart.html'" style="position:relative">🛍️<span class="h-cart-count" id="cart-count">0</span></button>
+    <a href="account.html" class="h-cta">My Account</a>
+  </div>
+</header>
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="../index.html">Home</a><span>›</span><a href="faq.html">FAQ</a></div>
+    <div class="page-tag">❓ FAQ</div>
+    <h1 class="page-h1">Frequently Asked <em>Questions</em></h1>
+    <p class="page-desc">Everything you need to know about shopping with TSCBS.</p>
+  </div>
+</div><div class="faq-section">
+<div class="faq-item rv" onclick="toggleFaq(this)">
+  <div class="faq-q">How do I place an order?<span class="faq-icon">+</span></div>
+  <div class="faq-a"><p>Simply browse our collection, click 'Add to Cart' on the products you want, then proceed to checkout. You can pay via UPI, credit/debit card, net banking, or choose Cash on Delivery.</p></div>
+</div>
+<div class="faq-item rv" onclick="toggleFaq(this)">
+  <div class="faq-q">Is Cash on Delivery available?<span class="faq-icon">+</span></div>
+  <div class="faq-a"><p>Yes! COD is available for all orders across India. A small handling fee of ₹25 applies for orders below ₹499.</p></div>
+</div>
+<div class="faq-item rv" onclick="toggleFaq(this)">
+  <div class="faq-q">How long does delivery take?<span class="faq-icon">+</span></div>
+  <div class="faq-a"><p>Metro cities: 2–3 days. Tier 2/3 cities: 4–5 days. Remote areas: 5–7 days. All orders are dispatched within 24 hours.</p></div>
+</div>
+<div class="faq-item rv" onclick="toggleFaq(this)">
+  <div class="faq-q">What is the return policy?<span class="faq-icon">+</span></div>
+  <div class="faq-a"><p>We offer a 7-day hassle-free return policy. If you're not satisfied for any reason, WhatsApp us and we'll arrange a free pickup.</p></div>
+</div>
+<div class="faq-item rv" onclick="toggleFaq(this)">
+  <div class="faq-q">Are the products genuine?<span class="faq-icon">+</span></div>
+  <div class="faq-a"><p>Absolutely! Every product is handpicked and quality-checked by our team before being listed. We work directly with trusted manufacturers.</p></div>
+</div>
+<div class="faq-item rv" onclick="toggleFaq(this)">
+  <div class="faq-q">Can I track my order?<span class="faq-icon">+</span></div>
+  <div class="faq-a"><p>Yes! Once your order ships, you'll receive a tracking link via WhatsApp/SMS. You can also use our Track Order page.</p></div>
+</div>
+<div class="faq-item rv" onclick="toggleFaq(this)">
+  <div class="faq-q">Do you offer bulk/wholesale orders?<span class="faq-icon">+</span></div>
+  <div class="faq-a"><p>Yes, we offer special pricing for bulk orders. Contact us on WhatsApp at +91 99999 99999 with your requirements.</p></div>
+</div>
+<div class="faq-item rv" onclick="toggleFaq(this)">
+  <div class="faq-q">What payment methods do you accept?<span class="faq-icon">+</span></div>
+  <div class="faq-a"><p>UPI (GPay, PhonePe, Paytm), Credit/Debit Cards, Net Banking, and Cash on Delivery.</p></div>
+</div>
+<div class="faq-item rv" onclick="toggleFaq(this)">
+  <div class="faq-q">Can I change or cancel my order?<span class="faq-icon">+</span></div>
+  <div class="faq-a"><p>Orders can be changed or cancelled within 2 hours of placement. Contact us immediately on WhatsApp for the fastest response.</p></div>
+</div>
+<div style="background:linear-gradient(135deg,var(--pink-soft),#FFF0F9);border:1.5px solid var(--border);border-radius:16px;padding:2rem;text-align:center;margin-top:2rem" class="rv">
+  <div style="font-size:2rem;margin-bottom:.75rem">💬</div>
+  <div style="font-size:.96rem;font-weight:700;color:var(--text);margin-bottom:.4rem">Still have questions?</div>
+  <div style="font-size:.82rem;color:var(--text-muted);margin-bottom:1.5rem">We reply within 1 hour on WhatsApp!</div>
+  <a href="https://wa.me/919999999999" class="btn-main" style="display:inline-flex">Chat with Us 💬</a>
+</div>
+</div>
+<script>function toggleFaq(el){el.classList.toggle('open')}</script>
+<footer><div class="footer-grid">
+<div><a href="../index.html" class="f-logo">TSC<span>BS</span></a>
+<p class="f-desc">Your one-stop destination for everything a woman needs. Quality you can trust, prices you'll love.</p>
+<div class="f-socials"><a href="#" class="f-soc">📸</a><a href="#" class="f-soc">👍</a><a href="https://wa.me/919999999999" class="f-soc">💬</a><a href="#" class="f-soc">▶️</a></div></div>
+<div class="footer-col"><h5>Shop</h5><a href="shop.html">All Products</a><a href="jewellery.html">Jewellery</a><a href="bangles.html">Bangles</a><a href="cosmetics.html">Cosmetics</a><a href="hair.html">Hair</a><a href="combos.html">Combos</a><a href="sale.html">Sale 🔥</a></div>
+<div class="footer-col"><h5>Help</h5><a href="shipping.html">Shipping</a><a href="returns.html">Returns</a><a href="track.html">Track Order</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a></div>
+<div class="footer-col"><h5>About</h5><a href="about.html">About Us</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="bulk.html">Bulk Orders</a></div>
+</div><div class="footer-bottom"><span>© 2025 TSCBS — Crafted with 💕 for every woman.</span>
+<div class="pay-row"><span class="pay-chip">UPI</span><span class="pay-chip">Visa</span><span class="pay-chip">Mastercard</span><span class="pay-chip">RuPay</span><span class="pay-chip">COD</span></div></div></footer>
+<a href="https://wa.me/919999999999" class="wa-btn" target="_blank">💬</a>
+<div id="toast"></div><script src="_common.js"></script>
+</body></html>
