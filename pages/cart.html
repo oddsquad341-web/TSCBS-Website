@@ -96,35 +96,11 @@ function closeMobileNav(){document.getElementById('mobile-nav').classList.remove
     <div class="os-save" id="os-save-msg">🎉 You're saving ₹0 on this order!</div>
     <div class="coupon-row"><input class="coupon-input" id="coupon-inp" placeholder="Enter coupon code"/><button class="coupon-btn" onclick="applyCoupon()">Apply</button></div>
     <div class="os-row total"><span>Total</span><span class="os-val" id="os-total">₹0</span></div>
-    <button class="checkout-btn" onclick="showToast('✨ Proceeding to checkout...')">Proceed to Checkout →</button>
+    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout →</button>
     <div style="text-align:center;margin-top:1rem"><a href="shop.html" style="font-size:.75rem;color:var(--rose);font-weight:600">← Continue Shopping</a></div>
   </div>
 </div>
-<script>
-function renderCart(){
-  const cart=JSON.parse(localStorage.getItem('tscbs_cart')||'[]');
-  const list=document.getElementById('cart-items-list');
-  const cnt=document.getElementById('cart-item-count');
-  if(cnt)cnt.textContent=cart.length+' item'+(cart.length!==1?'s':'');
-  if(!cart.length){list.innerHTML='<div class="empty-cart"><span class="ec-emoji">🛍️</span><h3>Your cart is empty</h3><p>Looks like you haven't added anything yet!</p><a href="shop.html" class="btn-main" style="display:inline-flex">Shop Now ✨</a></div>';updateSummary(0,0);return;}
-  const emojis=['💍','🪬','💄','🎀','🔴','🌿','🎁','💎'];
-  list.innerHTML=cart.map((item,i)=>`<div class="cart-item"><div class="ci-emoji">${emojis[i%emojis.length]}</div><div><div class="ci-cat">Product</div><div class="ci-name">${item.n}</div><div class="ci-price">₹${item.p.toLocaleString()}</div><div class="qty-row"><button class="qty-btn" onclick="chQty(${item.id},-1)">−</button><span class="qty-num">1</span><button class="qty-btn" onclick="chQty(${item.id},1)">+</button></div></div><button class="ci-remove" onclick="removeItem(${item.id})">✕</button></div>`).join('');
-  const sub=cart.reduce((a,x)=>a+x.p,0);
-  const disc=Math.round(sub*.1);
-  updateSummary(sub,disc);
-}
-function updateSummary(sub,disc){
-  const s=document.getElementById('os-sub'),d=document.getElementById('os-disc'),t=document.getElementById('os-total'),sm=document.getElementById('os-save-msg');
-  if(s)s.textContent='₹'+sub.toLocaleString();
-  if(d)d.textContent='-₹'+disc.toLocaleString();
-  if(t)t.textContent='₹'+(sub-disc).toLocaleString();
-  if(sm)sm.textContent='🎉 You're saving ₹'+disc.toLocaleString()+' on this order!';
-}
-function removeItem(id){let cart=JSON.parse(localStorage.getItem('tscbs_cart')||'[]');cart=cart.filter(x=>x.id!==id);localStorage.setItem('tscbs_cart',JSON.stringify(cart));renderCart();showToast('Removed from cart');const b=document.getElementById('cart-count');if(b)b.textContent=cart.length;}
-function chQty(id,delta){showToast(delta>0?'✨ Quantity updated':'Quantity updated');}
-function applyCoupon(){const v=document.getElementById('coupon-inp').value.trim().toUpperCase();if(v==='TSCBS10'){showToast('🎉 10% discount applied!');}else{showToast('❌ Invalid coupon code');}}
-renderCart();
-</script>
+
 <footer><div class="footer-grid">
 <div><a href="../index.html" class="f-logo">TSC<span>BS</span></a>
 <p class="f-desc">Your one-stop destination for everything a woman needs. Quality you can trust, prices you'll love.</p>
@@ -136,6 +112,43 @@ renderCart();
 <div class="pay-row"><span class="pay-chip">UPI</span><span class="pay-chip">Visa</span><span class="pay-chip">Mastercard</span><span class="pay-chip">RuPay</span><span class="pay-chip">COD</span></div></div></footer>
 <a href="https://wa.me/919910513800" class="wa-btn" target="_blank">💬</a>
 <div id="toast"></div><script src="_common.js"></script>
+<script>
+const COUPONS={'TSCBS10':10,'SAVE20':20,'BRIDAL15':15,'NEWUSER':5,'FESTIVE25':25};
+let couponDiscount=0;
+function renderCart(){
+  const cart=JSON.parse(localStorage.getItem('tscbs_cart')||'[]');
+  const list=document.getElementById('cart-items-list');
+  const cnt=document.getElementById('cart-item-count');
+  const badge=document.getElementById('cart-count');
+  if(cnt) cnt.textContent=cart.length+' item'+(cart.length!==1?'s':'');
+  if(badge) badge.textContent=cart.length;
+  if(!cart.length){list.innerHTML='<div class="empty-cart"><span class="ec-emoji">🛍️</span><h3>Your cart is empty</h3><p>Add something beautiful!</p><a href="shop.html" class="btn-main" style="display:inline-flex">Shop Now ✨</a></div>';updateSummary(0,0,0);return;}
+  const emojis=['💍','🪬','💄','🎀','🔴','🌿','🎁','💎','🌺','✨'];
+  list.innerHTML=cart.map((item,i)=>`<div class="cart-item"><div class="ci-emoji">${emojis[i%emojis.length]}</div><div><div class="ci-cat">Product</div><div class="ci-name">${item.n}</div><div class="ci-price">₹${item.p.toLocaleString()}</div><div class="qty-row"><button class="qty-btn" onclick="chQty(this,-1)">−</button><span class="qty-num">1</span><button class="qty-btn" onclick="chQty(this,1)">+</button></div></div><button class="ci-remove" onclick="removeCartItem(${item.id})">✕</button></div>`).join('');
+  recalcTotal();
+}
+function recalcTotal(){
+  const cart=JSON.parse(localStorage.getItem('tscbs_cart')||'[]');
+  const sub=cart.reduce((a,x)=>a+x.p,0);
+  const del=sub>=499?0:49;
+  const disc=Math.round(sub*couponDiscount/100);
+  updateSummary(sub,del,disc);
+}
+function updateSummary(sub,del,disc){
+  const total=sub+del-disc;
+  const s=document.getElementById('os-sub'),d=document.getElementById('os-disc'),dv=document.getElementById('os-del'),t=document.getElementById('os-total'),sm=document.getElementById('os-save-msg');
+  if(s)s.textContent='₹'+sub.toLocaleString();
+  if(d)d.textContent='-₹'+disc.toLocaleString();
+  if(dv)dv.innerHTML=sub>=499?'<span style="color:#065F46;font-weight:700">FREE</span>':'₹49';
+  if(t)t.textContent='₹'+Math.max(0,total).toLocaleString();
+  if(sm)sm.textContent='🎉 You're saving ₹'+disc+(sub>=499?' + Free delivery!':'');
+}
+function removeCartItem(id){let c=JSON.parse(localStorage.getItem('tscbs_cart')||'[]');c=c.filter(x=>x.id!==id);localStorage.setItem('tscbs_cart',JSON.stringify(c));renderCart();showToast('Removed from cart');}
+function chQty(btn,d){showToast(d>0?'✨ Quantity increased':'Quantity decreased');}
+function applyCoupon(){const v=document.getElementById('coupon-inp').value.trim().toUpperCase();if(COUPONS[v]){couponDiscount=COUPONS[v];showToast('🎉 '+couponDiscount+'% discount applied!');document.getElementById('coupon-inp').style.borderColor='var(--rose)';recalcTotal();}else{showToast('❌ Invalid code. Try: TSCBS10');document.getElementById('coupon-inp').style.borderColor='#DC2626';}}
+function checkout(){const cart=JSON.parse(localStorage.getItem('tscbs_cart')||'[]');if(!cart.length){showToast('Cart is empty!');return;}const items=cart.map(x=>x.n+' ₹'+x.p).join(', ');const sub=cart.reduce((a,x)=>a+x.p,0);const msg=encodeURIComponent('Hi! I want to order:\n'+items+'\n\nTotal: ₹'+sub+'\nPlease confirm!');window.open('https://wa.me/919910513800?text='+msg,'_blank');}
+renderCart();
+</script>
 </body></html><style>
 @media(max-width:860px){
   .cart-section{grid-template-columns:1fr!important;padding:1.5rem 1.25rem 3rem!important}

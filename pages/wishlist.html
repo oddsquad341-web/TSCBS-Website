@@ -62,7 +62,7 @@ if(!wl.length){
   con.innerHTML='<div class="wl-empty"><span class="we-emoji">💝</span><h3>Your wishlist is empty</h3><p>Save products you love by clicking the ♡ heart on any product.</p><a href="shop.html" class="btn-main" style="display:inline-flex">Shop Now ✨</a></div>';
 }else{
   const emojis=['💍','🪬','💄','🎀','🔴','🌿','🎁','💎','🌺','✨'];
-  const cards=wl.map((name,i)=>`<div class="prod-card rv">
+  const cards=wl.map((name,i)=>`<div class="prod-card rv" onclick="location.href='product.html'">
     <div class="prod-img">${emojis[i%emojis.length]}<button class="prod-wish on" onclick="removeWish(this,'${name}')">♥</button></div>
     <div class="prod-info">
       <div class="prod-name">${name}</div>
